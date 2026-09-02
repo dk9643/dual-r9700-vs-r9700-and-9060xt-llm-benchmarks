@@ -5,8 +5,12 @@ upgrade: swapping an RX 9060 XT (16 GB) for a second Radeon AI PRO R9700 —
 going from 48 GB of mismatched VRAM to 64 GB of matching gfx1201. The
 benchmark tooling is included.
 
-**Status: the "before" numbers are done. "After" numbers coming once the
-second card is in.**
+**Status: complete — before and after data for all four models on both
+stacks.** Headline results: ~1.25–1.35× decode and up to ~1.4× prefill
+across the board (aggregate bandwidth/compute went up 33%, and the numbers
+track that almost exactly), the MoE models went from *crashing* to fully
+working on Ollama/ROCm, and the upgrade surfaced a second gnarly finding
+about Vulkan model loading ([finding #2](#finding-2-the-vulkan-loader-can-eat-all-your-ram)).
 
 Along the way, benchmarking surfaced a reproducible ROCm crash that
 affects mixture-of-experts models split across mismatched AMD GPUs. For
@@ -163,13 +167,135 @@ Worth noticing:
 
 ## Results — after (dual R9700)
 
-Doesn't exist yet — the second R9700 isn't in the machine. Once it is, this
-gets generated with:
+Same methodology, same 7 tiers, label `dual-r9700`. Tables show means with
+the speedup factor vs the mixed config; stdevs live in the JSONs. Generated
+via `compare.py --markdown`.
 
-```
-python3 compare.py --before "r9700+9060xt" --after "dual-r9700" --markdown
-python3 compare.py --file vulkan_bench_results.json --before "r9700+9060xt" --after "dual-r9700" --markdown
-```
+### Ollama (ROCm) — dense models, before → after
+
+**qwen3.5-27b**
+
+| tier | prefill before | after | × | decode before | after | × |
+|---|---|---|---|---|---|---|
+| short | 213.3 | 255.3 | 1.20 | 14.9 | 19.2 | 1.29 |
+| medium | 352.3 | 407.9 | 1.16 | 14.9 | 19.1 | 1.28 |
+| long | 1264.6 | 1626.2 | 1.29 | 14.7 | 19.0 | 1.29 |
+| extra_long | 1443.8 | 1892.2 | 1.31 | 14.3 | 18.4 | 1.29 |
+| extremely_long | 1332.4 | 1772.4 | 1.33 | 13.9 | 17.8 | 1.28 |
+| colossal_32k | 1108.8 | 1486.4 | 1.34 | 13.0 | 16.7 | 1.28 |
+| colossal_64k | 806.8 | 1091.8 | 1.35 | 11.6 | 14.9 | 1.28 |
+
+**gemma-4-31b-it**
+
+| tier | prefill before | after | × | decode before | after | × |
+|---|---|---|---|---|---|---|
+| short | 216.2 | 290.2 | 1.34 | 12.8 | 16.6 | 1.30 |
+| medium | 344.6 | 426.5 | 1.24 | 12.8 | 16.6 | 1.30 |
+| long | 924.9 | 1167.3 | 1.26 | 12.4 | 16.2 | 1.31 |
+| extra_long | 1061.5 | 1389.7 | 1.31 | 12.0 | 15.7 | 1.31 |
+| extremely_long | 1003.3 | 1301.4 | 1.30 | 11.5 | 15.0 | 1.30 |
+| colossal_32k | 825.4 | 1082.8 | 1.31 | 10.6 | 14.0 | 1.32 |
+| colossal_64k | 577.0 | 785.2 | 1.36 | 9.2 | 12.2 | 1.33 |
+
+### Ollama (ROCm) — MoE models, after only
+
+No before-counterparts exist: on the mixed config these crashed (see
+[The MoE crash](#the-moe-crash)). On dual R9700s both completed the full
+suite on ROCm — first-ever numbers for this box, and the prediction from
+the crash diagnosis confirmed in full.
+
+**gemma-4-26b-a4b**
+
+| tier | prompt tokens | prefill tok/s | decode tok/s |
+|---|---|---|---|
+| short | ~43 | 622.3 ± 14.1 | 71.1 ± 0.2 |
+| medium | ~77 | 934.8 ± 16.0 | 70.9 ± 0.2 |
+| long | ~2.3k | 3679.2 ± 7.0 | 68.4 ± 0.3 |
+| extra_long | ~7.4k | 3393.3 ± 6.4 | 66.2 ± 0.4 |
+| extremely_long | ~14.8k | 2975.2 ± 2.4 | 63.4 ± 0.2 |
+| colossal_32k | ~29.7k | 2360.1 ± 1.4 | 57.6 ± 0.1 |
+| colossal_64k | ~59.3k | 1667.9 ± 2.2 | 50.3 ± 0.0 |
+
+**qwen3.5-35b-a3b**
+
+| tier | prompt tokens | prefill tok/s | decode tok/s |
+|---|---|---|---|
+| short | ~39 | 484.3 ± 12.9 | 72.3 ± 0.4 |
+| medium | ~67 | 751.4 ± 19.6 | 72.2 ± 0.1 |
+| long | ~2.4k | 4049.6 ± 10.5 | 71.8 ± 0.1 |
+| extra_long | ~8.0k | 5514.0 ± 9.2 | 68.4 ± 0.1 |
+| extremely_long | ~16.0k | 5270.5 ± 8.0 | 64.4 ± 0.1 |
+| colossal_32k | ~32.0k | 4335.1 ± 10.3 | 58.8 ± 0.0 |
+| colossal_64k | ~64.0k | 3082.1 ± 2.5 | 49.9 ± 0.0 |
+
+That qwen3.5-35b-a3b prefill peak — **5,514 tok/s at ~8k context** — is the
+fastest number in this entire repo.
+
+### llama.cpp Vulkan — all four, before → after
+
+**qwen3.5-27b**
+
+| tier | prefill before | after | × | decode before | after | × |
+|---|---|---|---|---|---|---|
+| short | 109.8 | 125.5 | 1.14 | 14.3 | 18.2 | 1.27 |
+| medium | 207.4 | 227.0 | 1.09 | 14.4 | 18.3 | 1.27 |
+| long | 869.4 | 1063.8 | 1.22 | 14.4 | 18.3 | 1.27 |
+| extra_long | 1164.6 | 1486.3 | 1.28 | 14.2 | 18.2 | 1.28 |
+| extremely_long | 1174.8 | 1521.9 | 1.30 | 13.9 | 17.7 | 1.27 |
+| colossal_32k | 1075.7 | 1421.2 | 1.32 | 13.5 | 17.1 | 1.27 |
+| colossal_64k | 867.5 | 1161.3 | 1.34 | 12.7 | 16.1 | 1.27 |
+
+**gemma-4-31b-it**
+
+| tier | prefill before | after | × | decode before | after | × |
+|---|---|---|---|---|---|---|
+| short | 109.7 | 127.8 | 1.16 | — | — | — |
+| medium | 212.4 | 259.1 | 1.22 | 12.5 | 15.8 | 1.26 |
+| long | 677.9 | 811.0 | 1.20 | 12.0 | 14.9 | 1.24 |
+| extra_long | 902.8 | 1159.2 | 1.28 | 11.5 | 14.2 | 1.23 |
+| extremely_long | 894.0 | 1144.3 | 1.28 | 11.1 | 13.9 | 1.25 |
+| colossal_32k | 733.5 | 979.7 | 1.34 | 10.7 | 13.3 | 1.24 |
+| colossal_64k | 508.1 | 711.8 | 1.40 | 9.9 | 12.1 | 1.22 |
+
+*(Short-tier decode: same instant-EOS quirk as the before run — nothing to
+time, both sides.)*
+
+**gemma-4-26b-a4b (MoE)**
+
+| tier | prefill before | after | × | decode before | after | × |
+|---|---|---|---|---|---|---|
+| short | 259.5 | 285.9 | 1.10 | 59.7 | 67.9 | 1.14 |
+| medium | 442.0 | 519.0 | 1.17 | 59.5 | 67.8 | 1.14 |
+| long | 1983.7 | 2347.0 | 1.18 | 55.7 | 64.1 | 1.15 |
+| extra_long | 3197.8 | 3887.8 | 1.22 | 53.1 | 61.6 | 1.16 |
+| extremely_long | 3373.0 | 4224.0 | 1.25 | 51.3 | 59.8 | 1.17 |
+| colossal_32k | 2831.8 | 3656.5 | 1.29 | 48.4 | 56.7 | 1.17 |
+| colossal_64k | 1933.9 | 2547.0 | 1.32 | 43.6 | 51.4 | 1.18 |
+
+**qwen3.5-35b-a3b (MoE)**
+
+| tier | prefill before | after | × | decode before | after | × |
+|---|---|---|---|---|---|---|
+| short | 219.6 | 244.4 | 1.11 | 68.7 | 78.8 | 1.15 |
+| medium | 369.4 | 427.8 | 1.16 | 69.1 | 78.6 | 1.14 |
+| long | 2101.1 | 2635.7 | 1.25 | 68.4 | 78.0 | 1.14 |
+| extra_long | 3382.9 | 4196.0 | 1.24 | 67.2 | 76.7 | 1.14 |
+| extremely_long | 3483.9 | 4443.1 | 1.28 | 65.7 | 74.9 | 1.14 |
+| colossal_32k | 3119.0 | 4087.2 | 1.31 | 62.4 | 71.5 | 1.15 |
+| colossal_64k | 2394.1 | 3192.9 | 1.33 | 56.3 | 65.3 | 1.16 |
+
+### Reading the speedups
+
+- **Decode lands at ~1.27–1.33× for dense, ~1.14–1.18× for MoE.** The
+  aggregate memory bandwidth went up 33% (only one of two cards changed),
+  and layer-split decode tracks aggregate bandwidth — dense models, being
+  fully bandwidth-bound, capture nearly all of it. MoE decode is lighter on
+  bandwidth per token, so it captures less.
+- **Prefill speedups grow with context depth** (1.1× short → 1.3–1.4× at
+  64k) — deep-context attention is where the extra compute matters most.
+- **The biggest wins aren't in the ratios:** MoE models went from crashing
+  to working on ROCm, and 64 GB of uniform VRAM opens model sizes the mixed
+  config couldn't hold at all.
 
 ## The MoE crash
 
@@ -223,11 +349,49 @@ fixed in llama.cpp in March 2026 and already absent from current builds.)
 
 **The implication:** the GPU upgrade itself should fix this — two R9700s
 make the split homogeneous (gfx1201 + gfx1201), which sidesteps the rocBLAS
-bug entirely. The "after" half of this repo will test that prediction. For
-anyone stuck on mixed cards there are two escape hatches: wait for Ollama's
-bundle to move past ROCm 7.2.x (the fix first ships in newer ROCm
-releases), or use a Vulkan backend — that worked here, and it's where the
-MoE numbers above came from.
+bug entirely. For anyone stuck on mixed cards there are two escape hatches:
+wait for Ollama's bundle to move past ROCm 7.2.x (the fix first ships in
+newer ROCm releases), or use a Vulkan backend — that worked here, and it's
+where the before-MoE numbers came from.
+
+**Confirmed after the swap:** on dual R9700s, both MoE models completed the
+full 7-tier suite on Ollama/ROCm without a single error — the same models
+that couldn't survive five requests on the mixed config. The diagnosis held
+end to end.
+
+## Finding #2: the Vulkan loader can eat all your RAM
+
+The after-swap Vulkan runs surfaced a separate hazard: loading gemma-4-31b
+(32.6 GB GGUF) through `llama-server` on the dual-R9700 config **consumed
+~24 GB of host RAM in under 30 seconds** and, on the first two attempts,
+took the whole machine down — hard freeze, power-button territory. Kernel
+logs showed the memory went to GPU-driver-pinned allocations (amdgpu GTT —
+system RAM locked for GPU access, invisible to process listings and
+unreclaimable; the OOM killer's backtrace was literally inside
+`amdgpu_ttm_evict_resources`). Killing llama-server *after* the kernel OOM
+fired did not release it; the machine stayed wedged.
+
+Notes for anyone reproducing this class of failure:
+
+- The behavior is model/config-dependent, not purely size-dependent: the
+  36.9 GB qwen3.5-35b-a3b loaded cleanly on the same setup, while 32.6 GB
+  gemma-4-31b reliably blew up. Same binary and settings loaded gemma fine
+  on the *mixed* GPU pair — the dual-identical topology flipped the
+  loader's memory-placement choice. Related upstream context:
+  [#12748](https://github.com/ggml-org/llama.cpp/issues/12748),
+  [#27097](https://github.com/ggml-org/llama.cpp/issues/27097),
+  [PR #11520](https://github.com/ggml-org/llama.cpp/pull/11520). ReBAR was
+  verified enabled (full 32 G BARs) — not the cause here.
+- **The fix that worked:** `GGML_VK_FORCE_MAX_ALLOCATION_SIZE=2147483648`
+  (cap allocations at 2 GiB, forcing chunked loading) together with
+  `GGML_VK_DISABLE_HOST_VISIBLE_VIDMEM=1`. With both set, the load held
+  steady at ~3 GB of host RAM use and the full benchmark completed.
+- **The safety net that earned its keep:** a watchdog loop sampling
+  `MemAvailable` every 2 s and hard-killing llama-server below a 6 GB
+  floor. Killing *early* (before the kernel OOM path) released all driver
+  memory within seconds; letting the kernel OOM handle it did not. If you
+  experiment near your RAM limit on multi-GPU AMD Vulkan, run one of
+  these.
 
 ## How the measuring works
 
@@ -258,10 +422,18 @@ MoE numbers above came from.
   `-c 131072 -fa on -ctk q8_0 -ctv q8_0 -ngl 999 --device Vulkan1,Vulkan2`.
   That last flag matters: Vulkan enumerates the iGPU as a device, and
   without it the iGPU takes layers backed by slow system RAM.
-- **Caveats:** the dense numbers are Ollama-specific (its scheduler, its
-  bundled llama.cpp/ROCm build) and the MoE numbers are
-  llama.cpp-Vulkan-specific — don't expect either to transfer exactly to
-  other stacks, and don't compare across the two tables without the
+- **After-run Vulkan env vars:** because of [finding #2](#finding-2-the-vulkan-loader-can-eat-all-your-ram),
+  the dual-r9700 Vulkan runs set `GGML_VK_DISABLE_HOST_VISIBLE_VIDMEM=1`
+  (all models except qwen3.5-27b, which ran before the crash was
+  diagnosed) and gemma-4-31b additionally ran with
+  `GGML_VK_FORCE_MAX_ALLOCATION_SIZE=2147483648`. Per the
+  [R9700 tuning thread](https://github.com/ggml-org/llama.cpp/discussions/21043),
+  host-memory-visibility settings measure as zero-impact on healthy
+  configs, and qwen3.5-27b's with/without numbers here are consistent with
+  that.
+- **Caveats:** the dense before/after comparison is Ollama-specific and the
+  Vulkan tables are llama.cpp-specific — don't expect either to transfer
+  exactly to other stacks, and don't compare across stacks without the
   cross-stack note above. Short-tier prefill tok/s mostly measures fixed
   per-request overhead, not real throughput. Both PCIe slots run x8.
 

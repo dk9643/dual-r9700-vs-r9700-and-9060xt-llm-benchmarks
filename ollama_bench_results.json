@@ -770,5 +770,1549 @@
         "gen_tps_stdev": 0.0
       }
     }
+  },
+  {
+    "timestamp": "2026-09-02T03:15:56.252874+00:00",
+    "label": "dual-r9700",
+    "model": "qwen3.5-27b:131072",
+    "gen_tokens_requested": 256,
+    "hardware": {
+      "gpus_lspci": "03:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Navi 48 [Radeon AI PRO R9700] (rev c0)\n07:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Navi 48 [Radeon AI PRO R9700] (rev c0)\n15:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Granite Ridge [Radeon Graphics] (rev c2)",
+      "rocm_smi": "device,VRAM Total Memory (B),VRAM Total Used Memory (B),Card Series,Card Model,Card Vendor,Card SKU,Subsystem ID,Device Rev,Node ID,GUID,GFX Version\ncard0,34208743424,17332367360,AMD Radeon AI PRO R9700,0x7551,Advanced Micro Devices Inc. [AMD/ATI],1E4990U,-0x1b67,0xc0,1,64106,gfx1201\ncard1,34208743424,17858981888,AMD Radeon AI PRO R9700,0x7551,Advanced Micro Devices Inc. [AMD/ATI],1E4990U,-0x1b67,0xc0,2,14696,gfx1201\ncard2,536870912,49856512,AMD Ryzen 9 9900X 12-Core Processor,0x13c0,Advanced Micro Devices Inc. [AMD/ATI],RAPHAEL,-0x3000,0xc2,3,26548,gfx1036",
+      "kernel": "7.0.0-30-generic",
+      "ollama_version": "ollama version is 0.33.2"
+    },
+    "ollama_ps": "NAME                  ID              SIZE     PROCESSOR    CONTEXT    UNTIL   \nqwen3.5-27b:131072    e16be7e2cf97    34 GB    100% GPU     131072     Forever",
+    "results": {
+      "short": {
+        "runs": [
+          {
+            "wall_seconds": 13.57,
+            "prompt_tokens": 37,
+            "prompt_eval_tps": 246.2,
+            "gen_tokens": 256,
+            "gen_tps": 19.2,
+            "total_duration_s": 13.57,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 13.56,
+            "prompt_tokens": 39,
+            "prompt_eval_tps": 261.9,
+            "gen_tokens": 256,
+            "gen_tps": 19.2,
+            "total_duration_s": 13.56,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 13.56,
+            "prompt_tokens": 39,
+            "prompt_eval_tps": 259.5,
+            "gen_tokens": 256,
+            "gen_tps": 19.2,
+            "total_duration_s": 13.56,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 13.56,
+            "prompt_tokens": 38,
+            "prompt_eval_tps": 252.4,
+            "gen_tokens": 256,
+            "gen_tps": 19.2,
+            "total_duration_s": 13.56,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 13.56,
+            "prompt_tokens": 38,
+            "prompt_eval_tps": 256.4,
+            "gen_tokens": 256,
+            "gen_tps": 19.2,
+            "total_duration_s": 13.56,
+            "load_duration_s": 0.0
+          }
+        ],
+        "prompt_eval_tps_mean": 255.3,
+        "prompt_eval_tps_stdev": 6.2,
+        "gen_tps_mean": 19.2,
+        "gen_tps_stdev": 0.0
+      },
+      "medium": {
+        "runs": [
+          {
+            "wall_seconds": 13.61,
+            "prompt_tokens": 69,
+            "prompt_eval_tps": 378.0,
+            "gen_tokens": 256,
+            "gen_tps": 19.1,
+            "total_duration_s": 13.61,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 13.59,
+            "prompt_tokens": 68,
+            "prompt_eval_tps": 430.9,
+            "gen_tokens": 256,
+            "gen_tps": 19.1,
+            "total_duration_s": 13.59,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 13.6,
+            "prompt_tokens": 68,
+            "prompt_eval_tps": 414.9,
+            "gen_tokens": 256,
+            "gen_tps": 19.1,
+            "total_duration_s": 13.6,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 13.6,
+            "prompt_tokens": 69,
+            "prompt_eval_tps": 389.0,
+            "gen_tokens": 256,
+            "gen_tps": 19.2,
+            "total_duration_s": 13.6,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 13.58,
+            "prompt_tokens": 68,
+            "prompt_eval_tps": 426.6,
+            "gen_tokens": 256,
+            "gen_tps": 19.2,
+            "total_duration_s": 13.57,
+            "load_duration_s": 0.0
+          }
+        ],
+        "prompt_eval_tps_mean": 407.9,
+        "prompt_eval_tps_stdev": 23.3,
+        "gen_tps_mean": 19.1,
+        "gen_tps_stdev": 0.1
+      },
+      "long": {
+        "runs": [
+          {
+            "wall_seconds": 15.05,
+            "prompt_tokens": 2446,
+            "prompt_eval_tps": 1629.4,
+            "gen_tokens": 256,
+            "gen_tps": 19.0,
+            "total_duration_s": 15.05,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 15.04,
+            "prompt_tokens": 2445,
+            "prompt_eval_tps": 1623.4,
+            "gen_tokens": 256,
+            "gen_tps": 19.1,
+            "total_duration_s": 15.04,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 15.05,
+            "prompt_tokens": 2445,
+            "prompt_eval_tps": 1625.3,
+            "gen_tokens": 256,
+            "gen_tps": 19.0,
+            "total_duration_s": 15.04,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 15.05,
+            "prompt_tokens": 2446,
+            "prompt_eval_tps": 1625.2,
+            "gen_tokens": 256,
+            "gen_tps": 19.0,
+            "total_duration_s": 15.05,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 15.05,
+            "prompt_tokens": 2446,
+            "prompt_eval_tps": 1627.8,
+            "gen_tokens": 256,
+            "gen_tps": 19.0,
+            "total_duration_s": 15.04,
+            "load_duration_s": 0.0
+          }
+        ],
+        "prompt_eval_tps_mean": 1626.2,
+        "prompt_eval_tps_stdev": 2.4,
+        "gen_tps_mean": 19.0,
+        "gen_tps_stdev": 0.0
+      },
+      "extra_long": {
+        "runs": [
+          {
+            "wall_seconds": 18.25,
+            "prompt_tokens": 8044,
+            "prompt_eval_tps": 1892.8,
+            "gen_tokens": 256,
+            "gen_tps": 18.4,
+            "total_duration_s": 18.24,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 18.3,
+            "prompt_tokens": 8043,
+            "prompt_eval_tps": 1889.9,
+            "gen_tokens": 256,
+            "gen_tps": 18.4,
+            "total_duration_s": 18.29,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 18.3,
+            "prompt_tokens": 8045,
+            "prompt_eval_tps": 1894.8,
+            "gen_tokens": 256,
+            "gen_tps": 18.4,
+            "total_duration_s": 18.28,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 18.3,
+            "prompt_tokens": 8045,
+            "prompt_eval_tps": 1894.3,
+            "gen_tokens": 256,
+            "gen_tps": 18.4,
+            "total_duration_s": 18.29,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 18.36,
+            "prompt_tokens": 8047,
+            "prompt_eval_tps": 1889.1,
+            "gen_tokens": 256,
+            "gen_tps": 18.4,
+            "total_duration_s": 18.35,
+            "load_duration_s": 0.0
+          }
+        ],
+        "prompt_eval_tps_mean": 1892.2,
+        "prompt_eval_tps_stdev": 2.6,
+        "gen_tps_mean": 18.4,
+        "gen_tps_stdev": 0.0
+      },
+      "extremely_long": {
+        "runs": [
+          {
+            "wall_seconds": 23.64,
+            "prompt_tokens": 16046,
+            "prompt_eval_tps": 1768.4,
+            "gen_tokens": 256,
+            "gen_tps": 17.8,
+            "total_duration_s": 23.62,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 23.67,
+            "prompt_tokens": 16044,
+            "prompt_eval_tps": 1772.2,
+            "gen_tokens": 256,
+            "gen_tps": 17.8,
+            "total_duration_s": 23.65,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 23.66,
+            "prompt_tokens": 16046,
+            "prompt_eval_tps": 1774.2,
+            "gen_tokens": 256,
+            "gen_tps": 17.8,
+            "total_duration_s": 23.65,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 23.66,
+            "prompt_tokens": 16046,
+            "prompt_eval_tps": 1773.7,
+            "gen_tokens": 256,
+            "gen_tps": 17.8,
+            "total_duration_s": 23.64,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 23.63,
+            "prompt_tokens": 16045,
+            "prompt_eval_tps": 1773.6,
+            "gen_tokens": 256,
+            "gen_tps": 17.8,
+            "total_duration_s": 23.61,
+            "load_duration_s": 0.0
+          }
+        ],
+        "prompt_eval_tps_mean": 1772.4,
+        "prompt_eval_tps_stdev": 2.4,
+        "gen_tps_mean": 17.8,
+        "gen_tps_stdev": 0.0
+      },
+      "colossal_32k": {
+        "runs": [
+          {
+            "wall_seconds": 37.31,
+            "prompt_tokens": 32045,
+            "prompt_eval_tps": 1477.9,
+            "gen_tokens": 256,
+            "gen_tps": 16.7,
+            "total_duration_s": 37.28,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 37.25,
+            "prompt_tokens": 32042,
+            "prompt_eval_tps": 1487.6,
+            "gen_tokens": 256,
+            "gen_tps": 16.7,
+            "total_duration_s": 37.22,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 37.23,
+            "prompt_tokens": 32046,
+            "prompt_eval_tps": 1489.0,
+            "gen_tokens": 256,
+            "gen_tps": 16.7,
+            "total_duration_s": 37.2,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 37.26,
+            "prompt_tokens": 32044,
+            "prompt_eval_tps": 1488.9,
+            "gen_tokens": 256,
+            "gen_tps": 16.7,
+            "total_duration_s": 37.22,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 37.22,
+            "prompt_tokens": 32043,
+            "prompt_eval_tps": 1488.5,
+            "gen_tokens": 256,
+            "gen_tps": 16.7,
+            "total_duration_s": 37.18,
+            "load_duration_s": 0.0
+          }
+        ],
+        "prompt_eval_tps_mean": 1486.4,
+        "prompt_eval_tps_stdev": 4.8,
+        "gen_tps_mean": 16.7,
+        "gen_tps_stdev": 0.0
+      },
+      "colossal_64k": {
+        "runs": [
+          {
+            "wall_seconds": 76.39,
+            "prompt_tokens": 64045,
+            "prompt_eval_tps": 1091.4,
+            "gen_tokens": 256,
+            "gen_tps": 14.9,
+            "total_duration_s": 76.32,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 76.57,
+            "prompt_tokens": 64045,
+            "prompt_eval_tps": 1091.7,
+            "gen_tokens": 256,
+            "gen_tps": 14.9,
+            "total_duration_s": 76.51,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 76.55,
+            "prompt_tokens": 64045,
+            "prompt_eval_tps": 1092.2,
+            "gen_tokens": 256,
+            "gen_tps": 14.9,
+            "total_duration_s": 76.48,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 76.52,
+            "prompt_tokens": 64044,
+            "prompt_eval_tps": 1091.8,
+            "gen_tokens": 256,
+            "gen_tps": 14.9,
+            "total_duration_s": 76.46,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 76.55,
+            "prompt_tokens": 64047,
+            "prompt_eval_tps": 1091.7,
+            "gen_tokens": 256,
+            "gen_tps": 14.9,
+            "total_duration_s": 76.49,
+            "load_duration_s": 0.0
+          }
+        ],
+        "prompt_eval_tps_mean": 1091.8,
+        "prompt_eval_tps_stdev": 0.3,
+        "gen_tps_mean": 14.9,
+        "gen_tps_stdev": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-09-02T03:38:08.185987+00:00",
+    "label": "dual-r9700",
+    "model": "gemma-4-31b-it:latest",
+    "gen_tokens_requested": 256,
+    "hardware": {
+      "gpus_lspci": "03:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Navi 48 [Radeon AI PRO R9700] (rev c0)\n07:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Navi 48 [Radeon AI PRO R9700] (rev c0)\n15:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Granite Ridge [Radeon Graphics] (rev c2)",
+      "rocm_smi": "device,VRAM Total Memory (B),VRAM Total Used Memory (B),Card Series,Card Model,Card Vendor,Card SKU,Subsystem ID,Device Rev,Node ID,GUID,GFX Version\ncard0,34208743424,21460537344,AMD Radeon AI PRO R9700,0x7551,Advanced Micro Devices Inc. [AMD/ATI],1E4990U,-0x1b67,0xc0,1,64106,gfx1201\ncard1,34208743424,21899264000,AMD Radeon AI PRO R9700,0x7551,Advanced Micro Devices Inc. [AMD/ATI],1E4990U,-0x1b67,0xc0,2,14696,gfx1201\ncard2,536870912,49848320,AMD Ryzen 9 9900X 12-Core Processor,0x13c0,Advanced Micro Devices Inc. [AMD/ATI],RAPHAEL,-0x3000,0xc2,3,26548,gfx1036",
+      "kernel": "7.0.0-30-generic",
+      "ollama_version": "ollama version is 0.33.2"
+    },
+    "ollama_ps": "NAME                     ID              SIZE     PROCESSOR    CONTEXT    UNTIL   \ngemma-4-31b-it:latest    5b150bbe2ec9    36 GB    100% GPU     131072     Forever",
+    "results": {
+      "short": {
+        "runs": [
+          {
+            "wall_seconds": 15.74,
+            "prompt_tokens": 44,
+            "prompt_eval_tps": 300.0,
+            "gen_tokens": 256,
+            "gen_tps": 16.6,
+            "total_duration_s": 15.61,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 15.65,
+            "prompt_tokens": 44,
+            "prompt_eval_tps": 296.4,
+            "gen_tokens": 256,
+            "gen_tps": 16.6,
+            "total_duration_s": 15.62,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 15.63,
+            "prompt_tokens": 41,
+            "prompt_eval_tps": 282.8,
+            "gen_tokens": 256,
+            "gen_tps": 16.6,
+            "total_duration_s": 15.61,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 15.78,
+            "prompt_tokens": 43,
+            "prompt_eval_tps": 295.6,
+            "gen_tokens": 256,
+            "gen_tps": 16.5,
+            "total_duration_s": 15.76,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 15.64,
+            "prompt_tokens": 40,
+            "prompt_eval_tps": 276.2,
+            "gen_tokens": 256,
+            "gen_tps": 16.6,
+            "total_duration_s": 15.64,
+            "load_duration_s": 0.0
+          }
+        ],
+        "prompt_eval_tps_mean": 290.2,
+        "prompt_eval_tps_stdev": 10.2,
+        "gen_tps_mean": 16.6,
+        "gen_tps_stdev": 0.0
+      },
+      "medium": {
+        "runs": [
+          {
+            "wall_seconds": 15.74,
+            "prompt_tokens": 75,
+            "prompt_eval_tps": 427.6,
+            "gen_tokens": 256,
+            "gen_tps": 16.6,
+            "total_duration_s": 15.67,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 15.76,
+            "prompt_tokens": 76,
+            "prompt_eval_tps": 425.7,
+            "gen_tokens": 256,
+            "gen_tps": 16.5,
+            "total_duration_s": 15.73,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 15.65,
+            "prompt_tokens": 75,
+            "prompt_eval_tps": 419.7,
+            "gen_tokens": 256,
+            "gen_tps": 16.6,
+            "total_duration_s": 15.64,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 15.64,
+            "prompt_tokens": 75,
+            "prompt_eval_tps": 425.7,
+            "gen_tokens": 256,
+            "gen_tps": 16.6,
+            "total_duration_s": 15.63,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 15.64,
+            "prompt_tokens": 76,
+            "prompt_eval_tps": 434.0,
+            "gen_tokens": 256,
+            "gen_tps": 16.6,
+            "total_duration_s": 15.63,
+            "load_duration_s": 0.0
+          }
+        ],
+        "prompt_eval_tps_mean": 426.5,
+        "prompt_eval_tps_stdev": 5.1,
+        "gen_tps_mean": 16.6,
+        "gen_tps_stdev": 0.0
+      },
+      "long": {
+        "runs": [
+          {
+            "wall_seconds": 17.58,
+            "prompt_tokens": 2270,
+            "prompt_eval_tps": 1210.3,
+            "gen_tokens": 253,
+            "gen_tps": 16.2,
+            "total_duration_s": 17.55,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 17.6,
+            "prompt_tokens": 2270,
+            "prompt_eval_tps": 1132.8,
+            "gen_tokens": 249,
+            "gen_tps": 16.2,
+            "total_duration_s": 17.59,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 17.94,
+            "prompt_tokens": 2269,
+            "prompt_eval_tps": 1198.2,
+            "gen_tokens": 256,
+            "gen_tps": 16.2,
+            "total_duration_s": 17.92,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 17.83,
+            "prompt_tokens": 2271,
+            "prompt_eval_tps": 1104.3,
+            "gen_tokens": 249,
+            "gen_tps": 16.2,
+            "total_duration_s": 17.82,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 18.21,
+            "prompt_tokens": 2268,
+            "prompt_eval_tps": 1190.7,
+            "gen_tokens": 256,
+            "gen_tps": 16.2,
+            "total_duration_s": 18.2,
+            "load_duration_s": 0.0
+          }
+        ],
+        "prompt_eval_tps_mean": 1167.3,
+        "prompt_eval_tps_stdev": 46.1,
+        "gen_tps_mean": 16.2,
+        "gen_tps_stdev": 0.0
+      },
+      "extra_long": {
+        "runs": [
+          {
+            "wall_seconds": 21.96,
+            "prompt_tokens": 7450,
+            "prompt_eval_tps": 1388.5,
+            "gen_tokens": 256,
+            "gen_tps": 15.7,
+            "total_duration_s": 21.94,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 22.14,
+            "prompt_tokens": 7450,
+            "prompt_eval_tps": 1389.1,
+            "gen_tokens": 256,
+            "gen_tps": 15.7,
+            "total_duration_s": 22.12,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 22.0,
+            "prompt_tokens": 7451,
+            "prompt_eval_tps": 1392.0,
+            "gen_tokens": 256,
+            "gen_tps": 15.7,
+            "total_duration_s": 21.98,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 21.61,
+            "prompt_tokens": 7450,
+            "prompt_eval_tps": 1390.5,
+            "gen_tokens": 250,
+            "gen_tps": 15.7,
+            "total_duration_s": 21.59,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 22.0,
+            "prompt_tokens": 7451,
+            "prompt_eval_tps": 1388.6,
+            "gen_tokens": 256,
+            "gen_tps": 15.7,
+            "total_duration_s": 21.98,
+            "load_duration_s": 0.0
+          }
+        ],
+        "prompt_eval_tps_mean": 1389.7,
+        "prompt_eval_tps_stdev": 1.5,
+        "gen_tps_mean": 15.7,
+        "gen_tps_stdev": 0.0
+      },
+      "extremely_long": {
+        "runs": [
+          {
+            "wall_seconds": 28.51,
+            "prompt_tokens": 14850,
+            "prompt_eval_tps": 1293.7,
+            "gen_tokens": 250,
+            "gen_tps": 15.1,
+            "total_duration_s": 28.47,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 28.76,
+            "prompt_tokens": 14848,
+            "prompt_eval_tps": 1298.6,
+            "gen_tokens": 253,
+            "gen_tps": 15.1,
+            "total_duration_s": 28.72,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 28.54,
+            "prompt_tokens": 14848,
+            "prompt_eval_tps": 1303.4,
+            "gen_tokens": 250,
+            "gen_tps": 15.0,
+            "total_duration_s": 28.5,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 28.46,
+            "prompt_tokens": 14848,
+            "prompt_eval_tps": 1306.7,
+            "gen_tokens": 250,
+            "gen_tps": 15.0,
+            "total_duration_s": 28.42,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 28.48,
+            "prompt_tokens": 14850,
+            "prompt_eval_tps": 1304.6,
+            "gen_tokens": 250,
+            "gen_tps": 15.0,
+            "total_duration_s": 28.44,
+            "load_duration_s": 0.0
+          }
+        ],
+        "prompt_eval_tps_mean": 1301.4,
+        "prompt_eval_tps_stdev": 5.2,
+        "gen_tps_mean": 15.0,
+        "gen_tps_stdev": 0.1
+      },
+      "colossal_32k": {
+        "runs": [
+          {
+            "wall_seconds": 46.42,
+            "prompt_tokens": 29650,
+            "prompt_eval_tps": 1080.6,
+            "gen_tokens": 256,
+            "gen_tps": 14.0,
+            "total_duration_s": 46.33,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 46.54,
+            "prompt_tokens": 29649,
+            "prompt_eval_tps": 1083.1,
+            "gen_tokens": 256,
+            "gen_tps": 14.0,
+            "total_duration_s": 46.46,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 46.44,
+            "prompt_tokens": 29650,
+            "prompt_eval_tps": 1083.5,
+            "gen_tokens": 256,
+            "gen_tps": 14.0,
+            "total_duration_s": 46.36,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 46.51,
+            "prompt_tokens": 29650,
+            "prompt_eval_tps": 1083.7,
+            "gen_tokens": 256,
+            "gen_tps": 13.9,
+            "total_duration_s": 46.43,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 46.47,
+            "prompt_tokens": 29648,
+            "prompt_eval_tps": 1083.2,
+            "gen_tokens": 256,
+            "gen_tps": 14.0,
+            "total_duration_s": 46.39,
+            "load_duration_s": 0.0
+          }
+        ],
+        "prompt_eval_tps_mean": 1082.8,
+        "prompt_eval_tps_stdev": 1.3,
+        "gen_tps_mean": 14.0,
+        "gen_tps_stdev": 0.0
+      },
+      "colossal_64k": {
+        "runs": [
+          {
+            "wall_seconds": 97.43,
+            "prompt_tokens": 59251,
+            "prompt_eval_tps": 785.2,
+            "gen_tokens": 255,
+            "gen_tps": 12.2,
+            "total_duration_s": 97.27,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 97.63,
+            "prompt_tokens": 59249,
+            "prompt_eval_tps": 785.3,
+            "gen_tokens": 254,
+            "gen_tps": 12.2,
+            "total_duration_s": 97.44,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 97.54,
+            "prompt_tokens": 59249,
+            "prompt_eval_tps": 785.2,
+            "gen_tokens": 254,
+            "gen_tps": 12.2,
+            "total_duration_s": 97.38,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 97.6,
+            "prompt_tokens": 59247,
+            "prompt_eval_tps": 785.1,
+            "gen_tokens": 254,
+            "gen_tps": 12.2,
+            "total_duration_s": 97.44,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 97.52,
+            "prompt_tokens": 59251,
+            "prompt_eval_tps": 785.3,
+            "gen_tokens": 254,
+            "gen_tps": 12.2,
+            "total_duration_s": 97.36,
+            "load_duration_s": 0.0
+          }
+        ],
+        "prompt_eval_tps_mean": 785.2,
+        "prompt_eval_tps_stdev": 0.1,
+        "gen_tps_mean": 12.2,
+        "gen_tps_stdev": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-09-02T03:45:27.353314+00:00",
+    "label": "dual-r9700",
+    "model": "gemma-4-26b-a4b:131072",
+    "gen_tokens_requested": 256,
+    "hardware": {
+      "gpus_lspci": "03:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Navi 48 [Radeon AI PRO R9700] (rev c0)\n07:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Navi 48 [Radeon AI PRO R9700] (rev c0)\n15:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Granite Ridge [Radeon Graphics] (rev c2)",
+      "rocm_smi": "device,VRAM Total Memory (B),VRAM Total Used Memory (B),Card Series,Card Model,Card Vendor,Card SKU,Subsystem ID,Device Rev,Node ID,GUID,GFX Version\ncard0,34208743424,18236899328,AMD Radeon AI PRO R9700,0x7551,Advanced Micro Devices Inc. [AMD/ATI],1E4990U,-0x1b67,0xc0,1,64106,gfx1201\ncard1,34208743424,18752106496,AMD Radeon AI PRO R9700,0x7551,Advanced Micro Devices Inc. [AMD/ATI],1E4990U,-0x1b67,0xc0,2,14696,gfx1201\ncard2,536870912,49848320,AMD Ryzen 9 9900X 12-Core Processor,0x13c0,Advanced Micro Devices Inc. [AMD/ATI],RAPHAEL,-0x3000,0xc2,3,26548,gfx1036",
+      "kernel": "7.0.0-30-generic",
+      "ollama_version": "ollama version is 0.33.2"
+    },
+    "ollama_ps": "NAME                      ID              SIZE     PROCESSOR    CONTEXT    UNTIL   \ngemma-4-26b-a4b:131072    59695ea299db    34 GB    100% GPU     131072     Forever",
+    "results": {
+      "short": {
+        "runs": [
+          {
+            "wall_seconds": 3.68,
+            "prompt_tokens": 43,
+            "prompt_eval_tps": 637.1,
+            "gen_tokens": 256,
+            "gen_tps": 71.1,
+            "total_duration_s": 3.68,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 3.68,
+            "prompt_tokens": 43,
+            "prompt_eval_tps": 636.0,
+            "gen_tokens": 256,
+            "gen_tps": 71.1,
+            "total_duration_s": 3.68,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 3.68,
+            "prompt_tokens": 41,
+            "prompt_eval_tps": 615.6,
+            "gen_tokens": 256,
+            "gen_tps": 71.1,
+            "total_duration_s": 3.68,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 3.68,
+            "prompt_tokens": 41,
+            "prompt_eval_tps": 618.9,
+            "gen_tokens": 256,
+            "gen_tps": 71.0,
+            "total_duration_s": 3.68,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 3.66,
+            "prompt_tokens": 40,
+            "prompt_eval_tps": 604.1,
+            "gen_tokens": 256,
+            "gen_tps": 71.4,
+            "total_duration_s": 3.66,
+            "load_duration_s": 0.0
+          }
+        ],
+        "prompt_eval_tps_mean": 622.3,
+        "prompt_eval_tps_stdev": 14.1,
+        "gen_tps_mean": 71.1,
+        "gen_tps_stdev": 0.2
+      },
+      "medium": {
+        "runs": [
+          {
+            "wall_seconds": 3.7,
+            "prompt_tokens": 77,
+            "prompt_eval_tps": 945.2,
+            "gen_tokens": 256,
+            "gen_tps": 70.9,
+            "total_duration_s": 3.7,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 3.7,
+            "prompt_tokens": 73,
+            "prompt_eval_tps": 909.2,
+            "gen_tokens": 256,
+            "gen_tps": 70.9,
+            "total_duration_s": 3.7,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 3.7,
+            "prompt_tokens": 75,
+            "prompt_eval_tps": 934.2,
+            "gen_tokens": 256,
+            "gen_tps": 70.9,
+            "total_duration_s": 3.7,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 3.68,
+            "prompt_tokens": 77,
+            "prompt_eval_tps": 950.9,
+            "gen_tokens": 256,
+            "gen_tps": 71.3,
+            "total_duration_s": 3.68,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 3.72,
+            "prompt_tokens": 76,
+            "prompt_eval_tps": 934.7,
+            "gen_tokens": 256,
+            "gen_tps": 70.6,
+            "total_duration_s": 3.72,
+            "load_duration_s": 0.0
+          }
+        ],
+        "prompt_eval_tps_mean": 934.8,
+        "prompt_eval_tps_stdev": 16.0,
+        "gen_tps_mean": 70.9,
+        "gen_tps_stdev": 0.2
+      },
+      "long": {
+        "runs": [
+          {
+            "wall_seconds": 4.41,
+            "prompt_tokens": 2269,
+            "prompt_eval_tps": 3690.6,
+            "gen_tokens": 256,
+            "gen_tps": 68.0,
+            "total_duration_s": 4.4,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 4.42,
+            "prompt_tokens": 2271,
+            "prompt_eval_tps": 3671.9,
+            "gen_tokens": 256,
+            "gen_tps": 68.5,
+            "total_duration_s": 4.42,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 4.42,
+            "prompt_tokens": 2269,
+            "prompt_eval_tps": 3676.4,
+            "gen_tokens": 256,
+            "gen_tps": 68.6,
+            "total_duration_s": 4.41,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 4.41,
+            "prompt_tokens": 2269,
+            "prompt_eval_tps": 3679.7,
+            "gen_tokens": 256,
+            "gen_tps": 68.7,
+            "total_duration_s": 4.4,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 4.43,
+            "prompt_tokens": 2268,
+            "prompt_eval_tps": 3677.2,
+            "gen_tokens": 256,
+            "gen_tps": 68.4,
+            "total_duration_s": 4.42,
+            "load_duration_s": 0.0
+          }
+        ],
+        "prompt_eval_tps_mean": 3679.2,
+        "prompt_eval_tps_stdev": 7.0,
+        "gen_tps_mean": 68.4,
+        "gen_tps_stdev": 0.3
+      },
+      "extra_long": {
+        "runs": [
+          {
+            "wall_seconds": 6.19,
+            "prompt_tokens": 7448,
+            "prompt_eval_tps": 3404.1,
+            "gen_tokens": 256,
+            "gen_tps": 65.7,
+            "total_duration_s": 6.17,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 6.2,
+            "prompt_tokens": 7450,
+            "prompt_eval_tps": 3389.2,
+            "gen_tokens": 256,
+            "gen_tps": 66.0,
+            "total_duration_s": 6.18,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 6.18,
+            "prompt_tokens": 7449,
+            "prompt_eval_tps": 3393.9,
+            "gen_tokens": 256,
+            "gen_tps": 66.4,
+            "total_duration_s": 6.16,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 6.17,
+            "prompt_tokens": 7450,
+            "prompt_eval_tps": 3390.9,
+            "gen_tokens": 256,
+            "gen_tps": 66.5,
+            "total_duration_s": 6.15,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 6.17,
+            "prompt_tokens": 7447,
+            "prompt_eval_tps": 3388.5,
+            "gen_tokens": 256,
+            "gen_tps": 66.5,
+            "total_duration_s": 6.16,
+            "load_duration_s": 0.0
+          }
+        ],
+        "prompt_eval_tps_mean": 3393.3,
+        "prompt_eval_tps_stdev": 6.4,
+        "gen_tps_mean": 66.2,
+        "gen_tps_stdev": 0.4
+      },
+      "extremely_long": {
+        "runs": [
+          {
+            "wall_seconds": 9.2,
+            "prompt_tokens": 14849,
+            "prompt_eval_tps": 2976.2,
+            "gen_tokens": 256,
+            "gen_tps": 63.5,
+            "total_duration_s": 9.16,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 9.23,
+            "prompt_tokens": 14850,
+            "prompt_eval_tps": 2975.0,
+            "gen_tokens": 256,
+            "gen_tps": 63.5,
+            "total_duration_s": 9.19,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 9.22,
+            "prompt_tokens": 14848,
+            "prompt_eval_tps": 2978.5,
+            "gen_tokens": 256,
+            "gen_tps": 63.4,
+            "total_duration_s": 9.18,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 9.23,
+            "prompt_tokens": 14850,
+            "prompt_eval_tps": 2974.2,
+            "gen_tokens": 256,
+            "gen_tps": 63.4,
+            "total_duration_s": 9.19,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 9.25,
+            "prompt_tokens": 14851,
+            "prompt_eval_tps": 2971.9,
+            "gen_tokens": 256,
+            "gen_tps": 63.1,
+            "total_duration_s": 9.21,
+            "load_duration_s": 0.0
+          }
+        ],
+        "prompt_eval_tps_mean": 2975.2,
+        "prompt_eval_tps_stdev": 2.4,
+        "gen_tps_mean": 63.4,
+        "gen_tps_stdev": 0.2
+      },
+      "colossal_32k": {
+        "runs": [
+          {
+            "wall_seconds": 17.4,
+            "prompt_tokens": 29651,
+            "prompt_eval_tps": 2358.2,
+            "gen_tokens": 256,
+            "gen_tps": 57.5,
+            "total_duration_s": 17.33,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 17.42,
+            "prompt_tokens": 29650,
+            "prompt_eval_tps": 2360.4,
+            "gen_tokens": 256,
+            "gen_tps": 57.5,
+            "total_duration_s": 17.35,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 17.41,
+            "prompt_tokens": 29650,
+            "prompt_eval_tps": 2359.4,
+            "gen_tokens": 256,
+            "gen_tps": 57.7,
+            "total_duration_s": 17.34,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 17.42,
+            "prompt_tokens": 29650,
+            "prompt_eval_tps": 2361.0,
+            "gen_tokens": 256,
+            "gen_tps": 57.5,
+            "total_duration_s": 17.34,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 17.42,
+            "prompt_tokens": 29651,
+            "prompt_eval_tps": 2361.7,
+            "gen_tokens": 256,
+            "gen_tps": 57.6,
+            "total_duration_s": 17.35,
+            "load_duration_s": 0.0
+          }
+        ],
+        "prompt_eval_tps_mean": 2360.1,
+        "prompt_eval_tps_stdev": 1.4,
+        "gen_tps_mean": 57.6,
+        "gen_tps_stdev": 0.1
+      },
+      "colossal_64k": {
+        "runs": [
+          {
+            "wall_seconds": 41.32,
+            "prompt_tokens": 59250,
+            "prompt_eval_tps": 1671.0,
+            "gen_tokens": 256,
+            "gen_tps": 50.3,
+            "total_duration_s": 41.16,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 41.4,
+            "prompt_tokens": 59249,
+            "prompt_eval_tps": 1668.7,
+            "gen_tokens": 256,
+            "gen_tps": 50.3,
+            "total_duration_s": 41.24,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 41.42,
+            "prompt_tokens": 59250,
+            "prompt_eval_tps": 1668.0,
+            "gen_tokens": 256,
+            "gen_tps": 50.3,
+            "total_duration_s": 41.27,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 41.45,
+            "prompt_tokens": 59250,
+            "prompt_eval_tps": 1666.7,
+            "gen_tokens": 256,
+            "gen_tps": 50.3,
+            "total_duration_s": 41.3,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 41.48,
+            "prompt_tokens": 59250,
+            "prompt_eval_tps": 1665.2,
+            "gen_tokens": 256,
+            "gen_tps": 50.3,
+            "total_duration_s": 41.32,
+            "load_duration_s": 0.0
+          }
+        ],
+        "prompt_eval_tps_mean": 1667.9,
+        "prompt_eval_tps_stdev": 2.2,
+        "gen_tps_mean": 50.3,
+        "gen_tps_stdev": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-09-02T03:50:50.451589+00:00",
+    "label": "dual-r9700",
+    "model": "qwen3.5-35b-a3b:131072",
+    "gen_tokens_requested": 256,
+    "hardware": {
+      "gpus_lspci": "03:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Navi 48 [Radeon AI PRO R9700] (rev c0)\n07:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Navi 48 [Radeon AI PRO R9700] (rev c0)\n15:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Granite Ridge [Radeon Graphics] (rev c2)",
+      "rocm_smi": "device,VRAM Total Memory (B),VRAM Total Used Memory (B),Card Series,Card Model,Card Vendor,Card SKU,Subsystem ID,Device Rev,Node ID,GUID,GFX Version\ncard0,34208743424,21507969024,AMD Radeon AI PRO R9700,0x7551,Advanced Micro Devices Inc. [AMD/ATI],1E4990U,-0x1b67,0xc0,1,64106,gfx1201\ncard1,34208743424,20241448960,AMD Radeon AI PRO R9700,0x7551,Advanced Micro Devices Inc. [AMD/ATI],1E4990U,-0x1b67,0xc0,2,14696,gfx1201\ncard2,536870912,49848320,AMD Ryzen 9 9900X 12-Core Processor,0x13c0,Advanced Micro Devices Inc. [AMD/ATI],RAPHAEL,-0x3000,0xc2,3,26548,gfx1036",
+      "kernel": "7.0.0-30-generic",
+      "ollama_version": "ollama version is 0.33.2"
+    },
+    "ollama_ps": "NAME                      ID              SIZE     PROCESSOR    CONTEXT    UNTIL   \nqwen3.5-35b-a3b:131072    942e7010f5a4    40 GB    100% GPU     131072     Forever",
+    "results": {
+      "short": {
+        "runs": [
+          {
+            "wall_seconds": 3.68,
+            "prompt_tokens": 39,
+            "prompt_eval_tps": 496.4,
+            "gen_tokens": 256,
+            "gen_tps": 71.6,
+            "total_duration_s": 3.68,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 3.65,
+            "prompt_tokens": 39,
+            "prompt_eval_tps": 490.8,
+            "gen_tokens": 256,
+            "gen_tps": 72.4,
+            "total_duration_s": 3.65,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 3.64,
+            "prompt_tokens": 38,
+            "prompt_eval_tps": 493.6,
+            "gen_tokens": 256,
+            "gen_tps": 72.5,
+            "total_duration_s": 3.63,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 3.63,
+            "prompt_tokens": 35,
+            "prompt_eval_tps": 468.4,
+            "gen_tokens": 256,
+            "gen_tps": 72.7,
+            "total_duration_s": 3.62,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 3.64,
+            "prompt_tokens": 36,
+            "prompt_eval_tps": 472.4,
+            "gen_tokens": 256,
+            "gen_tps": 72.5,
+            "total_duration_s": 3.64,
+            "load_duration_s": 0.0
+          }
+        ],
+        "prompt_eval_tps_mean": 484.3,
+        "prompt_eval_tps_stdev": 12.9,
+        "gen_tps_mean": 72.3,
+        "gen_tps_stdev": 0.4
+      },
+      "medium": {
+        "runs": [
+          {
+            "wall_seconds": 3.67,
+            "prompt_tokens": 67,
+            "prompt_eval_tps": 770.0,
+            "gen_tokens": 256,
+            "gen_tps": 72.1,
+            "total_duration_s": 3.66,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 3.68,
+            "prompt_tokens": 69,
+            "prompt_eval_tps": 720.4,
+            "gen_tokens": 256,
+            "gen_tps": 72.1,
+            "total_duration_s": 3.67,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 3.67,
+            "prompt_tokens": 67,
+            "prompt_eval_tps": 751.3,
+            "gen_tokens": 256,
+            "gen_tps": 72.1,
+            "total_duration_s": 3.67,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 3.65,
+            "prompt_tokens": 68,
+            "prompt_eval_tps": 749.0,
+            "gen_tokens": 256,
+            "gen_tps": 72.4,
+            "total_duration_s": 3.65,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 3.66,
+            "prompt_tokens": 67,
+            "prompt_eval_tps": 766.3,
+            "gen_tokens": 256,
+            "gen_tps": 72.2,
+            "total_duration_s": 3.66,
+            "load_duration_s": 0.0
+          }
+        ],
+        "prompt_eval_tps_mean": 751.4,
+        "prompt_eval_tps_stdev": 19.6,
+        "gen_tps_mean": 72.2,
+        "gen_tps_stdev": 0.1
+      },
+      "long": {
+        "runs": [
+          {
+            "wall_seconds": 4.2,
+            "prompt_tokens": 2446,
+            "prompt_eval_tps": 4063.4,
+            "gen_tokens": 256,
+            "gen_tps": 71.9,
+            "total_duration_s": 4.19,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 4.22,
+            "prompt_tokens": 2445,
+            "prompt_eval_tps": 4045.0,
+            "gen_tokens": 256,
+            "gen_tps": 71.7,
+            "total_duration_s": 4.22,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 4.22,
+            "prompt_tokens": 2446,
+            "prompt_eval_tps": 4049.2,
+            "gen_tokens": 256,
+            "gen_tps": 71.7,
+            "total_duration_s": 4.22,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 4.22,
+            "prompt_tokens": 2444,
+            "prompt_eval_tps": 4035.4,
+            "gen_tokens": 256,
+            "gen_tps": 71.9,
+            "total_duration_s": 4.21,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 4.21,
+            "prompt_tokens": 2444,
+            "prompt_eval_tps": 4055.1,
+            "gen_tokens": 256,
+            "gen_tps": 71.9,
+            "total_duration_s": 4.21,
+            "load_duration_s": 0.0
+          }
+        ],
+        "prompt_eval_tps_mean": 4049.6,
+        "prompt_eval_tps_stdev": 10.5,
+        "gen_tps_mean": 71.8,
+        "gen_tps_stdev": 0.1
+      },
+      "extra_long": {
+        "runs": [
+          {
+            "wall_seconds": 5.26,
+            "prompt_tokens": 8046,
+            "prompt_eval_tps": 5524.1,
+            "gen_tokens": 256,
+            "gen_tps": 68.5,
+            "total_duration_s": 5.24,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 5.27,
+            "prompt_tokens": 8046,
+            "prompt_eval_tps": 5518.7,
+            "gen_tokens": 256,
+            "gen_tps": 68.5,
+            "total_duration_s": 5.26,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 5.27,
+            "prompt_tokens": 8045,
+            "prompt_eval_tps": 5518.5,
+            "gen_tokens": 256,
+            "gen_tps": 68.4,
+            "total_duration_s": 5.26,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 5.28,
+            "prompt_tokens": 8045,
+            "prompt_eval_tps": 5502.1,
+            "gen_tokens": 256,
+            "gen_tps": 68.3,
+            "total_duration_s": 5.27,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 5.27,
+            "prompt_tokens": 8046,
+            "prompt_eval_tps": 5506.6,
+            "gen_tokens": 256,
+            "gen_tps": 68.5,
+            "total_duration_s": 5.26,
+            "load_duration_s": 0.0
+          }
+        ],
+        "prompt_eval_tps_mean": 5514.0,
+        "prompt_eval_tps_stdev": 9.2,
+        "gen_tps_mean": 68.4,
+        "gen_tps_stdev": 0.1
+      },
+      "extremely_long": {
+        "runs": [
+          {
+            "wall_seconds": 7.11,
+            "prompt_tokens": 16046,
+            "prompt_eval_tps": 5265.3,
+            "gen_tokens": 256,
+            "gen_tps": 64.4,
+            "total_duration_s": 7.09,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 7.12,
+            "prompt_tokens": 16046,
+            "prompt_eval_tps": 5265.9,
+            "gen_tokens": 256,
+            "gen_tps": 64.4,
+            "total_duration_s": 7.1,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 7.14,
+            "prompt_tokens": 16045,
+            "prompt_eval_tps": 5265.2,
+            "gen_tokens": 256,
+            "gen_tps": 64.2,
+            "total_duration_s": 7.12,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 7.13,
+            "prompt_tokens": 16044,
+            "prompt_eval_tps": 5272.1,
+            "gen_tokens": 256,
+            "gen_tps": 64.3,
+            "total_duration_s": 7.11,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 7.1,
+            "prompt_tokens": 16045,
+            "prompt_eval_tps": 5283.9,
+            "gen_tokens": 256,
+            "gen_tps": 64.5,
+            "total_duration_s": 7.09,
+            "load_duration_s": 0.0
+          }
+        ],
+        "prompt_eval_tps_mean": 5270.5,
+        "prompt_eval_tps_stdev": 8.0,
+        "gen_tps_mean": 64.4,
+        "gen_tps_stdev": 0.1
+      },
+      "colossal_32k": {
+        "runs": [
+          {
+            "wall_seconds": 11.92,
+            "prompt_tokens": 32046,
+            "prompt_eval_tps": 4329.1,
+            "gen_tokens": 256,
+            "gen_tps": 58.8,
+            "total_duration_s": 11.89,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 11.97,
+            "prompt_tokens": 32047,
+            "prompt_eval_tps": 4322.3,
+            "gen_tokens": 256,
+            "gen_tps": 58.7,
+            "total_duration_s": 11.94,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 11.94,
+            "prompt_tokens": 32044,
+            "prompt_eval_tps": 4335.6,
+            "gen_tokens": 256,
+            "gen_tps": 58.8,
+            "total_duration_s": 11.9,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 11.93,
+            "prompt_tokens": 32045,
+            "prompt_eval_tps": 4338.7,
+            "gen_tokens": 256,
+            "gen_tps": 58.8,
+            "total_duration_s": 11.9,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 11.92,
+            "prompt_tokens": 32044,
+            "prompt_eval_tps": 4349.7,
+            "gen_tokens": 256,
+            "gen_tps": 58.8,
+            "total_duration_s": 11.88,
+            "load_duration_s": 0.0
+          }
+        ],
+        "prompt_eval_tps_mean": 4335.1,
+        "prompt_eval_tps_stdev": 10.3,
+        "gen_tps_mean": 58.8,
+        "gen_tps_stdev": 0.0
+      },
+      "colossal_64k": {
+        "runs": [
+          {
+            "wall_seconds": 26.24,
+            "prompt_tokens": 64046,
+            "prompt_eval_tps": 3077.9,
+            "gen_tokens": 256,
+            "gen_tps": 49.9,
+            "total_duration_s": 26.18,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 26.31,
+            "prompt_tokens": 64045,
+            "prompt_eval_tps": 3083.5,
+            "gen_tokens": 256,
+            "gen_tps": 49.9,
+            "total_duration_s": 26.24,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 26.29,
+            "prompt_tokens": 64043,
+            "prompt_eval_tps": 3083.2,
+            "gen_tokens": 256,
+            "gen_tps": 49.9,
+            "total_duration_s": 26.22,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 26.28,
+            "prompt_tokens": 64045,
+            "prompt_eval_tps": 3084.1,
+            "gen_tokens": 256,
+            "gen_tps": 49.8,
+            "total_duration_s": 26.21,
+            "load_duration_s": 0.0
+          },
+          {
+            "wall_seconds": 26.3,
+            "prompt_tokens": 64044,
+            "prompt_eval_tps": 3081.6,
+            "gen_tokens": 256,
+            "gen_tps": 49.9,
+            "total_duration_s": 26.23,
+            "load_duration_s": 0.0
+          }
+        ],
+        "prompt_eval_tps_mean": 3082.1,
+        "prompt_eval_tps_stdev": 2.5,
+        "gen_tps_mean": 49.9,
+        "gen_tps_stdev": 0.0
+      }
+    }
   }
 ]

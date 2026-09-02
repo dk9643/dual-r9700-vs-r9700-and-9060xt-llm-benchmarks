@@ -8,13 +8,17 @@
 - OS: Ubuntu Server, kernel 7.0.0-30-generic (in-kernel amdgpu driver)
 - Storage: NVMe SSD
 
-## GPUs (before configuration)
+## GPUs
 
-| Device | VRAM | Arch | PCIe |
-|---|---|---|---|
-| Radeon AI PRO R9700 | 32 GB | gfx1201 | x8 |
-| Radeon RX 9060 XT | 16 GB | gfx1200 | x8 |
-| Ryzen 9900X iGPU | 512 MB | gfx1036 | — (unused; takes no layers) |
+Before: Radeon AI PRO R9700 32 GB (gfx1201) + Radeon RX 9060 XT 16 GB
+(gfx1200). After: two Radeon AI PRO R9700s (both gfx1201, 64 GB total).
+The Ryzen 9900X iGPU (512 MB, gfx1036) is present in both configs but takes
+no layers; on Vulkan it must be excluded explicitly (`--device`). Resizable
+BAR active (full 32 G BARs verified on both discrete cards).
+
+The dual-r9700 Vulkan benchmarks set `GGML_VK_DISABLE_HOST_VISIBLE_VIDMEM=1`
+(and, for gemma-4-31b, `GGML_VK_FORCE_MAX_ALLOCATION_SIZE=2147483648`) —
+see the README's finding #2 for why.
 
 ## Software
 
