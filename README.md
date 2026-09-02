@@ -11,7 +11,9 @@ second card is in.**
 Along the way, benchmarking surfaced a reproducible ROCm crash that
 affects mixture-of-experts models split across mismatched AMD GPUs. For
 anyone thinking about mixing different AMD cards in one box,
-[that section](#the-moe-crash) might be the most useful thing here.
+[that section](#the-moe-crash) might be the most useful thing here. The MoE
+models did get benchmarked in the end — through llama.cpp's Vulkan backend,
+which sidesteps the bug entirely.
 
 ## Hardware
 
@@ -65,19 +67,60 @@ gets processed (compute-bound); decode is how fast tokens come out
 
 ### gemma-4-26b-a4b (MoE) and qwen3.5-35b-a3b (MoE)
 
-**These couldn't be benchmarked on this config** — both crash within a few
-requests (see [The MoE crash](#the-moe-crash)). Here's the partial data from
-the runs that completed before the crash. Indicative only:
+**These couldn't be benchmarked on Ollama/ROCm** — both crash within a few
+requests (see [The MoE crash](#the-moe-crash)). Both load fully onto GPU
+(split across the cards) and generate coherently until the crash; the runs
+that completed before it showed ~56.5 and ~60.3 tok/s decode respectively.
+Full numbers for both came from llama.cpp's Vulkan backend instead — next
+section.
 
-| Model | short-prompt prefill | decode |
-|---|---|---|
-| gemma-4-26b-a4b | ~480–520 tok/s | ~56.5 tok/s |
-| qwen3.5-35b-a3b | ~400–430 tok/s | ~60.3 tok/s |
+## Results — before, MoE models (llama.cpp Vulkan)
 
-Both MoEs loaded fully onto GPU (split across both cards) and produced
-coherent output — roughly 4× the decode speed of the dense models, which is
-what ~3–4B active params should deliver. Neither survived a full benchmark
-run.
+Since Ollama/ROCm can't run the MoEs on this config, both were benchmarked
+through `llama-server` (llama.cpp build 10745) on the Vulkan backend, which
+compiles GPU code per-device at runtime and is structurally immune to the
+rocBLAS mixed-architecture bug. Same methodology
+([llamacpp_bench.py](llamacpp_bench.py) mirrors the Ollama script: same five
+tiers, nonce cache-busting plus `cache_prompt: false`, 256 generation
+tokens, temperature 0, 5 runs, warmup excluded) and the same settings as the
+Ollama runs: ctx 131072, flash attention on, q8_0 KV cache, split across
+both discrete GPUs. Raw data in
+[vulkan_bench_results.json](vulkan_bench_results.json).
+
+### gemma-4-26b-a4b (MoE, ~4B active)
+
+| tier | prompt tokens | prefill tok/s | decode tok/s |
+|---|---|---|---|
+| short | ~26 | 242.9 ± 68.1 | 60.6 ± 0.2 |
+| medium | ~61 | 433.7 ± 35.8 | 60.4 ± 0.1 |
+| long | ~2.3k | 1999.0 ± 48.2 | 56.6 ± 0.2 |
+| extra_long | ~7.4k | 3207.8 ± 42.7 | 53.8 ± 0.2 |
+| extremely_long | ~14.8k | 3373.6 ± 9.5 | 51.9 ± 0.1 |
+
+### qwen3.5-35b-a3b (MoE, ~3B active)
+
+| tier | prompt tokens | prefill tok/s | decode tok/s |
+|---|---|---|---|
+| short | ~27 | 246.6 ± 38.9 | 72.2 ± 0.2 |
+| medium | ~57 | 411.4 ± 26.6 | 72.1 ± 0.2 |
+| long | ~2.4k | 2291.2 ± 39.6 | 70.9 ± 1.1 |
+| extra_long | ~8.0k | 3439.2 ± 26.3 | 70.2 ± 0.1 |
+| extremely_long | ~16.0k | 3487.7 ± 16.5 | 68.5 ± 0.1 |
+
+Worth noticing:
+
+- The MoEs are in a different speed class than the dense models: 4–5× the
+  decode rate, and prefill hitting ~3,400–3,500 tok/s at deep context.
+- qwen3.5-35b-a3b's decode barely decays with context depth — 72.2 → 68.5
+  tok/s (~5%) from short to ~16k. That's its Gated DeltaNet linear-attention
+  blocks doing exactly what they promise. The gemma MoE drops ~14% over the
+  same range.
+- **Cross-stack sanity check:** the two dense models ran on both stacks.
+  Vulkan decode lands within ~5% of ROCm (e.g. 14.0 vs 13.9 tok/s for qwen
+  at the deepest tier), and Vulkan prefill runs ~15–20% lower. So the MoE
+  numbers above are, if anything, slightly conservative relative to what
+  ROCm should do once its bug is fixed. All four Vulkan records (dense
+  included) are in the JSON.
 
 ## Results — after (dual R9700)
 
@@ -86,6 +129,7 @@ gets generated with:
 
 ```
 python3 compare.py --before "r9700+9060xt" --after "dual-r9700" --markdown
+python3 compare.py --file vulkan_bench_results.json --before "r9700+9060xt" --after "dual-r9700" --markdown
 ```
 
 ## The MoE crash
@@ -112,19 +156,33 @@ Things ruled out, one variable at a time:
 
 **What it actually is:** this matches
 [llama.cpp #19893](https://github.com/ggml-org/llama.cpp/issues/19893) —
-when a model is split across GPUs with *different* architectures (here,
-gfx1201 + gfx1200), the engine can dispatch a kernel variant that was never
-compiled for the device it lands on. The reported workaround is single-GPU
-execution. MoE expert routing exercises way more of the multi-device dispatch
-paths than dense inference does, which is why only the MoEs trigger it. See
-also [llama.cpp #20024](https://github.com/ggml-org/llama.cpp/issues/20024)
-for a related Qwen3.5-35B-A3B ROCm crash. Both issues were still open at the
-time of writing — no fixed release exists.
+the same error when a model is split across GPUs with *different*
+architectures (here, gfx1201 + gfx1200). That issue was traced to a rocBLAS
+bug ([ROCm/rocm-libraries#3413](https://github.com/ROCm/rocm-libraries/issues/3413):
+rocBLAS can launch a kernel object compiled for the wrong GPU in
+mixed-architecture systems) and closed once a fix
+([ROCm/rocm-libraries#4781](https://github.com/ROCm/rocm-libraries/pull/4781),
+"solution library per gfx", merged 2026-03-02) landed — confirmed fixed by
+building rocBLAS from source with that commit.
 
-**The implication:** the GPU upgrade itself should fix this. Two R9700s
-means the split becomes homogeneous (gfx1201 + gfx1201) — exactly the
-configuration that doesn't crash. The "after" half of this repo will test
-that prediction.
+The catch: that fix is not in any ROCm 7.2.x release (verified by commit
+containment against the 7.2.1–7.2.4 tags), and Ollama bundles the 7.2 line —
+so even the latest Ollama (0.33.2 at the time of writing) still ships the
+bug. The crashes above are the proof. On stock Ollama the workaround remains
+single-GPU execution. MoE expert routing exercises far more of the
+multi-device dispatch paths than dense inference does, which is why only the
+MoEs trigger it here.
+([llama.cpp #20024](https://github.com/ggml-org/llama.cpp/issues/20024), a
+Qwen3.5-35B-A3B ROCm crash with a different signature, was a separate bug —
+fixed in llama.cpp in March 2026 and already absent from current builds.)
+
+**The implication:** the GPU upgrade itself should fix this — two R9700s
+make the split homogeneous (gfx1201 + gfx1201), which sidesteps the rocBLAS
+bug entirely. The "after" half of this repo will test that prediction. For
+anyone stuck on mixed cards there are two escape hatches: wait for Ollama's
+bundle to move past ROCm 7.2.x (the fix first ships in newer ROCm
+releases), or use a Vulkan backend — that worked here, and it's where the
+MoE numbers above came from.
 
 ## How the measuring works
 
@@ -148,20 +206,39 @@ that prediction.
 - **Version stability:** the dense suite was run on both Ollama 0.32.14 and
   0.33.2 — everything agreed within noise (decode within ±0.1 tok/s). The
   tables above are 0.33.2.
-- **Caveats:** these numbers are Ollama-specific (its scheduler, its bundled
-  llama.cpp/ROCm build) — don't expect them to transfer exactly to raw
-  llama.cpp or vLLM. Short-tier prefill tok/s mostly measures fixed
+- **Vulkan side-suite:** the MoE numbers come from
+  [llamacpp_bench.py](llamacpp_bench.py) hitting `llama-server` — identical
+  tiers, nonce, and decode length, plus `cache_prompt: false` on every
+  request. Server settings matched the Ollama config:
+  `-c 131072 -fa on -ctk q8_0 -ctv q8_0 -ngl 999 --device Vulkan1,Vulkan2`.
+  That last flag matters: Vulkan enumerates the iGPU as a device, and
+  without it the iGPU takes layers backed by slow system RAM.
+- **Caveats:** the dense numbers are Ollama-specific (its scheduler, its
+  bundled llama.cpp/ROCm build) and the MoE numbers are
+  llama.cpp-Vulkan-specific — don't expect either to transfer exactly to
+  other stacks, and don't compare across the two tables without the
+  cross-stack note above. Short-tier prefill tok/s mostly measures fixed
   per-request overhead, not real throughput. Both PCIe slots run x8.
 
 ## Running it yourself
+
+Ollama:
 
 ```
 python3 ollama_bench.py <model>:<tag> --runs 5 --label "your-config-name"
 python3 compare.py --before "config-a" --after "config-b"
 ```
 
-Results append to `ollama_bench_results.json` with a hardware snapshot per
-record.
+llama.cpp Vulkan (one model at a time):
+
+```
+llama-server -m <model>.gguf -c 131072 -ngl 999 -fa on -ctk q8_0 -ctv q8_0 --device Vulkan1,Vulkan2 --port 8089
+python3 llamacpp_bench.py <model-name> --runs 5 --label "your-config-name" --url http://127.0.0.1:8089
+python3 compare.py --file vulkan_bench_results.json --before "config-a" --after "config-b"
+```
+
+Results append to `ollama_bench_results.json` / `vulkan_bench_results.json`
+with a hardware snapshot per record.
 
 ## License
 

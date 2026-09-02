@@ -19,10 +19,12 @@
 ## Software
 
 - Ollama 0.33.2 (official installer, systemd service), bundling its own
-  llama.cpp + ROCm 7.2 runtime (`rocm_v7_2`)
+  llama.cpp + ROCm 7.2 runtime (`rocm_v7_2`) — dense-model benchmarks
   - a 0.32.14 run of the dense suite agreed within noise
+- llama.cpp build 10745 (commit `c845263f8`), Vulkan backend via RADV —
+  MoE-model benchmarks (see the README for why)
 - Host ROCm tooling: rocm-smi 7.1.1
-- Python 3.14.4 (benchmark script, stdlib only)
+- Python 3.14.4 (benchmark scripts, stdlib only)
 
 ## Ollama service configuration
 
