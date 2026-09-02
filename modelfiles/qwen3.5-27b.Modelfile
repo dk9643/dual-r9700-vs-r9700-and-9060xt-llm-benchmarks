@@ -1,0 +1,16 @@
+# ======== Qwen3.5-27B (dense) — benchmark model ========
+# Source: unsloth/Qwen3.5-27B-GGUF — Qwen3.5-27B-Q8_0.gguf (28 GB)
+# Point FROM at your local copy of that file.
+#
+# No TEMPLATE line: chat format comes from Ollama's built-in qwen35
+# renderer / GGUF metadata. Do not add one.
+# Sampling params are the official Qwen3.5 manifest values.
+
+FROM ./Qwen3.5-27B-Q8_0.gguf
+
+PARAMETER temperature 1
+PARAMETER top_p 0.95
+PARAMETER top_k 20
+PARAMETER presence_penalty 1.5
+
+PARAMETER num_ctx 131072

@@ -1,0 +1,18 @@
+# ======== Gemma 4 31B instruct (dense) — benchmark model ========
+# Source: bartowski/google_gemma-4-31B-it-GGUF — google_gemma-4-31B-it-Q8_0.gguf (32.6 GB)
+# Point FROM at your local copy of that file.
+#
+# Gemma 4 GGUFs from HF ship with a BROKEN chat template (wrong turn
+# delimiters -> model outputs "---" on repeat). Fix: the TEMPLATE stub
+# plus RENDERER/PARSER lines force Ollama's built-in Gemma 4 formatting.
+# Requires Ollama 0.20.2+.
+# Sampling params are Google's recommended Gemma settings.
+
+FROM ./google_gemma-4-31B-it-Q8_0.gguf
+TEMPLATE {{ .Prompt }}
+RENDERER gemma4
+PARSER gemma4
+PARAMETER temperature 1
+PARAMETER top_k 64
+PARAMETER top_p 0.95
+PARAMETER num_ctx 131072
