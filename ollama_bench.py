@@ -58,6 +58,8 @@ PROMPTS = {
     "long": _LONG_PREFIX + _FILLER * 60,            # ~2.5k tokens
     "extra_long": _LONG_PREFIX + _FILLER * 200,     # ~8k tokens
     "extremely_long": _LONG_PREFIX + _FILLER * 400, # ~16k tokens
+    "colossal_32k": _LONG_PREFIX + _FILLER * 800,   # ~32k tokens
+    "colossal_64k": _LONG_PREFIX + _FILLER * 1600,  # ~64k tokens
 }
 
 # No num_ctx is set here: context window is inherited from each model's

@@ -49,21 +49,25 @@ gets processed (compute-bound); decode is how fast tokens come out
 
 | tier | prompt tokens | prefill tok/s | decode tok/s |
 |---|---|---|---|
-| short | ~36 | 205.7 ± 5.6 | 14.9 ± 0.0 |
-| medium | ~67 | 351.7 ± 6.1 | 14.9 ± 0.0 |
-| long | ~2.4k | 1263.4 ± 6.9 | 14.7 ± 0.0 |
-| extra_long | ~8.0k | 1444.6 ± 1.7 | 14.3 ± 0.1 |
-| extremely_long | ~16.0k | 1331.8 ± 1.1 | 13.9 ± 0.0 |
+| short | ~39 | 213.3 ± 4.0 | 14.9 ± 0.0 |
+| medium | ~68 | 352.3 ± 4.0 | 14.9 ± 0.1 |
+| long | ~2.4k | 1264.6 ± 1.8 | 14.7 ± 0.1 |
+| extra_long | ~8.0k | 1443.8 ± 2.2 | 14.3 ± 0.1 |
+| extremely_long | ~16.0k | 1332.4 ± 0.4 | 13.9 ± 0.0 |
+| colossal_32k | ~32.0k | 1108.8 ± 4.0 | 13.0 ± 0.0 |
+| colossal_64k | ~64.0k | 806.8 ± 0.1 | 11.6 ± 0.0 |
 
 ### gemma-4-31b-it (dense)
 
 | tier | prompt tokens | prefill tok/s | decode tok/s |
 |---|---|---|---|
-| short | ~42 | 224.6 ± 3.1 | 12.8 ± 0.1 |
-| medium | ~77 | 330.6 ± 38.6 | 12.8 ± 0.0 |
-| long | ~2.3k | 942.3 ± 10.3 | 12.4 ± 0.0 |
-| extra_long | ~7.5k | 1056.2 ± 21.1 | 12.0 ± 0.0 |
-| extremely_long | ~14.8k | 1003.7 ± 4.9 | 11.5 ± 0.0 |
+| short | ~42 | 216.2 ± 20.9 | 12.8 ± 0.0 |
+| medium | ~77 | 344.6 ± 7.3 | 12.8 ± 0.0 |
+| long | ~2.3k | 924.9 ± 17.1 | 12.4 ± 0.0 |
+| extra_long | ~7.4k | 1061.5 ± 4.4 | 12.0 ± 0.0 |
+| extremely_long | ~14.9k | 1003.3 ± 5.5 | 11.5 ± 0.0 |
+| colossal_32k | ~29.7k | 825.4 ± 1.1 | 10.6 ± 0.0 |
+| colossal_64k | ~59.3k | 577.0 ± 0.1 | 9.2 ± 0.0 |
 
 ### gemma-4-26b-a4b (MoE) and qwen3.5-35b-a3b (MoE)
 
@@ -81,7 +85,7 @@ All four models were also run through `llama-server` (llama.cpp build
 and is structurally immune to the rocBLAS mixed-architecture bug. For the
 MoEs this is the only full benchmark data on this config; for the dense
 models it doubles as a cross-stack check. Same methodology
-([llamacpp_bench.py](llamacpp_bench.py) mirrors the Ollama script: same five
+([llamacpp_bench.py](llamacpp_bench.py) mirrors the Ollama script: same seven
 tiers, nonce cache-busting plus `cache_prompt: false`, 256 generation
 tokens, temperature 0, 5 runs, warmup excluded) and the same settings as the
 Ollama runs: ctx 131072, flash attention on, q8_0 KV cache, split across
@@ -92,52 +96,69 @@ both discrete GPUs. Raw data in
 
 | tier | prompt tokens | prefill tok/s | decode tok/s |
 |---|---|---|---|
-| short | ~28 | 108.6 ± 6.3 | 14.2 ± 0.1 |
-| medium | ~58 | 199.0 ± 16.8 | 14.3 ± 0.0 |
-| long | ~2.4k | 871.1 ± 33.6 | 14.3 ± 0.1 |
-| extra_long | ~8.0k | 1166.8 ± 12.1 | 14.2 ± 0.0 |
-| extremely_long | ~16.0k | 1173.4 ± 1.8 | 14.0 ± 0.0 |
+| short | ~28 | 109.8 ± 8.2 | 14.3 ± 0.1 |
+| medium | ~55 | 207.4 ± 6.9 | 14.4 ± 0.1 |
+| long | ~2.4k | 869.4 ± 17.2 | 14.4 ± 0.0 |
+| extra_long | ~8.0k | 1164.6 ± 3.7 | 14.2 ± 0.1 |
+| extremely_long | ~16.0k | 1174.8 ± 6.2 | 13.9 ± 0.1 |
+| colossal_32k | ~32.0k | 1075.7 ± 4.8 | 13.5 ± 0.1 |
+| colossal_64k | ~64.0k | 867.5 ± 0.7 | 12.7 ± 0.0 |
 
 ### gemma-4-31b-it (dense)
 
 | tier | prompt tokens | prefill tok/s | decode tok/s |
 |---|---|---|---|
-| short | ~25 | 108.7 ± 9.7 | 12.4 ± 0.0 |
-| medium | ~58 | 198.9 ± 22.4 | 12.5 ± 0.1 |
-| long | ~2.3k | 669.2 ± 18.8 | 11.9 ± 0.0 |
-| extra_long | ~7.4k | 894.8 ± 17.4 | 11.4 ± 0.0 |
-| extremely_long | ~14.8k | 896.8 ± 1.0 | 11.0 ± 0.1 |
+| short | ~26 | 109.7 ± 10.5 | — |
+| medium | ~60 | 212.4 ± 23.2 | 12.5 ± 0.1 |
+| long | ~2.3k | 677.9 ± 3.6 | 12.0 ± 0.1 |
+| extra_long | ~7.4k | 902.8 ± 4.9 | 11.5 ± 0.1 |
+| extremely_long | ~14.8k | 894.0 ± 4.0 | 11.1 ± 0.0 |
+| colossal_32k | ~29.6k | 733.5 ± 0.9 | 10.7 ± 0.0 |
+| colossal_64k | ~59.2k | 508.1 ± 0.2 | 9.9 ± 0.0 |
+
+*(The empty short-tier decode cell: on the raw short prompt this model emitted
+an immediate end-of-sequence token in all five runs, so there was nothing to
+time. A raw-completion quirk at temperature 0, not a performance issue.)*
 
 ### gemma-4-26b-a4b (MoE, ~4B active)
 
 | tier | prompt tokens | prefill tok/s | decode tok/s |
 |---|---|---|---|
-| short | ~26 | 242.9 ± 68.1 | 60.6 ± 0.2 |
-| medium | ~61 | 433.7 ± 35.8 | 60.4 ± 0.1 |
-| long | ~2.3k | 1999.0 ± 48.2 | 56.6 ± 0.2 |
-| extra_long | ~7.4k | 3207.8 ± 42.7 | 53.8 ± 0.2 |
-| extremely_long | ~14.8k | 3373.6 ± 9.5 | 51.9 ± 0.1 |
+| short | ~27 | 259.5 ± 20.9 | 59.7 ± 0.2 |
+| medium | ~61 | 442.0 ± 16.3 | 59.5 ± 0.1 |
+| long | ~2.3k | 1983.7 ± 42.4 | 55.7 ± 0.3 |
+| extra_long | ~7.4k | 3197.8 ± 55.3 | 53.1 ± 0.2 |
+| extremely_long | ~14.8k | 3373.0 ± 14.3 | 51.3 ± 0.1 |
+| colossal_32k | ~29.6k | 2831.8 ± 5.2 | 48.4 ± 0.1 |
+| colossal_64k | ~59.2k | 1933.9 ± 1.4 | 43.6 ± 0.2 |
 
 ### qwen3.5-35b-a3b (MoE, ~3B active)
 
 | tier | prompt tokens | prefill tok/s | decode tok/s |
 |---|---|---|---|
-| short | ~27 | 246.6 ± 38.9 | 72.2 ± 0.2 |
-| medium | ~57 | 411.4 ± 26.6 | 72.1 ± 0.2 |
-| long | ~2.4k | 2291.2 ± 39.6 | 70.9 ± 1.1 |
-| extra_long | ~8.0k | 3439.2 ± 26.3 | 70.2 ± 0.1 |
-| extremely_long | ~16.0k | 3487.7 ± 16.5 | 68.5 ± 0.1 |
+| short | ~27 | 219.6 ± 23.3 | 68.7 ± 1.3 |
+| medium | ~58 | 369.4 ± 27.6 | 69.1 ± 0.1 |
+| long | ~2.4k | 2101.1 ± 50.3 | 68.4 ± 0.1 |
+| extra_long | ~8.0k | 3382.9 ± 28.0 | 67.2 ± 0.1 |
+| extremely_long | ~16.0k | 3483.9 ± 13.6 | 65.7 ± 0.1 |
+| colossal_32k | ~32.0k | 3119.0 ± 10.4 | 62.4 ± 0.0 |
+| colossal_64k | ~64.0k | 2394.1 ± 6.0 | 56.3 ± 0.2 |
 
 Worth noticing:
 
-- qwen3.5-35b-a3b's decode barely decays with context depth — 72.2 → 68.5
-  tok/s (~5%) from short to ~16k. That's its Gated DeltaNet linear-attention
-  blocks doing exactly what they promise. The gemma MoE drops ~14% over the
-  same range.
+- qwen3.5-35b-a3b's decode barely decays with context depth in the normal
+  range — 68.7 → 65.7 tok/s (~4%) from short to ~16k, the flattest curve of
+  the four. That's its Gated DeltaNet linear-attention blocks doing exactly
+  what they promise. The gemma MoE drops ~14% over the same range.
+- The colossal tiers are where deep context bites everyone: prefill peaks
+  around the 8–16k tiers and falls off hard by ~64k (gemma MoE 3373 → 1934
+  tok/s), and decode keeps sliding too — though the qwen MoE still holds up
+  best (68.7 → 56.3 by ~64k, vs 59.7 → 43.6 for the gemma MoE).
 - **Cross-stack sanity check:** comparing the dense tables here against the
-  Ollama ones above, Vulkan decode lands within ~5% of ROCm (e.g. 14.0 vs
-  13.9 tok/s for qwen at the deepest tier), while Vulkan prefill runs
-  ~15–20% lower. So the MoE numbers are, if anything, slightly conservative
+  Ollama ones above, Vulkan decode lands within ~5% of ROCm (13.9 tok/s on
+  both stacks for qwen at ~16k — and at 64k the Vulkan runs actually decay
+  *less*: 12.7 vs 11.6), while Vulkan prefill runs ~15–20% lower through the
+  mid tiers. So the MoE numbers are, if anything, slightly conservative
   relative to what ROCm should do once its bug is fixed.
 
 ## Results — after (dual R9700)
@@ -211,7 +232,7 @@ MoE numbers above came from.
 ## How the measuring works
 
 - [ollama_bench.py](ollama_bench.py) is stdlib-only Python talking to the
-  local Ollama API. Five prompt tiers (~40 tokens up to ~16k tokens), 256
+  local Ollama API. Seven prompt tiers (~40 tokens up to ~64k tokens), 256
   generation tokens, temperature 0, 5 runs per tier, one warmup request
   that doesn't count.
 - **Cache busting:** Ollama caches KV state for repeated prompt prefixes,

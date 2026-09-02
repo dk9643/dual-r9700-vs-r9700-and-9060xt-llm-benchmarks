@@ -1,13 +1,13 @@
 [
   {
-    "timestamp": "2026-09-01T17:11:37.097354+00:00",
+    "timestamp": "2026-09-01T19:16:59.867742+00:00",
     "label": "r9700+9060xt",
     "model": "qwen3.5-27b",
     "backend": "llama.cpp-vulkan",
     "gen_tokens_requested": 256,
     "hardware": {
       "gpus_lspci": "03:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Navi 48 [Radeon AI PRO R9700] (rev c0)\n07:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Navi 44 [Radeon RX 9060 XT] (rev c0)\n15:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Granite Ridge [Radeon Graphics] (rev c2)",
-      "rocm_smi": "device,VRAM Total Memory (B),VRAM Total Used Memory (B),Card Series,Card Model,Card Vendor,Card SKU,Subsystem ID,Device Rev,Node ID,GUID,GFX Version\ncard0,34208743424,22210236416,AMD Radeon AI PRO R9700,0x7551,Advanced Micro Devices Inc. [AMD/ATI],1E4990U,-0x1b67,0xc0,1,64106,gfx1201\ncard1,17095983104,11901595648,AMD Radeon RX 9060 XT,0x7590,Advanced Micro Devices Inc. [AMD/ATI],APM7842CL,0x5408,0xc0,2,27401,gfx1200\ncard2,536870912,17608704,AMD Ryzen 9 9900X 12-Core Processor,0x13c0,Advanced Micro Devices Inc. [AMD/ATI],RAPHAEL,-0x3000,0xc2,3,42976,gfx1036",
+      "rocm_smi": "device,VRAM Total Memory (B),VRAM Total Used Memory (B),Card Series,Card Model,Card Vendor,Card SKU,Subsystem ID,Device Rev,Node ID,GUID,GFX Version\ncard0,34208743424,22210248704,AMD Radeon AI PRO R9700,0x7551,Advanced Micro Devices Inc. [AMD/ATI],1E4990U,-0x1b67,0xc0,1,64106,gfx1201\ncard1,17095983104,12012756992,AMD Radeon RX 9060 XT,0x7590,Advanced Micro Devices Inc. [AMD/ATI],APM7842CL,0x5408,0xc0,2,27401,gfx1200\ncard2,536870912,17760256,AMD Ryzen 9 9900X 12-Core Processor,0x13c0,Advanced Micro Devices Inc. [AMD/ATI],RAPHAEL,-0x3000,0xc2,3,42976,gfx1036",
       "kernel": "7.0.0-30-generic",
       "llamacpp_version": "version: 0.3.0-dev (build 10745, commit c845263f8)"
     },
@@ -15,229 +15,315 @@
       "short": {
         "runs": [
           {
-            "wall_seconds": 18.22,
+            "wall_seconds": 18.17,
             "prompt_tokens": 28,
-            "prompt_eval_tps": 106.1,
-            "gen_tokens": 256,
-            "gen_tps": 14.2
-          },
-          {
-            "wall_seconds": 18.25,
-            "prompt_tokens": 28,
-            "prompt_eval_tps": 109.1,
-            "gen_tokens": 256,
-            "gen_tps": 14.2
-          },
-          {
-            "wall_seconds": 18.27,
-            "prompt_tokens": 27,
-            "prompt_eval_tps": 99.3,
+            "prompt_eval_tps": 96.8,
             "gen_tokens": 256,
             "gen_tps": 14.3
           },
           {
-            "wall_seconds": 18.23,
-            "prompt_tokens": 28,
-            "prompt_eval_tps": 112.9,
+            "wall_seconds": 18.13,
+            "prompt_tokens": 26,
+            "prompt_eval_tps": 107.3,
             "gen_tokens": 256,
             "gen_tps": 14.3
           },
           {
-            "wall_seconds": 18.33,
+            "wall_seconds": 18.09,
             "prompt_tokens": 28,
-            "prompt_eval_tps": 115.5,
+            "prompt_eval_tps": 116.3,
             "gen_tokens": 256,
-            "gen_tps": 14.2
+            "gen_tps": 14.4
+          },
+          {
+            "wall_seconds": 18.12,
+            "prompt_tokens": 28,
+            "prompt_eval_tps": 116.2,
+            "gen_tokens": 256,
+            "gen_tps": 14.3
+          },
+          {
+            "wall_seconds": 17.98,
+            "prompt_tokens": 28,
+            "prompt_eval_tps": 112.6,
+            "gen_tokens": 256,
+            "gen_tps": 14.4
           }
         ],
-        "prompt_eval_tps_mean": 108.6,
-        "prompt_eval_tps_stdev": 6.3,
-        "gen_tps_mean": 14.2,
+        "prompt_eval_tps_mean": 109.8,
+        "prompt_eval_tps_stdev": 8.2,
+        "gen_tps_mean": 14.3,
         "gen_tps_stdev": 0.1
       },
       "medium": {
         "runs": [
           {
-            "wall_seconds": 18.38,
+            "wall_seconds": 18.19,
+            "prompt_tokens": 55,
+            "prompt_eval_tps": 196.1,
+            "gen_tokens": 256,
+            "gen_tps": 14.3
+          },
+          {
+            "wall_seconds": 18.09,
             "prompt_tokens": 58,
-            "prompt_eval_tps": 169.6,
-            "gen_tokens": 256,
-            "gen_tps": 14.2
-          },
-          {
-            "wall_seconds": 18.22,
-            "prompt_tokens": 57,
-            "prompt_eval_tps": 206.3,
-            "gen_tokens": 256,
-            "gen_tps": 14.3
-          },
-          {
-            "wall_seconds": 18.21,
-            "prompt_tokens": 57,
-            "prompt_eval_tps": 203.8,
-            "gen_tokens": 256,
-            "gen_tps": 14.3
-          },
-          {
-            "wall_seconds": 18.17,
-            "prompt_tokens": 58,
-            "prompt_eval_tps": 202.9,
-            "gen_tokens": 256,
-            "gen_tps": 14.3
-          },
-          {
-            "wall_seconds": 18.15,
-            "prompt_tokens": 59,
-            "prompt_eval_tps": 212.4,
-            "gen_tokens": 256,
-            "gen_tps": 14.3
-          }
-        ],
-        "prompt_eval_tps_mean": 199.0,
-        "prompt_eval_tps_stdev": 16.8,
-        "gen_tps_mean": 14.3,
-        "gen_tps_stdev": 0.0
-      },
-      "long": {
-        "runs": [
-          {
-            "wall_seconds": 20.98,
-            "prompt_tokens": 2434,
-            "prompt_eval_tps": 812.7,
-            "gen_tokens": 256,
-            "gen_tps": 14.3
-          },
-          {
-            "wall_seconds": 20.86,
-            "prompt_tokens": 2437,
-            "prompt_eval_tps": 877.8,
-            "gen_tokens": 256,
-            "gen_tps": 14.2
-          },
-          {
-            "wall_seconds": 20.79,
-            "prompt_tokens": 2438,
-            "prompt_eval_tps": 877.5,
-            "gen_tokens": 256,
-            "gen_tps": 14.3
-          },
-          {
-            "wall_seconds": 20.55,
-            "prompt_tokens": 2434,
-            "prompt_eval_tps": 894.6,
+            "prompt_eval_tps": 207.3,
             "gen_tokens": 256,
             "gen_tps": 14.4
           },
           {
-            "wall_seconds": 20.69,
-            "prompt_tokens": 2436,
-            "prompt_eval_tps": 893.0,
+            "wall_seconds": 18.08,
+            "prompt_tokens": 59,
+            "prompt_eval_tps": 214.4,
             "gen_tokens": 256,
-            "gen_tps": 14.3
+            "gen_tps": 14.4
+          },
+          {
+            "wall_seconds": 17.99,
+            "prompt_tokens": 58,
+            "prompt_eval_tps": 211.2,
+            "gen_tokens": 256,
+            "gen_tps": 14.5
+          },
+          {
+            "wall_seconds": 18.04,
+            "prompt_tokens": 58,
+            "prompt_eval_tps": 208.1,
+            "gen_tokens": 256,
+            "gen_tps": 14.4
           }
         ],
-        "prompt_eval_tps_mean": 871.1,
-        "prompt_eval_tps_stdev": 33.6,
-        "gen_tps_mean": 14.3,
+        "prompt_eval_tps_mean": 207.4,
+        "prompt_eval_tps_stdev": 6.9,
+        "gen_tps_mean": 14.4,
         "gen_tps_stdev": 0.1
+      },
+      "long": {
+        "runs": [
+          {
+            "wall_seconds": 20.78,
+            "prompt_tokens": 2437,
+            "prompt_eval_tps": 843.5,
+            "gen_tokens": 256,
+            "gen_tps": 14.4
+          },
+          {
+            "wall_seconds": 20.58,
+            "prompt_tokens": 2435,
+            "prompt_eval_tps": 891.5,
+            "gen_tokens": 256,
+            "gen_tps": 14.4
+          },
+          {
+            "wall_seconds": 20.86,
+            "prompt_tokens": 2437,
+            "prompt_eval_tps": 866.9,
+            "gen_tokens": 256,
+            "gen_tps": 14.4
+          },
+          {
+            "wall_seconds": 20.92,
+            "prompt_tokens": 2437,
+            "prompt_eval_tps": 873.1,
+            "gen_tokens": 256,
+            "gen_tps": 14.4
+          },
+          {
+            "wall_seconds": 20.85,
+            "prompt_tokens": 2437,
+            "prompt_eval_tps": 871.9,
+            "gen_tokens": 256,
+            "gen_tps": 14.4
+          }
+        ],
+        "prompt_eval_tps_mean": 869.4,
+        "prompt_eval_tps_stdev": 17.2,
+        "gen_tps_mean": 14.4,
+        "gen_tps_stdev": 0.0
       },
       "extra_long": {
         "runs": [
           {
-            "wall_seconds": 25.03,
+            "wall_seconds": 24.95,
+            "prompt_tokens": 8036,
+            "prompt_eval_tps": 1158.0,
+            "gen_tokens": 256,
+            "gen_tps": 14.3
+          },
+          {
+            "wall_seconds": 25.1,
+            "prompt_tokens": 8038,
+            "prompt_eval_tps": 1165.7,
+            "gen_tokens": 256,
+            "gen_tps": 14.2
+          },
+          {
+            "wall_seconds": 24.92,
             "prompt_tokens": 8037,
-            "prompt_eval_tps": 1170.8,
+            "prompt_eval_tps": 1167.2,
+            "gen_tokens": 256,
+            "gen_tps": 14.3
+          },
+          {
+            "wall_seconds": 25.02,
+            "prompt_tokens": 8038,
+            "prompt_eval_tps": 1165.8,
             "gen_tokens": 256,
             "gen_tps": 14.2
           },
           {
-            "wall_seconds": 25.01,
-            "prompt_tokens": 8035,
-            "prompt_eval_tps": 1173.5,
-            "gen_tokens": 256,
-            "gen_tps": 14.2
-          },
-          {
-            "wall_seconds": 25.03,
-            "prompt_tokens": 8037,
-            "prompt_eval_tps": 1173.9,
-            "gen_tokens": 256,
-            "gen_tps": 14.2
-          },
-          {
-            "wall_seconds": 25.18,
-            "prompt_tokens": 8032,
-            "prompt_eval_tps": 1145.4,
-            "gen_tokens": 256,
-            "gen_tps": 14.2
-          },
-          {
-            "wall_seconds": 24.98,
-            "prompt_tokens": 8033,
-            "prompt_eval_tps": 1170.6,
+            "wall_seconds": 25.08,
+            "prompt_tokens": 8034,
+            "prompt_eval_tps": 1166.3,
             "gen_tokens": 256,
             "gen_tps": 14.2
           }
         ],
-        "prompt_eval_tps_mean": 1166.8,
-        "prompt_eval_tps_stdev": 12.1,
+        "prompt_eval_tps_mean": 1164.6,
+        "prompt_eval_tps_stdev": 3.7,
         "gen_tps_mean": 14.2,
-        "gen_tps_stdev": 0.0
+        "gen_tps_stdev": 0.1
       },
       "extremely_long": {
         "runs": [
           {
-            "wall_seconds": 32.15,
-            "prompt_tokens": 16038,
-            "prompt_eval_tps": 1170.6,
-            "gen_tokens": 256,
-            "gen_tps": 14.0
-          },
-          {
-            "wall_seconds": 32.21,
-            "prompt_tokens": 16035,
-            "prompt_eval_tps": 1175.0,
-            "gen_tokens": 256,
-            "gen_tps": 14.0
-          },
-          {
-            "wall_seconds": 32.16,
+            "wall_seconds": 32.2,
             "prompt_tokens": 16037,
-            "prompt_eval_tps": 1174.7,
+            "prompt_eval_tps": 1165.0,
             "gen_tokens": 256,
             "gen_tps": 14.0
           },
           {
-            "wall_seconds": 32.24,
-            "prompt_tokens": 16036,
-            "prompt_eval_tps": 1173.7,
+            "wall_seconds": 32.27,
+            "prompt_tokens": 16035,
+            "prompt_eval_tps": 1172.5,
             "gen_tokens": 256,
             "gen_tps": 13.9
           },
           {
-            "wall_seconds": 32.22,
-            "prompt_tokens": 16037,
-            "prompt_eval_tps": 1172.9,
+            "wall_seconds": 32.24,
+            "prompt_tokens": 16036,
+            "prompt_eval_tps": 1177.6,
+            "gen_tokens": 256,
+            "gen_tps": 13.9
+          },
+          {
+            "wall_seconds": 32.26,
+            "prompt_tokens": 16034,
+            "prompt_eval_tps": 1180.7,
+            "gen_tokens": 256,
+            "gen_tps": 13.9
+          },
+          {
+            "wall_seconds": 32.12,
+            "prompt_tokens": 16035,
+            "prompt_eval_tps": 1178.1,
             "gen_tokens": 256,
             "gen_tps": 14.0
           }
         ],
-        "prompt_eval_tps_mean": 1173.4,
-        "prompt_eval_tps_stdev": 1.8,
-        "gen_tps_mean": 14.0,
+        "prompt_eval_tps_mean": 1174.8,
+        "prompt_eval_tps_stdev": 6.2,
+        "gen_tps_mean": 13.9,
+        "gen_tps_stdev": 0.1
+      },
+      "colossal_32k": {
+        "runs": [
+          {
+            "wall_seconds": 49.26,
+            "prompt_tokens": 32036,
+            "prompt_eval_tps": 1067.2,
+            "gen_tokens": 256,
+            "gen_tps": 13.5
+          },
+          {
+            "wall_seconds": 49.07,
+            "prompt_tokens": 32036,
+            "prompt_eval_tps": 1077.8,
+            "gen_tokens": 256,
+            "gen_tps": 13.5
+          },
+          {
+            "wall_seconds": 49.17,
+            "prompt_tokens": 32036,
+            "prompt_eval_tps": 1077.9,
+            "gen_tokens": 256,
+            "gen_tps": 13.4
+          },
+          {
+            "wall_seconds": 49.07,
+            "prompt_tokens": 32034,
+            "prompt_eval_tps": 1078.0,
+            "gen_tokens": 256,
+            "gen_tps": 13.5
+          },
+          {
+            "wall_seconds": 49.13,
+            "prompt_tokens": 32038,
+            "prompt_eval_tps": 1077.7,
+            "gen_tokens": 256,
+            "gen_tps": 13.4
+          }
+        ],
+        "prompt_eval_tps_mean": 1075.7,
+        "prompt_eval_tps_stdev": 4.8,
+        "gen_tps_mean": 13.5,
+        "gen_tps_stdev": 0.1
+      },
+      "colossal_64k": {
+        "runs": [
+          {
+            "wall_seconds": 91.69,
+            "prompt_tokens": 64038,
+            "prompt_eval_tps": 866.3,
+            "gen_tokens": 221,
+            "gen_tps": 12.7
+          },
+          {
+            "wall_seconds": 91.64,
+            "prompt_tokens": 64036,
+            "prompt_eval_tps": 868.1,
+            "gen_tokens": 219,
+            "gen_tps": 12.7
+          },
+          {
+            "wall_seconds": 91.82,
+            "prompt_tokens": 64037,
+            "prompt_eval_tps": 867.9,
+            "gen_tokens": 221,
+            "gen_tps": 12.7
+          },
+          {
+            "wall_seconds": 93.18,
+            "prompt_tokens": 64035,
+            "prompt_eval_tps": 867.6,
+            "gen_tokens": 238,
+            "gen_tps": 12.7
+          },
+          {
+            "wall_seconds": 91.87,
+            "prompt_tokens": 64037,
+            "prompt_eval_tps": 867.7,
+            "gen_tokens": 221,
+            "gen_tps": 12.7
+          }
+        ],
+        "prompt_eval_tps_mean": 867.5,
+        "prompt_eval_tps_stdev": 0.7,
+        "gen_tps_mean": 12.7,
         "gen_tps_stdev": 0.0
       }
     }
   },
   {
-    "timestamp": "2026-09-01T17:19:27.040517+00:00",
+    "timestamp": "2026-09-01T19:39:49.542312+00:00",
     "label": "r9700+9060xt",
     "model": "gemma-4-31b-it",
     "backend": "llama.cpp-vulkan",
     "gen_tokens_requested": 256,
     "hardware": {
       "gpus_lspci": "03:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Navi 48 [Radeon AI PRO R9700] (rev c0)\n07:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Navi 44 [Radeon RX 9060 XT] (rev c0)\n15:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Granite Ridge [Radeon Graphics] (rev c2)",
-      "rocm_smi": "device,VRAM Total Memory (B),VRAM Total Used Memory (B),Card Series,Card Model,Card Vendor,Card SKU,Subsystem ID,Device Rev,Node ID,GUID,GFX Version\ncard0,34208743424,27015925760,AMD Radeon AI PRO R9700,0x7551,Advanced Micro Devices Inc. [AMD/ATI],1E4990U,-0x1b67,0xc0,1,64106,gfx1201\ncard1,17095983104,15268892672,AMD Radeon RX 9060 XT,0x7590,Advanced Micro Devices Inc. [AMD/ATI],APM7842CL,0x5408,0xc0,2,27401,gfx1200\ncard2,536870912,16678912,AMD Ryzen 9 9900X 12-Core Processor,0x13c0,Advanced Micro Devices Inc. [AMD/ATI],RAPHAEL,-0x3000,0xc2,3,42976,gfx1036",
+      "rocm_smi": "device,VRAM Total Memory (B),VRAM Total Used Memory (B),Card Series,Card Model,Card Vendor,Card SKU,Subsystem ID,Device Rev,Node ID,GUID,GFX Version\ncard0,34208743424,27016749056,AMD Radeon AI PRO R9700,0x7551,Advanced Micro Devices Inc. [AMD/ATI],1E4990U,-0x1b67,0xc0,1,64106,gfx1201\ncard1,17095983104,15400472576,AMD Radeon RX 9060 XT,0x7590,Advanced Micro Devices Inc. [AMD/ATI],APM7842CL,0x5408,0xc0,2,27401,gfx1200\ncard2,536870912,16691200,AMD Ryzen 9 9900X 12-Core Processor,0x13c0,Advanced Micro Devices Inc. [AMD/ATI],RAPHAEL,-0x3000,0xc2,3,42976,gfx1036",
       "kernel": "7.0.0-30-generic",
       "llamacpp_version": "version: 0.3.0-dev (build 10745, commit c845263f8)"
     },
@@ -245,229 +331,315 @@
       "short": {
         "runs": [
           {
-            "wall_seconds": 4.16,
-            "prompt_tokens": 25,
-            "prompt_eval_tps": 101.7,
-            "gen_tokens": 49,
-            "gen_tps": 12.4
-          },
-          {
-            "wall_seconds": 0.26,
-            "prompt_tokens": 28,
-            "prompt_eval_tps": 116.0,
+            "wall_seconds": 0.28,
+            "prompt_tokens": 26,
+            "prompt_eval_tps": 107.4,
             "gen_tokens": 1,
             "gen_tps": null
           },
           {
             "wall_seconds": 0.25,
-            "prompt_tokens": 28,
-            "prompt_eval_tps": 117.1,
-            "gen_tokens": 1,
-            "gen_tps": null
-          },
-          {
-            "wall_seconds": 0.25,
-            "prompt_tokens": 27,
-            "prompt_eval_tps": 113.3,
+            "prompt_tokens": 29,
+            "prompt_eval_tps": 123.0,
             "gen_tokens": 1,
             "gen_tps": null
           },
           {
             "wall_seconds": 0.32,
             "prompt_tokens": 29,
-            "prompt_eval_tps": 95.3,
+            "prompt_eval_tps": 95.0,
+            "gen_tokens": 1,
+            "gen_tps": null
+          },
+          {
+            "wall_seconds": 0.25,
+            "prompt_tokens": 27,
+            "prompt_eval_tps": 115.7,
+            "gen_tokens": 1,
+            "gen_tps": null
+          },
+          {
+            "wall_seconds": 0.25,
+            "prompt_tokens": 25,
+            "prompt_eval_tps": 107.4,
             "gen_tokens": 1,
             "gen_tps": null
           }
         ],
-        "prompt_eval_tps_mean": 108.7,
-        "prompt_eval_tps_stdev": 9.7,
-        "gen_tps_mean": 12.4,
+        "prompt_eval_tps_mean": 109.7,
+        "prompt_eval_tps_stdev": 10.5,
+        "gen_tps_mean": null,
         "gen_tps_stdev": 0
       },
       "medium": {
         "runs": [
           {
-            "wall_seconds": 20.86,
-            "prompt_tokens": 58,
-            "prompt_eval_tps": 195.3,
+            "wall_seconds": 20.84,
+            "prompt_tokens": 60,
+            "prompt_eval_tps": 215.8,
             "gen_tokens": 256,
             "gen_tps": 12.4
           },
           {
-            "wall_seconds": 20.81,
+            "wall_seconds": 20.85,
             "prompt_tokens": 60,
-            "prompt_eval_tps": 161.4,
+            "prompt_eval_tps": 171.8,
             "gen_tokens": 256,
             "gen_tps": 12.5
           },
           {
-            "wall_seconds": 20.71,
-            "prompt_tokens": 59,
-            "prompt_eval_tps": 213.0,
+            "wall_seconds": 20.75,
+            "prompt_tokens": 62,
+            "prompt_eval_tps": 228.4,
             "gen_tokens": 256,
             "gen_tps": 12.5
           },
           {
-            "wall_seconds": 20.6,
-            "prompt_tokens": 60,
-            "prompt_eval_tps": 208.6,
+            "wall_seconds": 20.64,
+            "prompt_tokens": 61,
+            "prompt_eval_tps": 224.7,
             "gen_tokens": 256,
             "gen_tps": 12.6
           },
           {
-            "wall_seconds": 20.58,
-            "prompt_tokens": 60,
-            "prompt_eval_tps": 216.2,
+            "wall_seconds": 20.64,
+            "prompt_tokens": 62,
+            "prompt_eval_tps": 221.4,
             "gen_tokens": 256,
             "gen_tps": 12.6
           }
         ],
-        "prompt_eval_tps_mean": 198.9,
-        "prompt_eval_tps_stdev": 22.4,
+        "prompt_eval_tps_mean": 212.4,
+        "prompt_eval_tps_stdev": 23.2,
         "gen_tps_mean": 12.5,
         "gen_tps_stdev": 0.1
       },
       "long": {
         "runs": [
           {
-            "wall_seconds": 25.03,
+            "wall_seconds": 24.76,
             "prompt_tokens": 2256,
-            "prompt_eval_tps": 635.7,
-            "gen_tokens": 256,
-            "gen_tps": 11.9
-          },
-          {
-            "wall_seconds": 10.77,
-            "prompt_tokens": 2256,
-            "prompt_eval_tps": 678.5,
-            "gen_tokens": 86,
-            "gen_tps": 11.9
-          },
-          {
-            "wall_seconds": 25.06,
-            "prompt_tokens": 2256,
-            "prompt_eval_tps": 676.2,
-            "gen_tokens": 256,
-            "gen_tps": 11.9
-          },
-          {
-            "wall_seconds": 25.06,
-            "prompt_tokens": 2256,
-            "prompt_eval_tps": 679.0,
-            "gen_tokens": 256,
-            "gen_tps": 11.9
-          },
-          {
-            "wall_seconds": 24.95,
-            "prompt_tokens": 2254,
-            "prompt_eval_tps": 676.7,
+            "prompt_eval_tps": 671.6,
             "gen_tokens": 256,
             "gen_tps": 12.0
+          },
+          {
+            "wall_seconds": 25.02,
+            "prompt_tokens": 2256,
+            "prompt_eval_tps": 680.4,
+            "gen_tokens": 256,
+            "gen_tps": 11.9
+          },
+          {
+            "wall_seconds": 24.87,
+            "prompt_tokens": 2255,
+            "prompt_eval_tps": 679.7,
+            "gen_tokens": 256,
+            "gen_tps": 12.0
+          },
+          {
+            "wall_seconds": 24.93,
+            "prompt_tokens": 2255,
+            "prompt_eval_tps": 679.5,
+            "gen_tokens": 256,
+            "gen_tps": 12.0
+          },
+          {
+            "wall_seconds": 25.06,
+            "prompt_tokens": 2256,
+            "prompt_eval_tps": 678.5,
+            "gen_tokens": 256,
+            "gen_tps": 11.9
           }
         ],
-        "prompt_eval_tps_mean": 669.2,
-        "prompt_eval_tps_stdev": 18.8,
-        "gen_tps_mean": 11.9,
-        "gen_tps_stdev": 0.0
+        "prompt_eval_tps_mean": 677.9,
+        "prompt_eval_tps_stdev": 3.6,
+        "gen_tps_mean": 12.0,
+        "gen_tps_stdev": 0.1
       },
       "extra_long": {
         "runs": [
           {
-            "wall_seconds": 15.88,
-            "prompt_tokens": 7436,
-            "prompt_eval_tps": 869.9,
-            "gen_tokens": 81,
-            "gen_tps": 11.4
-          },
-          {
-            "wall_seconds": 15.86,
+            "wall_seconds": 15.59,
             "prompt_tokens": 7437,
-            "prompt_eval_tps": 883.1,
-            "gen_tokens": 81,
-            "gen_tps": 11.4
-          },
-          {
-            "wall_seconds": 15.6,
-            "prompt_tokens": 7435,
-            "prompt_eval_tps": 905.2,
+            "prompt_eval_tps": 895.2,
             "gen_tokens": 81,
             "gen_tps": 11.5
           },
           {
-            "wall_seconds": 15.63,
+            "wall_seconds": 31.05,
             "prompt_tokens": 7436,
-            "prompt_eval_tps": 907.4,
-            "gen_tokens": 81,
+            "prompt_eval_tps": 904.8,
+            "gen_tokens": 256,
             "gen_tps": 11.4
           },
           {
-            "wall_seconds": 15.7,
+            "wall_seconds": 15.55,
+            "prompt_tokens": 7437,
+            "prompt_eval_tps": 907.7,
+            "gen_tokens": 81,
+            "gen_tps": 11.5
+          },
+          {
+            "wall_seconds": 15.58,
             "prompt_tokens": 7435,
-            "prompt_eval_tps": 908.4,
-            "gen_tokens": 82,
-            "gen_tps": 11.4
+            "prompt_eval_tps": 901.0,
+            "gen_tokens": 81,
+            "gen_tps": 11.6
+          },
+          {
+            "wall_seconds": 15.54,
+            "prompt_tokens": 7435,
+            "prompt_eval_tps": 905.2,
+            "gen_tokens": 81,
+            "gen_tps": 11.6
           }
         ],
-        "prompt_eval_tps_mean": 894.8,
-        "prompt_eval_tps_stdev": 17.4,
-        "gen_tps_mean": 11.4,
-        "gen_tps_stdev": 0.0
+        "prompt_eval_tps_mean": 902.8,
+        "prompt_eval_tps_stdev": 4.9,
+        "gen_tps_mean": 11.5,
+        "gen_tps_stdev": 0.1
       },
       "extremely_long": {
         "runs": [
           {
-            "wall_seconds": 23.77,
-            "prompt_tokens": 14834,
-            "prompt_eval_tps": 895.1,
-            "gen_tokens": 76,
-            "gen_tps": 11.1
-          },
-          {
-            "wall_seconds": 23.96,
-            "prompt_tokens": 14835,
-            "prompt_eval_tps": 896.8,
-            "gen_tokens": 77,
+            "wall_seconds": 23.12,
+            "prompt_tokens": 14837,
+            "prompt_eval_tps": 893.4,
+            "gen_tokens": 68,
             "gen_tps": 11.0
           },
           {
-            "wall_seconds": 23.88,
-            "prompt_tokens": 14836,
-            "prompt_eval_tps": 896.9,
-            "gen_tokens": 76,
-            "gen_tps": 10.9
-          },
-          {
-            "wall_seconds": 23.07,
-            "prompt_tokens": 14835,
-            "prompt_eval_tps": 897.8,
-            "gen_tokens": 68,
+            "wall_seconds": 22.38,
+            "prompt_tokens": 14837,
+            "prompt_eval_tps": 896.2,
+            "gen_tokens": 60,
             "gen_tps": 11.1
           },
           {
-            "wall_seconds": 22.35,
+            "wall_seconds": 22.79,
+            "prompt_tokens": 14837,
+            "prompt_eval_tps": 896.3,
+            "gen_tokens": 65,
+            "gen_tps": 11.1
+          },
+          {
+            "wall_seconds": 23.78,
             "prompt_tokens": 14836,
-            "prompt_eval_tps": 897.5,
-            "gen_tokens": 60,
+            "prompt_eval_tps": 896.8,
+            "gen_tokens": 76,
+            "gen_tps": 11.1
+          },
+          {
+            "wall_seconds": 23.24,
+            "prompt_tokens": 14834,
+            "prompt_eval_tps": 887.2,
+            "gen_tokens": 68,
             "gen_tps": 11.1
           }
         ],
-        "prompt_eval_tps_mean": 896.8,
-        "prompt_eval_tps_stdev": 1.0,
-        "gen_tps_mean": 11.0,
-        "gen_tps_stdev": 0.1
+        "prompt_eval_tps_mean": 894.0,
+        "prompt_eval_tps_stdev": 4.0,
+        "gen_tps_mean": 11.1,
+        "gen_tps_stdev": 0.0
+      },
+      "colossal_32k": {
+        "runs": [
+          {
+            "wall_seconds": 47.5,
+            "prompt_tokens": 29635,
+            "prompt_eval_tps": 734.5,
+            "gen_tokens": 72,
+            "gen_tps": 10.7
+          },
+          {
+            "wall_seconds": 47.99,
+            "prompt_tokens": 29634,
+            "prompt_eval_tps": 733.7,
+            "gen_tokens": 75,
+            "gen_tps": 10.7
+          },
+          {
+            "wall_seconds": 47.73,
+            "prompt_tokens": 29634,
+            "prompt_eval_tps": 733.7,
+            "gen_tokens": 72,
+            "gen_tps": 10.7
+          },
+          {
+            "wall_seconds": 47.74,
+            "prompt_tokens": 29636,
+            "prompt_eval_tps": 733.5,
+            "gen_tokens": 72,
+            "gen_tps": 10.6
+          },
+          {
+            "wall_seconds": 47.81,
+            "prompt_tokens": 29636,
+            "prompt_eval_tps": 732.1,
+            "gen_tokens": 72,
+            "gen_tps": 10.7
+          }
+        ],
+        "prompt_eval_tps_mean": 733.5,
+        "prompt_eval_tps_stdev": 0.9,
+        "gen_tps_mean": 10.7,
+        "gen_tps_stdev": 0.0
+      },
+      "colossal_64k": {
+        "runs": [
+          {
+            "wall_seconds": 123.51,
+            "prompt_tokens": 59235,
+            "prompt_eval_tps": 508.4,
+            "gen_tokens": 63,
+            "gen_tps": 9.9
+          },
+          {
+            "wall_seconds": 123.92,
+            "prompt_tokens": 59235,
+            "prompt_eval_tps": 508.0,
+            "gen_tokens": 63,
+            "gen_tps": 9.9
+          },
+          {
+            "wall_seconds": 123.94,
+            "prompt_tokens": 59236,
+            "prompt_eval_tps": 507.9,
+            "gen_tokens": 63,
+            "gen_tps": 9.9
+          },
+          {
+            "wall_seconds": 123.66,
+            "prompt_tokens": 59233,
+            "prompt_eval_tps": 507.9,
+            "gen_tokens": 60,
+            "gen_tps": 9.9
+          },
+          {
+            "wall_seconds": 123.56,
+            "prompt_tokens": 59236,
+            "prompt_eval_tps": 508.1,
+            "gen_tokens": 60,
+            "gen_tps": 10.0
+          }
+        ],
+        "prompt_eval_tps_mean": 508.1,
+        "prompt_eval_tps_stdev": 0.2,
+        "gen_tps_mean": 9.9,
+        "gen_tps_stdev": 0.0
       }
     }
   },
   {
-    "timestamp": "2026-09-01T17:22:10.318506+00:00",
+    "timestamp": "2026-09-01T19:46:42.601829+00:00",
     "label": "r9700+9060xt",
     "model": "gemma-4-26b-a4b",
     "backend": "llama.cpp-vulkan",
     "gen_tokens_requested": 256,
     "hardware": {
       "gpus_lspci": "03:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Navi 48 [Radeon AI PRO R9700] (rev c0)\n07:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Navi 44 [Radeon RX 9060 XT] (rev c0)\n15:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Granite Ridge [Radeon Graphics] (rev c2)",
-      "rocm_smi": "device,VRAM Total Memory (B),VRAM Total Used Memory (B),Card Series,Card Model,Card Vendor,Card SKU,Subsystem ID,Device Rev,Node ID,GUID,GFX Version\ncard0,34208743424,20289343488,AMD Radeon AI PRO R9700,0x7551,Advanced Micro Devices Inc. [AMD/ATI],1E4990U,-0x1b67,0xc0,1,64106,gfx1201\ncard1,17095983104,10937540608,AMD Radeon RX 9060 XT,0x7590,Advanced Micro Devices Inc. [AMD/ATI],APM7842CL,0x5408,0xc0,2,27401,gfx1200\ncard2,536870912,16842752,AMD Ryzen 9 9900X 12-Core Processor,0x13c0,Advanced Micro Devices Inc. [AMD/ATI],RAPHAEL,-0x3000,0xc2,3,42976,gfx1036",
+      "rocm_smi": "device,VRAM Total Memory (B),VRAM Total Used Memory (B),Card Series,Card Model,Card Vendor,Card SKU,Subsystem ID,Device Rev,Node ID,GUID,GFX Version\ncard0,34208743424,20289314816,AMD Radeon AI PRO R9700,0x7551,Advanced Micro Devices Inc. [AMD/ATI],1E4990U,-0x1b67,0xc0,1,64106,gfx1201\ncard1,17095983104,11032842240,AMD Radeon RX 9060 XT,0x7590,Advanced Micro Devices Inc. [AMD/ATI],APM7842CL,0x5408,0xc0,2,27401,gfx1200\ncard2,536870912,17809408,AMD Ryzen 9 9900X 12-Core Processor,0x13c0,Advanced Micro Devices Inc. [AMD/ATI],RAPHAEL,-0x3000,0xc2,3,42976,gfx1036",
       "kernel": "7.0.0-30-generic",
       "llamacpp_version": "version: 0.3.0-dev (build 10745, commit c845263f8)"
     },
@@ -475,229 +647,315 @@
       "short": {
         "runs": [
           {
-            "wall_seconds": 4.44,
-            "prompt_tokens": 26,
-            "prompt_eval_tps": 135.2,
-            "gen_tokens": 256,
-            "gen_tps": 60.5
-          },
-          {
-            "wall_seconds": 1.06,
+            "wall_seconds": 2.46,
             "prompt_tokens": 27,
-            "prompt_eval_tps": 279.3,
-            "gen_tokens": 58,
-            "gen_tps": 60.3
+            "prompt_eval_tps": 244.5,
+            "gen_tokens": 139,
+            "gen_tps": 59.7
           },
           {
-            "wall_seconds": 4.3,
-            "prompt_tokens": 29,
-            "prompt_eval_tps": 296.3,
-            "gen_tokens": 256,
-            "gen_tps": 60.8
-          },
-          {
-            "wall_seconds": 4.31,
-            "prompt_tokens": 28,
-            "prompt_eval_tps": 288.1,
-            "gen_tokens": 256,
-            "gen_tps": 60.8
-          },
-          {
-            "wall_seconds": 2.19,
+            "wall_seconds": 4.37,
             "prompt_tokens": 26,
-            "prompt_eval_tps": 215.4,
-            "gen_tokens": 125,
-            "gen_tps": 60.5
+            "prompt_eval_tps": 260.3,
+            "gen_tokens": 256,
+            "gen_tps": 59.9
+          },
+          {
+            "wall_seconds": 4.38,
+            "prompt_tokens": 24,
+            "prompt_eval_tps": 233.2,
+            "gen_tokens": 256,
+            "gen_tps": 59.8
+          },
+          {
+            "wall_seconds": 4.38,
+            "prompt_tokens": 29,
+            "prompt_eval_tps": 280.8,
+            "gen_tokens": 256,
+            "gen_tps": 59.8
+          },
+          {
+            "wall_seconds": 1.12,
+            "prompt_tokens": 28,
+            "prompt_eval_tps": 278.8,
+            "gen_tokens": 61,
+            "gen_tps": 59.5
           }
         ],
-        "prompt_eval_tps_mean": 242.9,
-        "prompt_eval_tps_stdev": 68.1,
-        "gen_tps_mean": 60.6,
+        "prompt_eval_tps_mean": 259.5,
+        "prompt_eval_tps_stdev": 20.9,
+        "gen_tps_mean": 59.7,
         "gen_tps_stdev": 0.2
       },
       "medium": {
         "runs": [
           {
-            "wall_seconds": 4.46,
+            "wall_seconds": 4.5,
             "prompt_tokens": 61,
-            "prompt_eval_tps": 378.6,
+            "prompt_eval_tps": 433.3,
             "gen_tokens": 256,
-            "gen_tps": 60.3
+            "gen_tps": 59.4
           },
           {
-            "wall_seconds": 4.38,
+            "wall_seconds": 4.43,
             "prompt_tokens": 62,
-            "prompt_eval_tps": 452.0,
+            "prompt_eval_tps": 463.3,
             "gen_tokens": 256,
-            "gen_tps": 60.4
+            "gen_tps": 59.6
           },
           {
-            "wall_seconds": 4.38,
+            "wall_seconds": 4.43,
+            "prompt_tokens": 55,
+            "prompt_eval_tps": 422.3,
+            "gen_tokens": 256,
+            "gen_tps": 59.5
+          },
+          {
+            "wall_seconds": 4.43,
             "prompt_tokens": 59,
-            "prompt_eval_tps": 416.3,
+            "prompt_eval_tps": 437.7,
             "gen_tokens": 256,
-            "gen_tps": 60.4
+            "gen_tps": 59.6
           },
           {
-            "wall_seconds": 4.37,
-            "prompt_tokens": 62,
-            "prompt_eval_tps": 462.2,
+            "wall_seconds": 4.43,
+            "prompt_tokens": 61,
+            "prompt_eval_tps": 453.5,
             "gen_tokens": 256,
-            "gen_tps": 60.5
-          },
-          {
-            "wall_seconds": 4.36,
-            "prompt_tokens": 60,
-            "prompt_eval_tps": 459.2,
-            "gen_tokens": 256,
-            "gen_tps": 60.5
+            "gen_tps": 59.6
           }
         ],
-        "prompt_eval_tps_mean": 433.7,
-        "prompt_eval_tps_stdev": 35.8,
-        "gen_tps_mean": 60.4,
+        "prompt_eval_tps_mean": 442.0,
+        "prompt_eval_tps_stdev": 16.3,
+        "gen_tps_mean": 59.5,
         "gen_tps_stdev": 0.1
       },
       "long": {
         "runs": [
           {
-            "wall_seconds": 5.75,
-            "prompt_tokens": 2257,
-            "prompt_eval_tps": 1949.2,
-            "gen_tokens": 256,
-            "gen_tps": 56.6
-          },
-          {
-            "wall_seconds": 5.69,
-            "prompt_tokens": 2256,
-            "prompt_eval_tps": 2051.9,
-            "gen_tokens": 256,
-            "gen_tps": 56.7
-          },
-          {
-            "wall_seconds": 5.69,
-            "prompt_tokens": 2256,
-            "prompt_eval_tps": 2049.6,
-            "gen_tokens": 256,
-            "gen_tps": 56.7
-          },
-          {
-            "wall_seconds": 2.89,
-            "prompt_tokens": 2254,
-            "prompt_eval_tps": 1973.1,
+            "wall_seconds": 2.95,
+            "prompt_tokens": 2255,
+            "prompt_eval_tps": 1909.4,
             "gen_tokens": 94,
-            "gen_tps": 56.3
+            "gen_tps": 55.4
           },
           {
-            "wall_seconds": 5.74,
-            "prompt_tokens": 2257,
-            "prompt_eval_tps": 1971.3,
+            "wall_seconds": 5.79,
+            "prompt_tokens": 2254,
+            "prompt_eval_tps": 1994.6,
             "gen_tokens": 256,
-            "gen_tps": 56.7
+            "gen_tps": 55.7
+          },
+          {
+            "wall_seconds": 5.78,
+            "prompt_tokens": 2256,
+            "prompt_eval_tps": 2007.9,
+            "gen_tokens": 256,
+            "gen_tps": 55.9
+          },
+          {
+            "wall_seconds": 5.77,
+            "prompt_tokens": 2257,
+            "prompt_eval_tps": 2013.3,
+            "gen_tokens": 256,
+            "gen_tps": 55.9
+          },
+          {
+            "wall_seconds": 2.38,
+            "prompt_tokens": 2257,
+            "prompt_eval_tps": 1993.2,
+            "gen_tokens": 65,
+            "gen_tps": 55.4
           }
         ],
-        "prompt_eval_tps_mean": 1999.0,
-        "prompt_eval_tps_stdev": 48.2,
-        "gen_tps_mean": 56.6,
-        "gen_tps_stdev": 0.2
+        "prompt_eval_tps_mean": 1983.7,
+        "prompt_eval_tps_stdev": 42.4,
+        "gen_tps_mean": 55.7,
+        "gen_tps_stdev": 0.3
       },
       "extra_long": {
         "runs": [
           {
-            "wall_seconds": 7.23,
+            "wall_seconds": 3.91,
             "prompt_tokens": 7435,
-            "prompt_eval_tps": 3134.6,
-            "gen_tokens": 256,
-            "gen_tps": 53.7
+            "prompt_eval_tps": 3104.6,
+            "gen_tokens": 76,
+            "gen_tps": 53.1
           },
           {
-            "wall_seconds": 3.82,
-            "prompt_tokens": 7434,
-            "prompt_eval_tps": 3241.1,
-            "gen_tokens": 77,
-            "gen_tps": 54.0
-          },
-          {
-            "wall_seconds": 7.18,
+            "wall_seconds": 7.25,
             "prompt_tokens": 7436,
-            "prompt_eval_tps": 3232.0,
+            "prompt_eval_tps": 3214.9,
             "gen_tokens": 256,
-            "gen_tps": 53.6
+            "gen_tps": 53.0
           },
           {
-            "wall_seconds": 7.18,
-            "prompt_tokens": 7437,
-            "prompt_eval_tps": 3223.7,
+            "wall_seconds": 7.23,
+            "prompt_tokens": 7436,
+            "prompt_eval_tps": 3235.7,
             "gen_tokens": 256,
-            "gen_tps": 53.7
+            "gen_tps": 53.0
           },
           {
-            "wall_seconds": 7.18,
+            "wall_seconds": 7.25,
+            "prompt_tokens": 7431,
+            "prompt_eval_tps": 3193.7,
+            "gen_tokens": 256,
+            "gen_tps": 53.1
+          },
+          {
+            "wall_seconds": 3.76,
             "prompt_tokens": 7434,
-            "prompt_eval_tps": 3207.8,
-            "gen_tokens": 256,
-            "gen_tps": 53.8
+            "prompt_eval_tps": 3240.0,
+            "gen_tokens": 73,
+            "gen_tps": 53.4
           }
         ],
-        "prompt_eval_tps_mean": 3207.8,
-        "prompt_eval_tps_stdev": 42.7,
-        "gen_tps_mean": 53.8,
+        "prompt_eval_tps_mean": 3197.8,
+        "prompt_eval_tps_stdev": 55.3,
+        "gen_tps_mean": 53.1,
         "gen_tps_stdev": 0.2
       },
       "extremely_long": {
         "runs": [
           {
-            "wall_seconds": 9.46,
-            "prompt_tokens": 14835,
-            "prompt_eval_tps": 3363.8,
-            "gen_tokens": 256,
-            "gen_tps": 52.0
-          },
-          {
-            "wall_seconds": 9.48,
-            "prompt_tokens": 14836,
-            "prompt_eval_tps": 3380.8,
-            "gen_tokens": 256,
-            "gen_tps": 52.0
-          },
-          {
-            "wall_seconds": 9.47,
+            "wall_seconds": 9.55,
             "prompt_tokens": 14837,
-            "prompt_eval_tps": 3379.7,
+            "prompt_eval_tps": 3350.2,
             "gen_tokens": 256,
-            "gen_tps": 51.9
+            "gen_tps": 51.2
           },
           {
-            "wall_seconds": 9.48,
+            "wall_seconds": 9.54,
             "prompt_tokens": 14836,
-            "prompt_eval_tps": 3381.0,
+            "prompt_eval_tps": 3374.3,
             "gen_tokens": 256,
-            "gen_tps": 51.7
+            "gen_tps": 51.3
           },
           {
-            "wall_seconds": 7.05,
-            "prompt_tokens": 14835,
-            "prompt_eval_tps": 3362.6,
-            "gen_tokens": 130,
-            "gen_tps": 52.0
+            "wall_seconds": 9.53,
+            "prompt_tokens": 14834,
+            "prompt_eval_tps": 3370.9,
+            "gen_tokens": 256,
+            "gen_tps": 51.3
+          },
+          {
+            "wall_seconds": 9.53,
+            "prompt_tokens": 14836,
+            "prompt_eval_tps": 3382.5,
+            "gen_tokens": 256,
+            "gen_tps": 51.2
+          },
+          {
+            "wall_seconds": 9.52,
+            "prompt_tokens": 14836,
+            "prompt_eval_tps": 3387.1,
+            "gen_tokens": 256,
+            "gen_tps": 51.3
           }
         ],
-        "prompt_eval_tps_mean": 3373.6,
-        "prompt_eval_tps_stdev": 9.5,
-        "gen_tps_mean": 51.9,
+        "prompt_eval_tps_mean": 3373.0,
+        "prompt_eval_tps_stdev": 14.3,
+        "gen_tps_mean": 51.3,
         "gen_tps_stdev": 0.1
+      },
+      "colossal_32k": {
+        "runs": [
+          {
+            "wall_seconds": 14.14,
+            "prompt_tokens": 29635,
+            "prompt_eval_tps": 2833.8,
+            "gen_tokens": 169,
+            "gen_tps": 48.4
+          },
+          {
+            "wall_seconds": 15.99,
+            "prompt_tokens": 29637,
+            "prompt_eval_tps": 2832.2,
+            "gen_tokens": 256,
+            "gen_tps": 48.4
+          },
+          {
+            "wall_seconds": 13.25,
+            "prompt_tokens": 29636,
+            "prompt_eval_tps": 2836.0,
+            "gen_tokens": 124,
+            "gen_tps": 48.5
+          },
+          {
+            "wall_seconds": 16.03,
+            "prompt_tokens": 29635,
+            "prompt_eval_tps": 2822.9,
+            "gen_tokens": 256,
+            "gen_tps": 48.3
+          },
+          {
+            "wall_seconds": 13.5,
+            "prompt_tokens": 29636,
+            "prompt_eval_tps": 2834.3,
+            "gen_tokens": 136,
+            "gen_tps": 48.4
+          }
+        ],
+        "prompt_eval_tps_mean": 2831.8,
+        "prompt_eval_tps_stdev": 5.2,
+        "gen_tps_mean": 48.4,
+        "gen_tps_stdev": 0.1
+      },
+      "colossal_64k": {
+        "runs": [
+          {
+            "wall_seconds": 36.84,
+            "prompt_tokens": 59234,
+            "prompt_eval_tps": 1935.3,
+            "gen_tokens": 256,
+            "gen_tps": 43.3
+          },
+          {
+            "wall_seconds": 36.92,
+            "prompt_tokens": 59236,
+            "prompt_eval_tps": 1931.6,
+            "gen_tokens": 256,
+            "gen_tps": 43.7
+          },
+          {
+            "wall_seconds": 36.92,
+            "prompt_tokens": 59235,
+            "prompt_eval_tps": 1933.9,
+            "gen_tokens": 256,
+            "gen_tps": 43.4
+          },
+          {
+            "wall_seconds": 36.89,
+            "prompt_tokens": 59237,
+            "prompt_eval_tps": 1933.8,
+            "gen_tokens": 256,
+            "gen_tps": 43.7
+          },
+          {
+            "wall_seconds": 36.89,
+            "prompt_tokens": 59236,
+            "prompt_eval_tps": 1934.7,
+            "gen_tokens": 256,
+            "gen_tps": 43.7
+          }
+        ],
+        "prompt_eval_tps_mean": 1933.9,
+        "prompt_eval_tps_stdev": 1.4,
+        "gen_tps_mean": 43.6,
+        "gen_tps_stdev": 0.2
       }
     }
   },
   {
-    "timestamp": "2026-09-01T17:25:16.825967+00:00",
+    "timestamp": "2026-09-01T19:53:44.518023+00:00",
     "label": "r9700+9060xt",
     "model": "qwen3.5-35b-a3b",
     "backend": "llama.cpp-vulkan",
     "gen_tokens_requested": 256,
     "hardware": {
       "gpus_lspci": "03:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Navi 48 [Radeon AI PRO R9700] (rev c0)\n07:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Navi 44 [Radeon RX 9060 XT] (rev c0)\n15:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Granite Ridge [Radeon Graphics] (rev c2)",
-      "rocm_smi": "device,VRAM Total Memory (B),VRAM Total Used Memory (B),Card Series,Card Model,Card Vendor,Card SKU,Subsystem ID,Device Rev,Node ID,GUID,GFX Version\ncard0,34208743424,27000729600,AMD Radeon AI PRO R9700,0x7551,Advanced Micro Devices Inc. [AMD/ATI],1E4990U,-0x1b67,0xc0,1,64106,gfx1201\ncard1,17095983104,12538564608,AMD Radeon RX 9060 XT,0x7590,Advanced Micro Devices Inc. [AMD/ATI],APM7842CL,0x5408,0xc0,2,27401,gfx1200\ncard2,536870912,16666624,AMD Ryzen 9 9900X 12-Core Processor,0x13c0,Advanced Micro Devices Inc. [AMD/ATI],RAPHAEL,-0x3000,0xc2,3,42976,gfx1036",
+      "rocm_smi": "device,VRAM Total Memory (B),VRAM Total Used Memory (B),Card Series,Card Model,Card Vendor,Card SKU,Subsystem ID,Device Rev,Node ID,GUID,GFX Version\ncard0,34208743424,27000729600,AMD Radeon AI PRO R9700,0x7551,Advanced Micro Devices Inc. [AMD/ATI],1E4990U,-0x1b67,0xc0,1,64106,gfx1201\ncard1,17095983104,12657606656,AMD Radeon RX 9060 XT,0x7590,Advanced Micro Devices Inc. [AMD/ATI],APM7842CL,0x5408,0xc0,2,27401,gfx1200\ncard2,536870912,16683008,AMD Ryzen 9 9900X 12-Core Processor,0x13c0,Advanced Micro Devices Inc. [AMD/ATI],RAPHAEL,-0x3000,0xc2,3,42976,gfx1036",
       "kernel": "7.0.0-30-generic",
       "llamacpp_version": "version: 0.3.0-dev (build 10745, commit c845263f8)"
     },
@@ -705,217 +963,303 @@
       "short": {
         "runs": [
           {
-            "wall_seconds": 3.75,
+            "wall_seconds": 4.03,
             "prompt_tokens": 27,
-            "prompt_eval_tps": 177.9,
+            "prompt_eval_tps": 191.1,
             "gen_tokens": 256,
-            "gen_tps": 71.8
+            "gen_tps": 66.3
           },
           {
-            "wall_seconds": 3.67,
-            "prompt_tokens": 28,
-            "prompt_eval_tps": 258.2,
-            "gen_tokens": 256,
-            "gen_tps": 72.3
-          },
-          {
-            "wall_seconds": 3.66,
-            "prompt_tokens": 28,
-            "prompt_eval_tps": 268.2,
-            "gen_tokens": 256,
-            "gen_tps": 72.4
-          },
-          {
-            "wall_seconds": 3.67,
+            "wall_seconds": 3.83,
             "prompt_tokens": 27,
-            "prompt_eval_tps": 256.9,
+            "prompt_eval_tps": 234.9,
             "gen_tokens": 256,
-            "gen_tps": 72.2
+            "gen_tps": 69.3
           },
           {
-            "wall_seconds": 3.67,
+            "wall_seconds": 3.85,
             "prompt_tokens": 28,
-            "prompt_eval_tps": 271.6,
+            "prompt_eval_tps": 207.5,
             "gen_tokens": 256,
-            "gen_tps": 72.2
+            "gen_tps": 69.3
+          },
+          {
+            "wall_seconds": 3.83,
+            "prompt_tokens": 29,
+            "prompt_eval_tps": 250.4,
+            "gen_tokens": 256,
+            "gen_tps": 69.2
+          },
+          {
+            "wall_seconds": 3.86,
+            "prompt_tokens": 29,
+            "prompt_eval_tps": 214.0,
+            "gen_tokens": 256,
+            "gen_tps": 69.2
           }
         ],
-        "prompt_eval_tps_mean": 246.6,
-        "prompt_eval_tps_stdev": 38.9,
-        "gen_tps_mean": 72.2,
-        "gen_tps_stdev": 0.2
+        "prompt_eval_tps_mean": 219.6,
+        "prompt_eval_tps_stdev": 23.3,
+        "gen_tps_mean": 68.7,
+        "gen_tps_stdev": 1.3
       },
       "medium": {
         "runs": [
           {
-            "wall_seconds": 3.78,
-            "prompt_tokens": 57,
-            "prompt_eval_tps": 366.7,
-            "gen_tokens": 256,
-            "gen_tps": 71.9
-          },
-          {
-            "wall_seconds": 3.71,
+            "wall_seconds": 3.96,
             "prompt_tokens": 58,
-            "prompt_eval_tps": 422.4,
-            "gen_tokens": 256,
-            "gen_tps": 72.1
-          },
-          {
-            "wall_seconds": 3.7,
-            "prompt_tokens": 58,
-            "prompt_eval_tps": 428.1,
-            "gen_tokens": 256,
-            "gen_tps": 72.2
-          },
-          {
-            "wall_seconds": 3.71,
-            "prompt_tokens": 56,
-            "prompt_eval_tps": 407.6,
-            "gen_tokens": 256,
-            "gen_tps": 72.2
-          },
-          {
-            "wall_seconds": 3.7,
-            "prompt_tokens": 59,
-            "prompt_eval_tps": 432.0,
-            "gen_tokens": 256,
-            "gen_tps": 72.3
-          }
-        ],
-        "prompt_eval_tps_mean": 411.4,
-        "prompt_eval_tps_stdev": 26.6,
-        "gen_tps_mean": 72.1,
-        "gen_tps_stdev": 0.2
-      },
-      "long": {
-        "runs": [
-          {
-            "wall_seconds": 4.88,
-            "prompt_tokens": 2438,
-            "prompt_eval_tps": 2221.2,
+            "prompt_eval_tps": 321.1,
             "gen_tokens": 256,
             "gen_tps": 68.9
           },
           {
-            "wall_seconds": 4.69,
-            "prompt_tokens": 2436,
-            "prompt_eval_tps": 2312.1,
+            "wall_seconds": 3.88,
+            "prompt_tokens": 59,
+            "prompt_eval_tps": 388.5,
             "gen_tokens": 256,
-            "gen_tps": 71.3
+            "gen_tps": 69.1
           },
           {
-            "wall_seconds": 4.68,
-            "prompt_tokens": 2438,
-            "prompt_eval_tps": 2298.6,
+            "wall_seconds": 3.88,
+            "prompt_tokens": 57,
+            "prompt_eval_tps": 372.4,
             "gen_tokens": 256,
-            "gen_tps": 71.6
+            "gen_tps": 69.1
           },
           {
-            "wall_seconds": 4.68,
-            "prompt_tokens": 2435,
-            "prompt_eval_tps": 2312.5,
+            "wall_seconds": 3.88,
+            "prompt_tokens": 56,
+            "prompt_eval_tps": 381.8,
             "gen_tokens": 256,
-            "gen_tps": 71.5
+            "gen_tps": 69.0
           },
           {
-            "wall_seconds": 4.68,
-            "prompt_tokens": 2431,
-            "prompt_eval_tps": 2311.7,
+            "wall_seconds": 3.87,
+            "prompt_tokens": 57,
+            "prompt_eval_tps": 383.4,
             "gen_tokens": 256,
-            "gen_tps": 71.4
+            "gen_tps": 69.2
           }
         ],
-        "prompt_eval_tps_mean": 2291.2,
-        "prompt_eval_tps_stdev": 39.6,
-        "gen_tps_mean": 70.9,
-        "gen_tps_stdev": 1.1
+        "prompt_eval_tps_mean": 369.4,
+        "prompt_eval_tps_stdev": 27.6,
+        "gen_tps_mean": 69.1,
+        "gen_tps_stdev": 0.1
+      },
+      "long": {
+        "runs": [
+          {
+            "wall_seconds": 5.01,
+            "prompt_tokens": 2437,
+            "prompt_eval_tps": 2037.5,
+            "gen_tokens": 256,
+            "gen_tps": 68.2
+          },
+          {
+            "wall_seconds": 4.95,
+            "prompt_tokens": 2437,
+            "prompt_eval_tps": 2090.8,
+            "gen_tokens": 256,
+            "gen_tps": 68.5
+          },
+          {
+            "wall_seconds": 4.91,
+            "prompt_tokens": 2436,
+            "prompt_eval_tps": 2156.3,
+            "gen_tokens": 256,
+            "gen_tps": 68.5
+          },
+          {
+            "wall_seconds": 4.96,
+            "prompt_tokens": 2435,
+            "prompt_eval_tps": 2073.4,
+            "gen_tokens": 256,
+            "gen_tps": 68.5
+          },
+          {
+            "wall_seconds": 4.92,
+            "prompt_tokens": 2436,
+            "prompt_eval_tps": 2147.7,
+            "gen_tokens": 256,
+            "gen_tps": 68.4
+          }
+        ],
+        "prompt_eval_tps_mean": 2101.1,
+        "prompt_eval_tps_stdev": 50.3,
+        "gen_tps_mean": 68.4,
+        "gen_tps_stdev": 0.1
       },
       "extra_long": {
         "runs": [
           {
-            "wall_seconds": 6.07,
-            "prompt_tokens": 8037,
-            "prompt_eval_tps": 3392.4,
+            "wall_seconds": 6.26,
+            "prompt_tokens": 8036,
+            "prompt_eval_tps": 3341.3,
             "gen_tokens": 256,
-            "gen_tps": 70.2
+            "gen_tps": 67.3
           },
           {
-            "wall_seconds": 6.05,
-            "prompt_tokens": 8038,
-            "prompt_eval_tps": 3447.8,
-            "gen_tokens": 256,
-            "gen_tps": 70.0
-          },
-          {
-            "wall_seconds": 6.04,
-            "prompt_tokens": 8037,
-            "prompt_eval_tps": 3453.8,
-            "gen_tokens": 256,
-            "gen_tps": 70.2
-          },
-          {
-            "wall_seconds": 6.04,
-            "prompt_tokens": 8034,
-            "prompt_eval_tps": 3448.1,
-            "gen_tokens": 256,
-            "gen_tps": 70.2
-          },
-          {
-            "wall_seconds": 6.03,
+            "wall_seconds": 6.22,
             "prompt_tokens": 8035,
-            "prompt_eval_tps": 3453.8,
+            "prompt_eval_tps": 3419.6,
             "gen_tokens": 256,
-            "gen_tps": 70.3
+            "gen_tps": 67.3
+          },
+          {
+            "wall_seconds": 6.24,
+            "prompt_tokens": 8036,
+            "prompt_eval_tps": 3387.5,
+            "gen_tokens": 256,
+            "gen_tps": 67.2
+          },
+          {
+            "wall_seconds": 6.24,
+            "prompt_tokens": 8038,
+            "prompt_eval_tps": 3378.9,
+            "gen_tokens": 256,
+            "gen_tps": 67.3
+          },
+          {
+            "wall_seconds": 6.25,
+            "prompt_tokens": 8034,
+            "prompt_eval_tps": 3387.4,
+            "gen_tokens": 256,
+            "gen_tps": 67.1
           }
         ],
-        "prompt_eval_tps_mean": 3439.2,
-        "prompt_eval_tps_stdev": 26.3,
-        "gen_tps_mean": 70.2,
+        "prompt_eval_tps_mean": 3382.9,
+        "prompt_eval_tps_stdev": 28.0,
+        "gen_tps_mean": 67.2,
         "gen_tps_stdev": 0.1
       },
       "extremely_long": {
         "runs": [
           {
-            "wall_seconds": 8.42,
-            "prompt_tokens": 16034,
-            "prompt_eval_tps": 3476.9,
+            "wall_seconds": 8.61,
+            "prompt_tokens": 16037,
+            "prompt_eval_tps": 3462.2,
             "gen_tokens": 256,
-            "gen_tps": 68.5
+            "gen_tps": 65.6
           },
           {
-            "wall_seconds": 8.45,
-            "prompt_tokens": 16036,
-            "prompt_eval_tps": 3470.8,
-            "gen_tokens": 256,
-            "gen_tps": 68.6
-          },
-          {
-            "wall_seconds": 8.45,
+            "wall_seconds": 8.6,
             "prompt_tokens": 16035,
-            "prompt_eval_tps": 3481.0,
+            "prompt_eval_tps": 3482.4,
             "gen_tokens": 256,
-            "gen_tps": 68.4
+            "gen_tps": 65.7
           },
           {
-            "wall_seconds": 8.4,
+            "wall_seconds": 8.58,
             "prompt_tokens": 16036,
-            "prompt_eval_tps": 3509.6,
+            "prompt_eval_tps": 3489.4,
             "gen_tokens": 256,
-            "gen_tps": 68.6
+            "gen_tps": 65.8
           },
           {
-            "wall_seconds": 8.42,
-            "prompt_tokens": 16034,
-            "prompt_eval_tps": 3500.3,
+            "wall_seconds": 8.58,
+            "prompt_tokens": 16038,
+            "prompt_eval_tps": 3486.5,
             "gen_tokens": 256,
-            "gen_tps": 68.4
+            "gen_tps": 65.8
+          },
+          {
+            "wall_seconds": 8.57,
+            "prompt_tokens": 16037,
+            "prompt_eval_tps": 3499.1,
+            "gen_tokens": 256,
+            "gen_tps": 65.8
           }
         ],
-        "prompt_eval_tps_mean": 3487.7,
-        "prompt_eval_tps_stdev": 16.5,
-        "gen_tps_mean": 68.5,
+        "prompt_eval_tps_mean": 3483.9,
+        "prompt_eval_tps_stdev": 13.6,
+        "gen_tps_mean": 65.7,
         "gen_tps_stdev": 0.1
+      },
+      "colossal_32k": {
+        "runs": [
+          {
+            "wall_seconds": 14.55,
+            "prompt_tokens": 32037,
+            "prompt_eval_tps": 3101.2,
+            "gen_tokens": 256,
+            "gen_tps": 62.4
+          },
+          {
+            "wall_seconds": 14.53,
+            "prompt_tokens": 32038,
+            "prompt_eval_tps": 3118.5,
+            "gen_tokens": 256,
+            "gen_tps": 62.4
+          },
+          {
+            "wall_seconds": 14.51,
+            "prompt_tokens": 32035,
+            "prompt_eval_tps": 3125.0,
+            "gen_tokens": 256,
+            "gen_tps": 62.4
+          },
+          {
+            "wall_seconds": 14.51,
+            "prompt_tokens": 32038,
+            "prompt_eval_tps": 3125.0,
+            "gen_tokens": 256,
+            "gen_tps": 62.3
+          },
+          {
+            "wall_seconds": 14.51,
+            "prompt_tokens": 32037,
+            "prompt_eval_tps": 3125.4,
+            "gen_tokens": 256,
+            "gen_tps": 62.4
+          }
+        ],
+        "prompt_eval_tps_mean": 3119.0,
+        "prompt_eval_tps_stdev": 10.4,
+        "gen_tps_mean": 62.4,
+        "gen_tps_stdev": 0.0
+      },
+      "colossal_64k": {
+        "runs": [
+          {
+            "wall_seconds": 31.59,
+            "prompt_tokens": 64034,
+            "prompt_eval_tps": 2383.4,
+            "gen_tokens": 256,
+            "gen_tps": 56.4
+          },
+          {
+            "wall_seconds": 31.52,
+            "prompt_tokens": 64036,
+            "prompt_eval_tps": 2396.8,
+            "gen_tokens": 256,
+            "gen_tps": 56.5
+          },
+          {
+            "wall_seconds": 31.56,
+            "prompt_tokens": 64036,
+            "prompt_eval_tps": 2395.5,
+            "gen_tokens": 256,
+            "gen_tps": 56.2
+          },
+          {
+            "wall_seconds": 31.55,
+            "prompt_tokens": 64036,
+            "prompt_eval_tps": 2397.6,
+            "gen_tokens": 256,
+            "gen_tps": 56.0
+          },
+          {
+            "wall_seconds": 27.0,
+            "prompt_tokens": 64036,
+            "prompt_eval_tps": 2397.2,
+            "gen_tokens": 1,
+            "gen_tps": null
+          }
+        ],
+        "prompt_eval_tps_mean": 2394.1,
+        "prompt_eval_tps_stdev": 6.0,
+        "gen_tps_mean": 56.3,
+        "gen_tps_stdev": 0.2
       }
     }
   }

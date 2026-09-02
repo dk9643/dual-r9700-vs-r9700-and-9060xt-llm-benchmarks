@@ -46,6 +46,8 @@ PROMPTS = {
     "long": _LONG_PREFIX + _FILLER * 60,
     "extra_long": _LONG_PREFIX + _FILLER * 200,
     "extremely_long": _LONG_PREFIX + _FILLER * 400,
+    "colossal_32k": _LONG_PREFIX + _FILLER * 800,
+    "colossal_64k": _LONG_PREFIX + _FILLER * 1600,
 }
 
 GEN_TOKENS = 256
