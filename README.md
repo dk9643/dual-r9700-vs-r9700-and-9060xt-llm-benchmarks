@@ -74,18 +74,39 @@ that completed before it showed ~56.5 and ~60.3 tok/s decode respectively.
 Full numbers for both came from llama.cpp's Vulkan backend instead — next
 section.
 
-## Results — before, MoE models (llama.cpp Vulkan)
+## Results — before (llama.cpp Vulkan)
 
-Since Ollama/ROCm can't run the MoEs on this config, both were benchmarked
-through `llama-server` (llama.cpp build 10745) on the Vulkan backend, which
-compiles GPU code per-device at runtime and is structurally immune to the
-rocBLAS mixed-architecture bug. Same methodology
+All four models were also run through `llama-server` (llama.cpp build
+10745) on the Vulkan backend, which compiles GPU code per-device at runtime
+and is structurally immune to the rocBLAS mixed-architecture bug. For the
+MoEs this is the only full benchmark data on this config; for the dense
+models it doubles as a cross-stack check. Same methodology
 ([llamacpp_bench.py](llamacpp_bench.py) mirrors the Ollama script: same five
 tiers, nonce cache-busting plus `cache_prompt: false`, 256 generation
 tokens, temperature 0, 5 runs, warmup excluded) and the same settings as the
 Ollama runs: ctx 131072, flash attention on, q8_0 KV cache, split across
 both discrete GPUs. Raw data in
 [vulkan_bench_results.json](vulkan_bench_results.json).
+
+### qwen3.5-27b (dense)
+
+| tier | prompt tokens | prefill tok/s | decode tok/s |
+|---|---|---|---|
+| short | ~28 | 108.6 ± 6.3 | 14.2 ± 0.1 |
+| medium | ~58 | 199.0 ± 16.8 | 14.3 ± 0.0 |
+| long | ~2.4k | 871.1 ± 33.6 | 14.3 ± 0.1 |
+| extra_long | ~8.0k | 1166.8 ± 12.1 | 14.2 ± 0.0 |
+| extremely_long | ~16.0k | 1173.4 ± 1.8 | 14.0 ± 0.0 |
+
+### gemma-4-31b-it (dense)
+
+| tier | prompt tokens | prefill tok/s | decode tok/s |
+|---|---|---|---|
+| short | ~25 | 108.7 ± 9.7 | 12.4 ± 0.0 |
+| medium | ~58 | 198.9 ± 22.4 | 12.5 ± 0.1 |
+| long | ~2.3k | 669.2 ± 18.8 | 11.9 ± 0.0 |
+| extra_long | ~7.4k | 894.8 ± 17.4 | 11.4 ± 0.0 |
+| extremely_long | ~14.8k | 896.8 ± 1.0 | 11.0 ± 0.1 |
 
 ### gemma-4-26b-a4b (MoE, ~4B active)
 
@@ -109,18 +130,15 @@ both discrete GPUs. Raw data in
 
 Worth noticing:
 
-- The MoEs are in a different speed class than the dense models: 4–5× the
-  decode rate, and prefill hitting ~3,400–3,500 tok/s at deep context.
 - qwen3.5-35b-a3b's decode barely decays with context depth — 72.2 → 68.5
   tok/s (~5%) from short to ~16k. That's its Gated DeltaNet linear-attention
   blocks doing exactly what they promise. The gemma MoE drops ~14% over the
   same range.
-- **Cross-stack sanity check:** the two dense models ran on both stacks.
-  Vulkan decode lands within ~5% of ROCm (e.g. 14.0 vs 13.9 tok/s for qwen
-  at the deepest tier), and Vulkan prefill runs ~15–20% lower. So the MoE
-  numbers above are, if anything, slightly conservative relative to what
-  ROCm should do once its bug is fixed. All four Vulkan records (dense
-  included) are in the JSON.
+- **Cross-stack sanity check:** comparing the dense tables here against the
+  Ollama ones above, Vulkan decode lands within ~5% of ROCm (e.g. 14.0 vs
+  13.9 tok/s for qwen at the deepest tier), while Vulkan prefill runs
+  ~15–20% lower. So the MoE numbers are, if anything, slightly conservative
+  relative to what ROCm should do once its bug is fixed.
 
 ## Results — after (dual R9700)
 
@@ -153,6 +171,12 @@ Things ruled out, one variable at a time:
 | Ollama / engine version | 0.32.14 → 0.33.2 | still crashes |
 | Quant style | UD-Q8_K_XL (gemma) and plain Q8_0 (qwen) | both crash |
 | Model family | Gemma 4 MoE and Qwen3.5 MoE | both crash |
+| Backend | llama.cpp Vulkan, same models, same GPU split | no crash — full suite passes |
+
+The last row is the clincher: the same two models on the same mixed-GPU
+split completed the entire benchmark suite on Vulkan (~125 requests across
+all four models) without a single error. The bug lives in the ROCm stack,
+not in the models or the hardware.
 
 **What it actually is:** this matches
 [llama.cpp #19893](https://github.com/ggml-org/llama.cpp/issues/19893) —
