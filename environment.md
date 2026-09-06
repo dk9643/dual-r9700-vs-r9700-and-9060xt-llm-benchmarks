@@ -28,6 +28,9 @@ see the README's finding #2 for why.
 - llama.cpp build 10745 (commit `c845263f8`), Vulkan backend via RADV —
   MoE-model benchmarks (see the README for why)
 - Host ROCm tooling: rocm-smi 7.1.1
+- vLLM 0.28.0 via Docker 29.1.3, image `vllm/vllm-openai-rocm:latest`
+  (torch 2.12.0, HIP 7.2.53211, RCCL 2.27.7) — tensor-parallel addendum on
+  the dual-R9700 config only; FP8 safetensors checkpoints, not GGUF
 - Python 3.14.4 (benchmark scripts, stdlib only)
 
 ## Ollama service configuration

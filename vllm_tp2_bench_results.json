@@ -1,0 +1,1242 @@
+[
+  {
+    "timestamp": "2026-09-02T19:06:14.793678+00:00",
+    "label": "dual-r9700-vllm-tp2",
+    "model": "gemma-4-31b-it-fp8",
+    "hf_repo": "RedHatAI/gemma-4-31B-it-FP8-dynamic",
+    "backend": "vllm-rocm-tp2",
+    "gen_tokens_requested": 256,
+    "launch": "A",
+    "kv_cache_dtype": "bf16",
+    "image": "vllm/vllm-openai-rocm:v0.28.0",
+    "max_model_len": 131072,
+    "timing_method": "client-side SSE stream timing (t0=send, t_first=first content chunk, t_last=last content chunk)",
+    "hardware": {
+      "gpus": "2x Radeon AI PRO R9700 32GB (gfx1201), PCIe x8/x8",
+      "cpu": "AMD Ryzen 9 9900X",
+      "ram_gb": 32,
+      "board": "Gigabyte AI TOP B850",
+      "os": "Ubuntu Server, kernel 7.0.0-30-generic, in-kernel amdgpu",
+      "topology": "tensor-parallel 2, NCCL_PROTO=Simple, TRITON_ATTN, AITER off"
+    },
+    "results": {
+      "short": {
+        "runs": [
+          {
+            "prompt_tokens": 26,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.0585,
+            "total_s": 11.9019,
+            "prompt_eval_tps": 444.54057158542327,
+            "gen_tps": 21.530983590013523,
+            "finish_reason": "length",
+            "output_head": "\nExplain why the sky is blue in two sentences.\nExplain why the sky is blue in tw"
+          },
+          {
+            "prompt_tokens": 26,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.0584,
+            "total_s": 12.0545,
+            "prompt_eval_tps": 445.2761899160047,
+            "gen_tps": 21.257075263384156,
+            "finish_reason": "length",
+            "output_head": "\nExplain why the sky is blue in two sentences.\nExplain why the sky is blue in tw"
+          },
+          {
+            "prompt_tokens": 26,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.0583,
+            "total_s": 12.0952,
+            "prompt_eval_tps": 446.275171979644,
+            "gen_tps": 21.184928506011794,
+            "finish_reason": "length",
+            "output_head": "\nExplain why the sky is blue in two sentences.\nExplain why the sky is blue in tw"
+          }
+        ],
+        "prompt_eval_tps_mean": 445.363977827024,
+        "prompt_eval_tps_stdev": 0.8706260218363321,
+        "gen_tps_mean": 21.324329119803156,
+        "gen_tps_stdev": 0.18256736070087076
+      },
+      "medium": {
+        "runs": [
+          {
+            "prompt_tokens": 59,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.0937,
+            "total_s": 12.1298,
+            "prompt_eval_tps": 629.5346635695312,
+            "gen_tps": 21.186428129106154,
+            "finish_reason": "length",
+            "output_head": " Aim for thoroughness. Aim for thoroughness. Aim for thoroughness. Aim for thoro"
+          },
+          {
+            "prompt_tokens": 59,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.0673,
+            "total_s": 12.1013,
+            "prompt_eval_tps": 877.2446311398879,
+            "gen_tps": 21.189926894524167,
+            "finish_reason": "length",
+            "output_head": " Aim for thoroughness. Aim for thoroughness. Aim for thoroughness. Aim for thoro"
+          },
+          {
+            "prompt_tokens": 59,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.0673,
+            "total_s": 12.1186,
+            "prompt_eval_tps": 877.1582665005609,
+            "gen_tps": 21.159497373679557,
+            "finish_reason": "length",
+            "output_head": " Aim for thoroughness. Aim for thoroughness. Aim for thoroughness. Aim for thoro"
+          }
+        ],
+        "prompt_eval_tps_mean": 794.64585373666,
+        "prompt_eval_tps_stdev": 142.99049165422525,
+        "gen_tps_mean": 21.17861746576996,
+        "gen_tps_stdev": 0.016650639057455903
+      },
+      "long": {
+        "runs": [
+          {
+            "prompt_tokens": 2254,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.8429,
+            "total_s": 13.2477,
+            "prompt_eval_tps": 2673.987781060929,
+            "gen_tps": 20.556776873883294,
+            "finish_reason": "length",
+            "output_head": "\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n "
+          },
+          {
+            "prompt_tokens": 2254,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.8235,
+            "total_s": 13.2409,
+            "prompt_eval_tps": 2736.9951269683565,
+            "gen_tps": 20.535857212481,
+            "finish_reason": "length",
+            "output_head": "\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n "
+          },
+          {
+            "prompt_tokens": 2254,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.8238,
+            "total_s": 13.2432,
+            "prompt_eval_tps": 2735.963708986708,
+            "gen_tps": 20.53253330894916,
+            "finish_reason": "length",
+            "output_head": "\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n "
+          }
+        ],
+        "prompt_eval_tps_mean": 2715.6488723386647,
+        "prompt_eval_tps_stdev": 36.08324889200065,
+        "gen_tps_mean": 20.541722465104485,
+        "gen_tps_stdev": 0.013143001994668653
+      },
+      "extra_long": {
+        "runs": [
+          {
+            "prompt_tokens": 7434,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 3.2763,
+            "total_s": 15.9224,
+            "prompt_eval_tps": 2269.049406660172,
+            "gen_tps": 20.164380354443736,
+            "finish_reason": "length",
+            "output_head": "\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n "
+          },
+          {
+            "prompt_tokens": 7434,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 3.2739,
+            "total_s": 15.9349,
+            "prompt_eval_tps": 2270.715468499443,
+            "gen_tps": 20.140656732512518,
+            "finish_reason": "length",
+            "output_head": "\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n "
+          },
+          {
+            "prompt_tokens": 7434,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 3.2856,
+            "total_s": 15.9469,
+            "prompt_eval_tps": 2262.57398786521,
+            "gen_tps": 20.140282918317673,
+            "finish_reason": "length",
+            "output_head": "\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n "
+          }
+        ],
+        "prompt_eval_tps_mean": 2267.4462876749417,
+        "prompt_eval_tps_stdev": 4.30097891066706,
+        "gen_tps_mean": 20.148440001757976,
+        "gen_tps_stdev": 0.013806015611786192
+      },
+      "extremely_long": {
+        "runs": [
+          {
+            "prompt_tokens": 14834,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 8.3625,
+            "total_s": 21.2668,
+            "prompt_eval_tps": 1773.8714299855665,
+            "gen_tps": 19.760983807044685,
+            "finish_reason": "length",
+            "output_head": "\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n "
+          },
+          {
+            "prompt_tokens": 14834,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 8.3811,
+            "total_s": 21.2845,
+            "prompt_eval_tps": 1769.9244301879767,
+            "gen_tps": 19.762429823314054,
+            "finish_reason": "length",
+            "output_head": "\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n "
+          },
+          {
+            "prompt_tokens": 14834,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 8.4317,
+            "total_s": 21.3332,
+            "prompt_eval_tps": 1759.3161414013623,
+            "gen_tps": 19.765257577331575,
+            "finish_reason": "length",
+            "output_head": "\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n "
+          }
+        ],
+        "prompt_eval_tps_mean": 1767.7040005249685,
+        "prompt_eval_tps_stdev": 7.52740575222573,
+        "gen_tps_mean": 19.76289040256344,
+        "gen_tps_stdev": 0.0021737934699500817
+      },
+      "colossal_32k": {
+        "runs": [
+          {
+            "prompt_tokens": 29634,
+            "completion_tokens": 39,
+            "chunks": 38,
+            "ttft_s": 25.915,
+            "total_s": 27.9269,
+            "prompt_eval_tps": 1143.5061383718898,
+            "gen_tps": 19.403442280238735,
+            "finish_reason": "stop",
+            "output_head": "\nThe history of computing spans mechanical calculators, vacuum tubes, transistor"
+          },
+          {
+            "prompt_tokens": 29634,
+            "completion_tokens": 39,
+            "chunks": 38,
+            "ttft_s": 25.7026,
+            "total_s": 27.7153,
+            "prompt_eval_tps": 1152.9589607965072,
+            "gen_tps": 19.39745087827753,
+            "finish_reason": "stop",
+            "output_head": "\nThe history of computing spans mechanical calculators, vacuum tubes, transistor"
+          },
+          {
+            "prompt_tokens": 29634,
+            "completion_tokens": 39,
+            "chunks": 38,
+            "ttft_s": 25.6933,
+            "total_s": 27.7033,
+            "prompt_eval_tps": 1153.372794208249,
+            "gen_tps": 19.42577300489671,
+            "finish_reason": "stop",
+            "output_head": "\nThe history of computing spans mechanical calculators, vacuum tubes, transistor"
+          }
+        ],
+        "prompt_eval_tps_mean": 1149.945964458882,
+        "prompt_eval_tps_stdev": 5.5808901213154956,
+        "gen_tps_mean": 19.408888721137657,
+        "gen_tps_stdev": 0.014925933904023062
+      },
+      "colossal_64k": {
+        "runs": [
+          {
+            "prompt_tokens": 59234,
+            "completion_tokens": 39,
+            "chunks": 38,
+            "ttft_s": 90.5606,
+            "total_s": 92.6485,
+            "prompt_eval_tps": 654.0813644096067,
+            "gen_tps": 18.708182105165854,
+            "finish_reason": "stop",
+            "output_head": "\nThe history of computing spans mechanical calculators, vacuum tubes, transistor"
+          },
+          {
+            "prompt_tokens": 59234,
+            "completion_tokens": 39,
+            "chunks": 38,
+            "ttft_s": 90.6357,
+            "total_s": 92.7246,
+            "prompt_eval_tps": 653.539554870431,
+            "gen_tps": 18.69909102961804,
+            "finish_reason": "stop",
+            "output_head": "\nThe history of computing spans mechanical calculators, vacuum tubes, transistor"
+          },
+          {
+            "prompt_tokens": 59234,
+            "completion_tokens": 39,
+            "chunks": 38,
+            "ttft_s": 90.8278,
+            "total_s": 92.9009,
+            "prompt_eval_tps": 652.1572460913684,
+            "gen_tps": 18.84526578169725,
+            "finish_reason": "stop",
+            "output_head": "\nThe history of computing spans mechanical calculators, vacuum tubes, transistor"
+          }
+        ],
+        "prompt_eval_tps_mean": 653.2593884571354,
+        "prompt_eval_tps_stdev": 0.9921833197546129,
+        "gen_tps_mean": 18.750846305493713,
+        "gen_tps_stdev": 0.08189590971816976
+      }
+    }
+  },
+  {
+    "timestamp": "2026-09-02T19:19:41.948048+00:00",
+    "label": "dual-r9700-vllm-tp2",
+    "model": "gemma-4-31b-it-fp8",
+    "hf_repo": "RedHatAI/gemma-4-31B-it-FP8-dynamic",
+    "backend": "vllm-rocm-tp2",
+    "gen_tokens_requested": 256,
+    "launch": "B",
+    "kv_cache_dtype": "bf16",
+    "image": "vllm/vllm-openai-rocm:v0.28.0",
+    "max_model_len": 131072,
+    "timing_method": "client-side SSE stream timing (t0=send, t_first=first content chunk, t_last=last content chunk)",
+    "hardware": {
+      "gpus": "2x Radeon AI PRO R9700 32GB (gfx1201), PCIe x8/x8",
+      "cpu": "AMD Ryzen 9 9900X",
+      "ram_gb": 32,
+      "board": "Gigabyte AI TOP B850",
+      "os": "Ubuntu Server, kernel 7.0.0-30-generic, in-kernel amdgpu",
+      "topology": "tensor-parallel 2, NCCL_PROTO=Simple, TRITON_ATTN, AITER off"
+    },
+    "results": {
+      "short": {
+        "runs": [
+          {
+            "prompt_tokens": 26,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.0594,
+            "total_s": 11.9786,
+            "prompt_eval_tps": 438.05730682859763,
+            "gen_tps": 21.394051326727627,
+            "finish_reason": "length",
+            "output_head": "\nSBBBBBBBBBBBBBBBR//////S//////////////////////S////////////S///////////////////"
+          },
+          {
+            "prompt_tokens": 26,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.0591,
+            "total_s": 12.1008,
+            "prompt_eval_tps": 440.29710912068236,
+            "gen_tps": 21.176360554394297,
+            "finish_reason": "length",
+            "output_head": "\nSBBBBBBBBBBBBBBBR//////S//////////////////////S////////////S///////////////////"
+          },
+          {
+            "prompt_tokens": 26,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.0588,
+            "total_s": 12.1069,
+            "prompt_eval_tps": 441.9402598331795,
+            "gen_tps": 21.165227566624278,
+            "finish_reason": "length",
+            "output_head": "\nSBBBBBBBBBBBBBBBR//////S//////////////////////S////////////S///////////////////"
+          }
+        ],
+        "prompt_eval_tps_mean": 440.09822526081985,
+        "prompt_eval_tps_stdev": 1.9491016138809107,
+        "gen_tps_mean": 21.245213149248734,
+        "gen_tps_stdev": 0.12901778234259326
+      },
+      "medium": {
+        "runs": [
+          {
+            "prompt_tokens": 59,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.0936,
+            "total_s": 12.136,
+            "prompt_eval_tps": 630.3041496319853,
+            "gen_tps": 21.1752991261425,
+            "finish_reason": "length",
+            "output_head": " Aim for thoroughness. Aim for thoroughness. Aim for thoroughness. Aim for thoro"
+          },
+          {
+            "prompt_tokens": 59,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.0676,
+            "total_s": 12.1131,
+            "prompt_eval_tps": 872.9041626689755,
+            "gen_tps": 21.16975187976146,
+            "finish_reason": "length",
+            "output_head": " Aim for thoroughness. Aim for thoroughness. Aim for thoroughness. Aim for thoro"
+          },
+          {
+            "prompt_tokens": 59,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.0678,
+            "total_s": 12.124,
+            "prompt_eval_tps": 870.8305720832707,
+            "gen_tps": 21.150929806216364,
+            "finish_reason": "length",
+            "output_head": " Aim for thoroughness. Aim for thoroughness. Aim for thoroughness. Aim for thoro"
+          }
+        ],
+        "prompt_eval_tps_mean": 791.3462947947438,
+        "prompt_eval_tps_stdev": 139.47044250824803,
+        "gen_tps_mean": 21.165326937373443,
+        "gen_tps_stdev": 0.012773058551833439
+      },
+      "long": {
+        "runs": [
+          {
+            "prompt_tokens": 2254,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.8431,
+            "total_s": 13.2576,
+            "prompt_eval_tps": 2673.3763494884465,
+            "gen_tps": 20.54057013942237,
+            "finish_reason": "length",
+            "output_head": "\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n "
+          },
+          {
+            "prompt_tokens": 2254,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.825,
+            "total_s": 13.24,
+            "prompt_eval_tps": 2732.104720140937,
+            "gen_tps": 20.539738672885882,
+            "finish_reason": "length",
+            "output_head": "\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n "
+          },
+          {
+            "prompt_tokens": 2254,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.8235,
+            "total_s": 13.2463,
+            "prompt_eval_tps": 2737.046449239315,
+            "gen_tps": 20.526946337862686,
+            "finish_reason": "length",
+            "output_head": "\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n "
+          }
+        ],
+        "prompt_eval_tps_mean": 2714.1758396228993,
+        "prompt_eval_tps_stdev": 35.41968334194885,
+        "gen_tps_mean": 20.535751716723645,
+        "gen_tps_stdev": 0.007637005749252233
+      },
+      "extra_long": {
+        "runs": [
+          {
+            "prompt_tokens": 7434,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 3.2795,
+            "total_s": 15.9219,
+            "prompt_eval_tps": 2266.842521239427,
+            "gen_tps": 20.170160185605468,
+            "finish_reason": "length",
+            "output_head": "\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n "
+          },
+          {
+            "prompt_tokens": 7434,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 3.2891,
+            "total_s": 15.949,
+            "prompt_eval_tps": 2260.1749759669933,
+            "gen_tps": 20.142440250471758,
+            "finish_reason": "length",
+            "output_head": "\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n "
+          },
+          {
+            "prompt_tokens": 7434,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 3.2804,
+            "total_s": 15.9453,
+            "prompt_eval_tps": 2266.1724988833544,
+            "gen_tps": 20.134442233019023,
+            "finish_reason": "length",
+            "output_head": "\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n "
+          }
+        ],
+        "prompt_eval_tps_mean": 2264.3966653632583,
+        "prompt_eval_tps_stdev": 3.67140688405827,
+        "gen_tps_mean": 20.149014223032083,
+        "gen_tps_stdev": 0.01874448907438714
+      },
+      "extremely_long": {
+        "runs": [
+          {
+            "prompt_tokens": 14834,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 8.3579,
+            "total_s": 21.2636,
+            "prompt_eval_tps": 1774.8423390912794,
+            "gen_tps": 19.75884056146362,
+            "finish_reason": "length",
+            "output_head": "\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n "
+          },
+          {
+            "prompt_tokens": 14834,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 8.3795,
+            "total_s": 21.2888,
+            "prompt_eval_tps": 1770.2662325140307,
+            "gen_tps": 19.753251199836438,
+            "finish_reason": "length",
+            "output_head": "\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n "
+          },
+          {
+            "prompt_tokens": 14834,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 8.4129,
+            "total_s": 21.3229,
+            "prompt_eval_tps": 1763.2426604889743,
+            "gen_tps": 19.752244275477015,
+            "finish_reason": "length",
+            "output_head": "\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n "
+          }
+        ],
+        "prompt_eval_tps_mean": 1769.4504106980949,
+        "prompt_eval_tps_stdev": 5.8427142532997305,
+        "gen_tps_mean": 19.754778678925693,
+        "gen_tps_stdev": 0.003553539289265959
+      },
+      "colossal_32k": {
+        "runs": [
+          {
+            "prompt_tokens": 29634,
+            "completion_tokens": 39,
+            "chunks": 38,
+            "ttft_s": 25.646,
+            "total_s": 27.6517,
+            "prompt_eval_tps": 1155.500595547934,
+            "gen_tps": 19.468851051508896,
+            "finish_reason": "stop",
+            "output_head": "\nThe history of computing spans mechanical calculators, vacuum tubes, transistor"
+          },
+          {
+            "prompt_tokens": 29634,
+            "completion_tokens": 39,
+            "chunks": 38,
+            "ttft_s": 25.6655,
+            "total_s": 27.6715,
+            "prompt_eval_tps": 1154.6229292226867,
+            "gen_tps": 19.465316084089714,
+            "finish_reason": "stop",
+            "output_head": "\nThe history of computing spans mechanical calculators, vacuum tubes, transistor"
+          },
+          {
+            "prompt_tokens": 29634,
+            "completion_tokens": 39,
+            "chunks": 38,
+            "ttft_s": 25.669,
+            "total_s": 27.688,
+            "prompt_eval_tps": 1154.4662234138536,
+            "gen_tps": 19.33577771012874,
+            "finish_reason": "stop",
+            "output_head": "\nThe history of computing spans mechanical calculators, vacuum tubes, transistor"
+          }
+        ],
+        "prompt_eval_tps_mean": 1154.8632493948248,
+        "prompt_eval_tps_stdev": 0.5574914948165559,
+        "gen_tps_mean": 19.423314948575783,
+        "gen_tps_stdev": 0.07583007374956664
+      },
+      "colossal_64k": {
+        "runs": [
+          {
+            "prompt_tokens": 59234,
+            "completion_tokens": 39,
+            "chunks": 38,
+            "ttft_s": 90.4319,
+            "total_s": 92.5195,
+            "prompt_eval_tps": 655.0125785112725,
+            "gen_tps": 18.711188732242817,
+            "finish_reason": "stop",
+            "output_head": "\nThe history of computing spans mechanical calculators, vacuum tubes, transistor"
+          },
+          {
+            "prompt_tokens": 59234,
+            "completion_tokens": 39,
+            "chunks": 38,
+            "ttft_s": 90.7435,
+            "total_s": 92.8298,
+            "prompt_eval_tps": 652.7631638672999,
+            "gen_tps": 18.721260380437293,
+            "finish_reason": "stop",
+            "output_head": "\nThe history of computing spans mechanical calculators, vacuum tubes, transistor"
+          },
+          {
+            "prompt_tokens": 59234,
+            "completion_tokens": 39,
+            "chunks": 38,
+            "ttft_s": 90.6159,
+            "total_s": 92.7021,
+            "prompt_eval_tps": 653.6824570461753,
+            "gen_tps": 18.72379934719012,
+            "finish_reason": "stop",
+            "output_head": "\nThe history of computing spans mechanical calculators, vacuum tubes, transistor"
+          }
+        ],
+        "prompt_eval_tps_mean": 653.8193998082493,
+        "prompt_eval_tps_stdev": 1.1309427705206592,
+        "gen_tps_mean": 18.71874948662341,
+        "gen_tps_stdev": 0.006669733363915608
+      }
+    }
+  },
+  {
+    "timestamp": "2026-09-02T18:30:40.978531+00:00",
+    "label": "dual-r9700-vllm-tp2",
+    "model": "qwen3.5-27b-fp8",
+    "hf_repo": "Qwen/Qwen3.5-27B-FP8",
+    "backend": "vllm-rocm-tp2",
+    "gen_tokens_requested": 256,
+    "launch": "A",
+    "kv_cache_dtype": "bf16",
+    "image": "vllm/vllm-openai-rocm:v0.28.0",
+    "max_model_len": 131072,
+    "timing_method": "client-side SSE stream timing (t0=send, t_first=first content chunk, t_last=last content chunk)",
+    "hardware": {
+      "gpus": "2x Radeon AI PRO R9700 32GB (gfx1201), PCIe x8/x8",
+      "cpu": "AMD Ryzen 9 9900X",
+      "ram_gb": 32,
+      "board": "Gigabyte AI TOP B850",
+      "os": "Ubuntu Server, kernel 7.0.0-30-generic, in-kernel amdgpu",
+      "topology": "tensor-parallel 2, NCCL_PROTO=Simple, TRITON_ATTN, AITER off"
+    },
+    "results": {
+      "short": {
+        "runs": [
+          {
+            "prompt_tokens": 26,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.0528,
+            "total_s": 10.2612,
+            "prompt_eval_tps": 492.5136877738095,
+            "gen_tps": 24.97953579937428,
+            "finish_reason": "length",
+            "output_head": "\n\n<think>\nThinking Process:\n\n1.  **Analyze the Request:**\n    *   Task: Explain "
+          },
+          {
+            "prompt_tokens": 26,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.0515,
+            "total_s": 10.2671,
+            "prompt_eval_tps": 505.00345771693185,
+            "gen_tps": 24.961824430685414,
+            "finish_reason": "length",
+            "output_head": "\n\n<think>\nThinking Process:\n\n1.  **Analyze the Request:**\n    *   Task: Explain "
+          },
+          {
+            "prompt_tokens": 26,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.0512,
+            "total_s": 10.2746,
+            "prompt_eval_tps": 507.3381685414334,
+            "gen_tps": 24.94306355945784,
+            "finish_reason": "length",
+            "output_head": "\n\n<think>\nThinking Process:\n\n1.  **Analyze the Request:**\n    *   Task: Explain "
+          }
+        ],
+        "prompt_eval_tps_mean": 501.6184380107249,
+        "prompt_eval_tps_stdev": 7.970889305213654,
+        "gen_tps_mean": 24.961474596505845,
+        "gen_tps_stdev": 0.01823863643739465
+      },
+      "medium": {
+        "runs": [
+          {
+            "prompt_tokens": 56,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.0787,
+            "total_s": 10.1719,
+            "prompt_eval_tps": 711.1471244962314,
+            "gen_tps": 25.26476091017935,
+            "finish_reason": "length",
+            "output_head": "\n\n<think>\nHere's a thinking process that leads to the suggested explanation of a"
+          },
+          {
+            "prompt_tokens": 56,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.0566,
+            "total_s": 10.1238,
+            "prompt_eval_tps": 989.0541029326026,
+            "gen_tps": 25.329839007410644,
+            "finish_reason": "length",
+            "output_head": "\n\n<think>\nHere's a thinking process that leads to the suggested explanation of a"
+          },
+          {
+            "prompt_tokens": 56,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.057,
+            "total_s": 10.1215,
+            "prompt_eval_tps": 982.6671723952696,
+            "gen_tps": 25.336689459436446,
+            "finish_reason": "length",
+            "output_head": "\n\n<think>\nHere's a thinking process that leads to the suggested explanation of a"
+          }
+        ],
+        "prompt_eval_tps_mean": 894.2894666080346,
+        "prompt_eval_tps_stdev": 158.63806707745067,
+        "gen_tps_mean": 25.31042979234215,
+        "gen_tps_stdev": 0.039698454273925515
+      },
+      "long": {
+        "runs": [
+          {
+            "prompt_tokens": 2435,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.7935,
+            "total_s": 10.8723,
+            "prompt_eval_tps": 3068.771698023064,
+            "gen_tps": 25.300717948836333,
+            "finish_reason": "length",
+            "output_head": " The history of computing spans mechanical calculators, vacuum tubes, transistor"
+          },
+          {
+            "prompt_tokens": 2435,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.774,
+            "total_s": 10.8493,
+            "prompt_eval_tps": 3145.8079531778635,
+            "gen_tps": 25.30977192128384,
+            "finish_reason": "length",
+            "output_head": " The history of computing spans mechanical calculators, vacuum tubes, transistor"
+          },
+          {
+            "prompt_tokens": 2435,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.7749,
+            "total_s": 10.8539,
+            "prompt_eval_tps": 3142.3969256037435,
+            "gen_tps": 25.300187962938885,
+            "finish_reason": "length",
+            "output_head": " The history of computing spans mechanical calculators, vacuum tubes, transistor"
+          }
+        ],
+        "prompt_eval_tps_mean": 3118.992192268224,
+        "prompt_eval_tps_stdev": 43.52565116053916,
+        "gen_tps_mean": 25.303559277686354,
+        "gen_tps_stdev": 0.005386828994401335
+      },
+      "extra_long": {
+        "runs": [
+          {
+            "prompt_tokens": 8035,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 2.6378,
+            "total_s": 12.8439,
+            "prompt_eval_tps": 3046.0732796028883,
+            "gen_tps": 24.985270820314643,
+            "finish_reason": "length",
+            "output_head": " The history of computing spans mechanical calculators, vacuum tubes, transistor"
+          },
+          {
+            "prompt_tokens": 8035,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 2.6331,
+            "total_s": 12.8389,
+            "prompt_eval_tps": 3051.484203221496,
+            "gen_tps": 24.985962680393875,
+            "finish_reason": "length",
+            "output_head": " The history of computing spans mechanical calculators, vacuum tubes, transistor"
+          },
+          {
+            "prompt_tokens": 8035,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 2.6356,
+            "total_s": 12.8376,
+            "prompt_eval_tps": 3048.681640594101,
+            "gen_tps": 24.995084814589095,
+            "finish_reason": "length",
+            "output_head": " The history of computing spans mechanical calculators, vacuum tubes, transistor"
+          }
+        ],
+        "prompt_eval_tps_mean": 3048.7463744728284,
+        "prompt_eval_tps_stdev": 2.7060425824242134,
+        "gen_tps_mean": 24.98877277176587,
+        "gen_tps_stdev": 0.005477324259523991
+      },
+      "extremely_long": {
+        "runs": [
+          {
+            "prompt_tokens": 16035,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 5.8388,
+            "total_s": 16.1979,
+            "prompt_eval_tps": 2746.2684270658237,
+            "gen_tps": 24.616116416361564,
+            "finish_reason": "length",
+            "output_head": " The history of computing spans mechanical calculators, vacuum tubes, transistor"
+          },
+          {
+            "prompt_tokens": 16035,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 5.8389,
+            "total_s": 16.1842,
+            "prompt_eval_tps": 2746.2536211386687,
+            "gen_tps": 24.6489718102907,
+            "finish_reason": "length",
+            "output_head": " The history of computing spans mechanical calculators, vacuum tubes, transistor"
+          },
+          {
+            "prompt_tokens": 16035,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 5.8338,
+            "total_s": 16.1838,
+            "prompt_eval_tps": 2748.6607387963945,
+            "gen_tps": 24.637802467859675,
+            "finish_reason": "length",
+            "output_head": " The history of computing spans mechanical calculators, vacuum tubes, transistor"
+          }
+        ],
+        "prompt_eval_tps_mean": 2747.060929000296,
+        "prompt_eval_tps_stdev": 1.3854957024979102,
+        "gen_tps_mean": 24.634296898170646,
+        "gen_tps_stdev": 0.01670586698418123
+      },
+      "colossal_32k": {
+        "runs": [
+          {
+            "prompt_tokens": 32035,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 14.0602,
+            "total_s": 24.6832,
+            "prompt_eval_tps": 2278.421367357025,
+            "gen_tps": 24.00466655236015,
+            "finish_reason": "length",
+            "output_head": " The history of computing spans mechanical calculators, vacuum tubes, transistor"
+          },
+          {
+            "prompt_tokens": 32035,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 14.0421,
+            "total_s": 24.665,
+            "prompt_eval_tps": 2281.347555372563,
+            "gen_tps": 24.004845974043526,
+            "finish_reason": "length",
+            "output_head": " The history of computing spans mechanical calculators, vacuum tubes, transistor"
+          },
+          {
+            "prompt_tokens": 32035,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 14.0445,
+            "total_s": 24.6698,
+            "prompt_eval_tps": 2280.963358178067,
+            "gen_tps": 23.999467480614566,
+            "finish_reason": "length",
+            "output_head": " The history of computing spans mechanical calculators, vacuum tubes, transistor"
+          }
+        ],
+        "prompt_eval_tps_mean": 2280.244093635885,
+        "prompt_eval_tps_stdev": 1.59017300530485,
+        "gen_tps_mean": 24.00299333567275,
+        "gen_tps_stdev": 0.003054797612541997
+      },
+      "colossal_64k": {
+        "runs": [
+          {
+            "prompt_tokens": 64035,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 37.7297,
+            "total_s": 48.9333,
+            "prompt_eval_tps": 1697.2030110678827,
+            "gen_tps": 22.760650241045795,
+            "finish_reason": "length",
+            "output_head": " The history of computing spans mechanical calculators, vacuum tubes, transistor"
+          },
+          {
+            "prompt_tokens": 64035,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 37.768,
+            "total_s": 48.9585,
+            "prompt_eval_tps": 1695.4819475254403,
+            "gen_tps": 22.787356884346753,
+            "finish_reason": "length",
+            "output_head": " The history of computing spans mechanical calculators, vacuum tubes, transistor"
+          },
+          {
+            "prompt_tokens": 64035,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 37.5122,
+            "total_s": 46.3661,
+            "prompt_eval_tps": 1707.044920840428,
+            "gen_tps": 28.801042554912755,
+            "finish_reason": "length",
+            "output_head": " The history of computing spans mechanical calculators, vacuum tubes, transistor"
+          }
+        ],
+        "prompt_eval_tps_mean": 1699.9099598112502,
+        "prompt_eval_tps_stdev": 6.238691096311283,
+        "gen_tps_mean": 24.783016560101768,
+        "gen_tps_stdev": 3.479738206019487
+      }
+    }
+  },
+  {
+    "timestamp": "2026-09-02T18:41:36.184582+00:00",
+    "label": "dual-r9700-vllm-tp2",
+    "model": "qwen3.5-27b-fp8",
+    "hf_repo": "Qwen/Qwen3.5-27B-FP8",
+    "backend": "vllm-rocm-tp2",
+    "gen_tokens_requested": 256,
+    "launch": "B",
+    "kv_cache_dtype": "bf16",
+    "image": "vllm/vllm-openai-rocm:v0.28.0",
+    "max_model_len": 131072,
+    "timing_method": "client-side SSE stream timing (t0=send, t_first=first content chunk, t_last=last content chunk)",
+    "hardware": {
+      "gpus": "2x Radeon AI PRO R9700 32GB (gfx1201), PCIe x8/x8",
+      "cpu": "AMD Ryzen 9 9900X",
+      "ram_gb": 32,
+      "board": "Gigabyte AI TOP B850",
+      "os": "Ubuntu Server, kernel 7.0.0-30-generic, in-kernel amdgpu",
+      "topology": "tensor-parallel 2, NCCL_PROTO=Simple, TRITON_ATTN, AITER off"
+    },
+    "results": {
+      "short": {
+        "runs": [
+          {
+            "prompt_tokens": 28,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.0528,
+            "total_s": 10.2596,
+            "prompt_eval_tps": 529.9126913985559,
+            "gen_tps": 24.983688862310455,
+            "finish_reason": "length",
+            "output_head": "\n\n<think>\nThinking Process:\n\n1.  **Analyze the Request:**\n    *   Task: Explain "
+          },
+          {
+            "prompt_tokens": 28,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.0521,
+            "total_s": 10.2679,
+            "prompt_eval_tps": 537.3885698326942,
+            "gen_tps": 24.961365317568422,
+            "finish_reason": "length",
+            "output_head": "\n\n<think>\nThinking Process:\n\n1.  **Analyze the Request:**\n    *   Task: Explain "
+          },
+          {
+            "prompt_tokens": 28,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.0516,
+            "total_s": 10.2715,
+            "prompt_eval_tps": 543.0386125134527,
+            "gen_tps": 24.95132849781342,
+            "finish_reason": "length",
+            "output_head": "\n\n<think>\nThinking Process:\n\n1.  **Analyze the Request:**\n    *   Task: Explain "
+          }
+        ],
+        "prompt_eval_tps_mean": 536.7799579149009,
+        "prompt_eval_tps_stdev": 6.584091253049514,
+        "gen_tps_mean": 24.9654608925641,
+        "gen_tps_stdev": 0.016564377395608267
+      },
+      "medium": {
+        "runs": [
+          {
+            "prompt_tokens": 58,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.0576,
+            "total_s": 10.1415,
+            "prompt_eval_tps": 1006.3693113662832,
+            "gen_tps": 25.288084328458655,
+            "finish_reason": "length",
+            "output_head": "\n\n<think>\nHere's a thinking process that leads to the suggested explanation of a"
+          },
+          {
+            "prompt_tokens": 58,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.0577,
+            "total_s": 10.1369,
+            "prompt_eval_tps": 1005.6488684000232,
+            "gen_tps": 25.299612483901807,
+            "finish_reason": "length",
+            "output_head": "\n\n<think>\nHere's a thinking process that leads to the suggested explanation of a"
+          },
+          {
+            "prompt_tokens": 58,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.0576,
+            "total_s": 10.136,
+            "prompt_eval_tps": 1007.7382307803724,
+            "gen_tps": 25.301731982209628,
+            "finish_reason": "length",
+            "output_head": "\n\n<think>\nHere's a thinking process that leads to the suggested explanation of a"
+          }
+        ],
+        "prompt_eval_tps_mean": 1006.5854701822262,
+        "prompt_eval_tps_stdev": 1.0613209996919415,
+        "gen_tps_mean": 25.296476264856697,
+        "gen_tps_stdev": 0.007344488794381263
+      },
+      "long": {
+        "runs": [
+          {
+            "prompt_tokens": 2437,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.7776,
+            "total_s": 10.8792,
+            "prompt_eval_tps": 3133.809003533506,
+            "gen_tps": 25.243681711857,
+            "finish_reason": "length",
+            "output_head": " The history of computing spans mechanical calculators, vacuum tubes, transistor"
+          },
+          {
+            "prompt_tokens": 2437,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.7783,
+            "total_s": 10.8759,
+            "prompt_eval_tps": 3131.0920787880373,
+            "gen_tps": 25.253767678866357,
+            "finish_reason": "length",
+            "output_head": " The history of computing spans mechanical calculators, vacuum tubes, transistor"
+          },
+          {
+            "prompt_tokens": 2437,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 0.7793,
+            "total_s": 10.8805,
+            "prompt_eval_tps": 3127.1864600755885,
+            "gen_tps": 25.24468223625317,
+            "finish_reason": "length",
+            "output_head": " The history of computing spans mechanical calculators, vacuum tubes, transistor"
+          }
+        ],
+        "prompt_eval_tps_mean": 3130.6958474657104,
+        "prompt_eval_tps_stdev": 3.3290043419310176,
+        "gen_tps_mean": 25.247377208992177,
+        "gen_tps_stdev": 0.0055568733273709155
+      },
+      "extra_long": {
+        "runs": [
+          {
+            "prompt_tokens": 8037,
+            "completion_tokens": 226,
+            "chunks": 225,
+            "ttft_s": 2.6449,
+            "total_s": 11.6708,
+            "prompt_eval_tps": 3038.734718564303,
+            "gen_tps": 25.040173090408604,
+            "finish_reason": "stop",
+            "output_head": " The history of computing spans mechanical calculators, vacuum tubes, transistor"
+          },
+          {
+            "prompt_tokens": 8037,
+            "completion_tokens": 226,
+            "chunks": 225,
+            "ttft_s": 2.6678,
+            "total_s": 11.695,
+            "prompt_eval_tps": 3012.5654701775056,
+            "gen_tps": 25.03661736034955,
+            "finish_reason": "stop",
+            "output_head": " The history of computing spans mechanical calculators, vacuum tubes, transistor"
+          },
+          {
+            "prompt_tokens": 8037,
+            "completion_tokens": 226,
+            "chunks": 225,
+            "ttft_s": 2.6664,
+            "total_s": 11.7005,
+            "prompt_eval_tps": 3014.1379846671603,
+            "gen_tps": 25.017401390021,
+            "finish_reason": "stop",
+            "output_head": " The history of computing spans mechanical calculators, vacuum tubes, transistor"
+          }
+        ],
+        "prompt_eval_tps_mean": 3021.812724469656,
+        "prompt_eval_tps_stdev": 14.675953582629182,
+        "gen_tps_mean": 25.031397280259718,
+        "gen_tps_stdev": 0.012250490265450416
+      },
+      "extremely_long": {
+        "runs": [
+          {
+            "prompt_tokens": 16037,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 5.8724,
+            "total_s": 16.2516,
+            "prompt_eval_tps": 2730.907338193914,
+            "gen_tps": 24.568554348525947,
+            "finish_reason": "length",
+            "output_head": " The history of computing spans mechanical calculators, vacuum tubes, transistor"
+          },
+          {
+            "prompt_tokens": 16037,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 5.8437,
+            "total_s": 16.2207,
+            "prompt_eval_tps": 2744.3319501466394,
+            "gen_tps": 24.573759293678158,
+            "finish_reason": "length",
+            "output_head": " The history of computing spans mechanical calculators, vacuum tubes, transistor"
+          },
+          {
+            "prompt_tokens": 16037,
+            "completion_tokens": 256,
+            "chunks": 256,
+            "ttft_s": 5.8499,
+            "total_s": 16.2275,
+            "prompt_eval_tps": 2741.396629845534,
+            "gen_tps": 24.572441410570992,
+            "finish_reason": "length",
+            "output_head": " The history of computing spans mechanical calculators, vacuum tubes, transistor"
+          }
+        ],
+        "prompt_eval_tps_mean": 2738.8786393953624,
+        "prompt_eval_tps_stdev": 7.057638305458997,
+        "gen_tps_mean": 24.571585017591698,
+        "gen_tps_stdev": 0.0027060894683323938
+      },
+      "colossal_32k": {
+        "runs": [
+          {
+            "prompt_tokens": 32037,
+            "completion_tokens": 225,
+            "chunks": 224,
+            "ttft_s": 14.0679,
+            "total_s": 23.4266,
+            "prompt_eval_tps": 2277.31963290421,
+            "gen_tps": 24.04321904554049,
+            "finish_reason": "stop",
+            "output_head": " The history of computing spans mechanical calculators, vacuum tubes, transistor"
+          },
+          {
+            "prompt_tokens": 32037,
+            "completion_tokens": 225,
+            "chunks": 224,
+            "ttft_s": 14.0621,
+            "total_s": 23.4212,
+            "prompt_eval_tps": 2278.259192344252,
+            "gen_tps": 24.04240906135651,
+            "finish_reason": "stop",
+            "output_head": " The history of computing spans mechanical calculators, vacuum tubes, transistor"
+          },
+          {
+            "prompt_tokens": 32037,
+            "completion_tokens": 225,
+            "chunks": 224,
+            "ttft_s": 14.0432,
+            "total_s": 21.3239,
+            "prompt_eval_tps": 2281.321834417608,
+            "gen_tps": 30.905569867117595,
+            "finish_reason": "stop",
+            "output_head": " The history of computing spans mechanical calculators, vacuum tubes, transistor"
+          }
+        ],
+        "prompt_eval_tps_mean": 2278.9668865553567,
+        "prompt_eval_tps_stdev": 2.0928515381614976,
+        "gen_tps_mean": 26.330399324671532,
+        "gen_tps_stdev": 3.962213937102369
+      },
+      "colossal_64k": {
+        "runs": [
+          {
+            "prompt_tokens": 64037,
+            "completion_tokens": 231,
+            "chunks": 230,
+            "ttft_s": 37.2533,
+            "total_s": 45.2313,
+            "prompt_eval_tps": 1718.9612018900323,
+            "gen_tps": 28.95759274735918,
+            "finish_reason": "stop",
+            "output_head": " The history of computing spans mechanical calculators, vacuum tubes, transistor"
+          },
+          {
+            "prompt_tokens": 64037,
+            "completion_tokens": 231,
+            "chunks": 230,
+            "ttft_s": 37.2377,
+            "total_s": 45.2164,
+            "prompt_eval_tps": 1719.6798104483485,
+            "gen_tps": 28.954956293616068,
+            "finish_reason": "stop",
+            "output_head": " The history of computing spans mechanical calculators, vacuum tubes, transistor"
+          },
+          {
+            "prompt_tokens": 64037,
+            "completion_tokens": 231,
+            "chunks": 230,
+            "ttft_s": 37.2556,
+            "total_s": 45.2382,
+            "prompt_eval_tps": 1718.8564387178028,
+            "gen_tps": 28.94097626769067,
+            "finish_reason": "stop",
+            "output_head": " The history of computing spans mechanical calculators, vacuum tubes, transistor"
+          }
+        ],
+        "prompt_eval_tps_mean": 1719.165817018728,
+        "prompt_eval_tps_stdev": 0.448202816628553,
+        "gen_tps_mean": 28.951175102888637,
+        "gen_tps_stdev": 0.008930280042159953
+      }
+    }
+  }
+]

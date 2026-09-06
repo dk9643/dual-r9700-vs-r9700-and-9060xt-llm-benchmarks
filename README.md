@@ -12,6 +12,13 @@ track that almost exactly), the MoE models went from *crashing* to fully
 working on Ollama/ROCm, and the upgrade surfaced a second gnarly finding
 about Vulkan model loading ([finding #2](#finding-2-the-vulkan-loader-can-eat-all-your-ram)).
 
+**Addendum:** the two dense models were also run on the dual-R9700 config
+through vLLM with tensor parallelism instead of layer split. Tensor parallel
+beats layer split at every tier: ~1.3× decode at short prompts, 1.5–1.8× at
+64k, and roughly 2× prefill through 16k. Against the original mixed config
+that is 1.65–2.1× decode. Details, caveats, and the RCCL workarounds it took
+are in [that section](#results--tensor-parallel-instead-of-layer-split-vllm-dual-r9700).
+
 Along the way, benchmarking surfaced a reproducible ROCm crash that
 affects mixture-of-experts models split across mismatched AMD GPUs. For
 anyone thinking about mixing different AMD cards in one box,
@@ -297,6 +304,243 @@ time, both sides.)*
   to working on ROCm, and 64 GB of uniform VRAM opens model sizes the mixed
   config couldn't hold at all.
 
+## Results — tensor parallel instead of layer split (vLLM, dual R9700)
+
+Every table above splits models by *layer*: card 0 runs its layers, then
+card 1 runs its layers, one token at a time, so a single request's decode
+only ever sees one card's memory bandwidth. Tensor parallelism cuts every
+layer's weight matrices across both cards so they read their halves at the
+same time, at the cost of a cross-GPU all-reduce on every layer. This
+section runs the two dense models on the same two R9700s through
+[vLLM](https://github.com/vllm-project/vllm) with
+`--tensor-parallel-size 2` and compares against the dual-R9700 layer-split
+numbers above. Same hardware, different parallelism strategy.
+
+Only the two dense models were run. The MoE models were deliberately
+skipped: single-request MoE decode is the lightest on bandwidth, which is
+exactly what tensor parallelism adds, and community data for this card
+showed no gain there.
+
+### Setup
+
+- **Stack:** Docker, image `vllm/vllm-openai-rocm:latest` = vLLM 0.28.0,
+  torch 2.12.0, HIP 7.2.53211, RCCL 2.27.7.
+- **Checkpoints:** FP8 safetensors, not GGUF —
+  [Qwen/Qwen3.5-27B-FP8](https://huggingface.co/Qwen/Qwen3.5-27B-FP8)
+  (30.9 GB, official) and
+  [RedHatAI/gemma-4-31B-it-FP8-dynamic](https://huggingface.co/RedHatAI/gemma-4-31B-it-FP8-dynamic)
+  (31.3 GB; there is no Google-official FP8 Gemma 4). These are
+  *comparable* to the Q8_0 GGUFs used everywhere else in this repo — both
+  are ~8 bits per weight — but not identical: FP8 is floating point with a
+  small mantissa, Q8_0 is int8 with a per-block scale.
+- **vLLM flags:** `--tensor-parallel-size 2 --distributed-executor-backend mp
+  --attention-backend TRITON_ATTN --max-model-len 131072
+  --gpu-memory-utilization 0.90 --no-enable-prefix-caching --max-num-seqs 8`.
+  KV cache bf16 (vLLM default).
+- **Environment:** `HIP_VISIBLE_DEVICES=0,1` (index 2 is the Ryzen iGPU,
+  which ROCm enumerates and which must be excluded, same story as Vulkan),
+  `NCCL_PROTO=Simple`, `NCCL_P2P_DISABLE=1`, `VLLM_ROCM_USE_AITER=0`.
+- **KV capacity** at 0.90 utilization: 341k tokens (Qwen), 198k tokens
+  (Gemma). 128k context fits for both; nothing was truncated (prompt token
+  counts are in the JSON).
+
+Three things had to change from the recipe the vLLM ROCm maintainer
+published for this card, and anyone reproducing this will hit them:
+
+1. `--swap-space` no longer exists in vLLM 0.28. Dropped.
+2. **RCCL peer-to-peer fails at init** on this kernel + gfx1201 + ROCm 7.2:
+   `hipIpcGetMemHandle failed: invalid argument` from `transport/p2p.cc`,
+   on both ranks, with or without `--cap-add=SYS_PTRACE`.
+   `NCCL_P2P_DISABLE=1` makes RCCL run the all-reduce through host shared
+   memory (`via SHM/direct/direct` in the log) and everything works. So
+   inter-GPU traffic goes through system RAM, not PCIe P2P; the numbers
+   below include that cost. With P2P working they would presumably be a bit
+   higher.
+3. **Qwen3.5-27B needs `--max-num-seqs` lowered.** It is a hybrid
+   attention/Mamba model; the default 256 exceeds the Mamba cache blocks
+   that fit (`max_num_seqs (256) exceeds available Mamba cache blocks
+   (177)`). 8 was used for both models since the benchmark is
+   single-request.
+
+Neither of the two RCCL bugs known for this card — the LL-protocol
+AllReduce deadlock
+([vllm #40980](https://github.com/vllm-project/vllm/issues/40980)) and the
+"present state" init abort
+([ROCm #6074](https://github.com/ROCm/ROCm/issues/6074)) — appeared.
+`NCCL_PROTO=Simple` was set throughout, so the deadlock may simply have
+been prevented. RCCL also warns `Missing "iommu=pt" from kernel command
+line`; not changed.
+
+### Tables
+
+Layer-split columns are the published dual-R9700 means from the sections
+above. TP=2 columns are the mean of all six runs (3 runs × 2 fresh
+container launches); the last column is the per-run min–max so the
+bimodal effect described under Observations is visible. Prefill and decode
+in tok/s. Generated by [vllm_tp2/make_report.py](vllm_tp2/make_report.py)
+from [vllm_tp2_bench_results.json](vllm_tp2_bench_results.json).
+
+**qwen3.5-27b — Ollama/ROCm layer split → vLLM TP=2 (both dual R9700)**
+
+| tier | prefill layer-split | TP=2 | × | decode layer-split | TP=2 | × | TP=2 decode min–max |
+|---|---|---|---|---|---|---|---|
+| short | 255.3 | 519.2 | 2.03 | 19.2 | 25.0 | 1.30 | 24.9–25.0 |
+| medium | 407.9 | 950.4 | 2.33 | 19.1 | 25.3 | 1.32 | 25.3–25.3 |
+| long | 1626.2 | 3124.8 | 1.92 | 19.0 | 25.3 | 1.33 | 25.2–25.3 |
+| extra_long | 1892.2 | 3035.3 | 1.60 | 18.4 | 25.0 | 1.36 | 25.0–25.0 |
+| extremely_long | 1772.4 | 2743.0 | 1.55 | 17.8 | 24.6 | 1.38 | 24.6–24.6 |
+| colossal_32k | 1486.4 | 2279.6 | 1.53 | 16.7 | 25.2 | 1.51 | 24.0–30.9 |
+| colossal_64k | 1091.8 | 1709.5 | 1.57 | 14.9 | 26.9 | 1.80 | 22.8–29.0 |
+
+**qwen3.5-27b — llama.cpp/Vulkan layer split → vLLM TP=2 (both dual R9700)**
+
+| tier | prefill layer-split | TP=2 | × | decode layer-split | TP=2 | × | TP=2 decode min–max |
+|---|---|---|---|---|---|---|---|
+| short | 125.5 | 519.2 | 4.14 | 18.2 | 25.0 | 1.37 | 24.9–25.0 |
+| medium | 227.0 | 950.4 | 4.19 | 18.3 | 25.3 | 1.38 | 25.3–25.3 |
+| long | 1063.8 | 3124.8 | 2.94 | 18.3 | 25.3 | 1.38 | 25.2–25.3 |
+| extra_long | 1486.3 | 3035.3 | 2.04 | 18.2 | 25.0 | 1.37 | 25.0–25.0 |
+| extremely_long | 1521.9 | 2743.0 | 1.80 | 17.7 | 24.6 | 1.39 | 24.6–24.6 |
+| colossal_32k | 1421.2 | 2279.6 | 1.60 | 17.1 | 25.2 | 1.47 | 24.0–30.9 |
+| colossal_64k | 1161.3 | 1709.5 | 1.47 | 16.1 | 26.9 | 1.67 | 22.8–29.0 |
+
+**gemma-4-31b-it — Ollama/ROCm layer split → vLLM TP=2 (both dual R9700)**
+
+| tier | prefill layer-split | TP=2 | × | decode layer-split | TP=2 | × | TP=2 decode min–max |
+|---|---|---|---|---|---|---|---|
+| short | 290.2 | 442.7 | 1.53 | 16.6 | 21.3 | 1.28 | 21.2–21.5 |
+| medium | 426.5 | 793.0 | 1.86 | 16.6 | 21.2 | 1.28 | 21.2–21.2 |
+| long | 1167.3 | 2714.9 | 2.33 | 16.2 | 20.5 | 1.27 | 20.5–20.6 |
+| extra_long | 1389.7 | 2265.9 | 1.63 | 15.7 | 20.1 | 1.28 | 20.1–20.2 |
+| extremely_long | 1301.4 | 1768.6 | 1.36 | 15.0 | 19.8 | 1.32 | 19.8–19.8 |
+| colossal_32k | 1082.8 | 1152.4 | 1.06 | 14.0 | 19.4 | 1.39 | 19.3–19.5 |
+| colossal_64k | 785.2 | 653.5 | 0.83 | 12.2 | 18.7 | 1.54 | 18.7–18.8 |
+
+**gemma-4-31b-it — llama.cpp/Vulkan layer split → vLLM TP=2 (both dual R9700)**
+
+| tier | prefill layer-split | TP=2 | × | decode layer-split | TP=2 | × | TP=2 decode min–max |
+|---|---|---|---|---|---|---|---|
+| short | 127.8 | 442.7 | 3.46 | — | 21.3 | — | 21.2–21.5 |
+| medium | 259.1 | 793.0 | 3.06 | 15.8 | 21.2 | 1.34 | 21.2–21.2 |
+| long | 811.0 | 2714.9 | 3.35 | 14.9 | 20.5 | 1.38 | 20.5–20.6 |
+| extra_long | 1159.2 | 2265.9 | 1.95 | 14.2 | 20.1 | 1.42 | 20.1–20.2 |
+| extremely_long | 1144.3 | 1768.6 | 1.55 | 13.9 | 19.8 | 1.42 | 19.8–19.8 |
+| colossal_32k | 979.7 | 1152.4 | 1.18 | 13.3 | 19.4 | 1.46 | 19.3–19.5 |
+| colossal_64k | 711.8 | 653.5 | 0.92 | 12.1 | 18.7 | 1.55 | 18.7–18.8 |
+
+The Gemma short-tier dash is the existing instant-EOS quirk in the
+llama.cpp run; vLLM generated the full 256 tokens on that prompt. The
+Gemma 32k/64k TP=2 decode figures rest on 38 decode steps, not 255 — see
+Observations.
+
+**vs the original R9700 + RX 9060 XT layer split** (decode tok/s, best of
+Ollama/llama.cpp per tier). This compares different hardware *and*
+different software: the before → after tables show the hardware-only step
+(mixed → dual, ~1.3×), the tables above show the software-only step
+(~1.3×), and the two multiply.
+
+| tier | qwen3.5-27b mixed best | TP=2 | × | gemma-4-31b-it mixed best | TP=2 | × |
+|---|---|---|---|---|---|---|
+| short | 14.9 | 25.0 | 1.68 | 12.8 | 21.3 | 1.66 |
+| medium | 14.9 | 25.3 | 1.70 | 12.8 | 21.2 | 1.65 |
+| long | 14.7 | 25.3 | 1.72 | 12.4 | 20.5 | 1.66 |
+| extra_long | 14.3 | 25.0 | 1.75 | 12.0 | 20.1 | 1.68 |
+| extremely_long | 13.9 | 24.6 | 1.77 | 11.5 | 19.8 | 1.72 |
+| colossal_32k | 13.5 | 25.2 | 1.86 | 10.7 | 19.4 | 1.81 |
+| colossal_64k | 12.7 | 26.9 | 2.12 | 9.9 | 18.7 | 1.89 |
+
+### Reading the tensor-parallel speedups
+
+- **Decode gain is ~1.3× at short prompts and grows with context.** Layer
+  split runs one card at a time, so single-request decode sees one card's
+  bandwidth; tensor parallel reads both halves of the weights
+  simultaneously and gets both cards' bandwidth, minus a per-layer
+  all-reduce. The all-reduce here goes over host shared memory (P2P
+  disabled) and it still wins clearly.
+- **The gap widens at 32k/64k** because vLLM's decode barely slows with
+  context (25.0 → 22.8–29.0 on Qwen) while the layer-split engines drop
+  20–25%.
+- **Prefill roughly doubles through 16k, then the advantage shrinks.**
+  vLLM's prefill peaks at the 2.4k tier and declines; Ollama and llama.cpp
+  peak at 8–16k. At 64k on Gemma, vLLM is slower than both (653 vs
+  785 / 712). The Triton attention backend is the generic path; AMD's tuned
+  AITER kernels are not yet enabled for gfx1201
+  ([ROCm/aiter #3294](https://github.com/ROCm/aiter/issues/3294)).
+- **Not "vLLM is 2× faster than Ollama."** The 2× figures are against the
+  mixed config, or at the 64k tier in fast mode. The like-for-like
+  short-prompt decode gain is 1.3×.
+
+### Observations
+
+- **Bimodal decode on Qwen at 32k and 64k.** Individual runs land at either
+  ~23–24 or ~29–31 tok/s, never in between, with identical output text and
+  identical prefill time; the decode wall time itself differs (8.0 s vs
+  11.2 s for 230 tokens at 64k), so it is not a measurement artifact. The
+  1.27× ratio matches [ROCm #6347](https://github.com/ROCm/ROCm/issues/6347)
+  (single R9700, vLLM, 33 vs 26 tok/s), but that report describes the state
+  as fixed per process, whereas here it flips per request within one
+  process. Launch A got 1 fast run of 6 at 32k+64k; launch B got 4 of 6.
+  Not seen on Gemma or at tiers up to 16k. Cause unknown; the plausible
+  mechanism is the memory clock not boosting during some decode phases
+  (decode is bandwidth-bound; the upstream reporter saw identical core
+  clocks in both states and never checked mclk). Untested here. The tables
+  report the mean and the min–max rather than averaging the two modes
+  away.
+- **Gemma stops early on the long raw prompts.** At 32k and 64k, Gemma
+  emitted EOS after 39 tokens in all six runs. Those two decode figures
+  rest on 38 decode steps, not 255; treat them as indicative.
+- **Determinism.** Temperature 0 gave identical text and token counts
+  across runs; decode stdev is 0.0–0.05 tok/s except where the bimodal
+  effect appears. Launches A and B agree within 0.1 tok/s everywhere except
+  the Qwen 32k/64k tiers.
+- **Host memory.** Minimum `MemAvailable` during the session was 7.2 GiB on
+  the 32 GB box (two workers mmapping ~15 GiB each during load). A watchdog
+  with a 6 GiB kill threshold ([vllm_tp2/memwatch.sh](vllm_tp2/memwatch.sh))
+  never fired, but the margin is thin — same class of risk as
+  [finding #2](#finding-2-the-vulkan-loader-can-eat-all-your-ram).
+
+### How this differs from the other runs
+
+Same as the published runs wherever possible: seven prompt tiers from the
+same filler paragraph, one excluded warmup, 256 max generation tokens,
+temperature 0, raw prompt (no chat template), unique nonce prepended to
+every prompt, prefix caching off, one model loaded at a time. Endpoint was
+`POST /v1/completions` with streaming
+([vllm_tp2/bench_vllm.py](vllm_tp2/bench_vllm.py)). Differences:
+
+- **3 runs per tier, not 5.** Two fresh container launches per model (A and
+  B) to check for the per-process bimodal decode reported for this card;
+  six runs per tier total.
+- **Timing is client-side.** vLLM returns no per-request timings. prefill
+  tok/s = prompt_tokens / (first content chunk − request sent); decode
+  tok/s = (completion_tokens − 1) / (last content chunk − first content
+  chunk). The client ran on the same host over localhost. This slightly
+  understates short-tier prefill (the first-chunk time includes scheduling
+  overhead) — same caveat as the existing note that short-tier prefill
+  mostly measures fixed overhead.
+- **KV cache bf16,** vs q8_0 in the Ollama Modelfiles and llama-server
+  flags. An fp8-KV repeat was planned but not run.
+- **FP8 weights,** vs Q8_0 GGUF. See Setup.
+- **Prompt token counts differ by tokenizer:** the 64k tier is 64,035
+  tokens for Qwen and 59,234 for Gemma.
+
+Upstream references for this section:
+[vllm #40980](https://github.com/vllm-project/vllm/issues/40980) (TP=2
+AllReduce deadlock on dual R9700; `NCCL_PROTO=Simple`),
+[ROCm #6347](https://github.com/ROCm/ROCm/issues/6347) (bimodal decode on
+R9700 under vLLM), [ROCm #6074](https://github.com/ROCm/ROCm/issues/6074)
+(RCCL init abort on ROCm 7.2.1; not hit here),
+[ROCm/aiter #3294](https://github.com/ROCm/aiter/issues/3294) (AITER not
+enabled for gfx1201),
+[rocm-systems #7183](https://github.com/ROCm/rocm-systems/pull/7183) /
+[#6966](https://github.com/ROCm/rocm-systems/pull/6966) (the RCCL gfx1201
+fix, not in ROCm 7.2.x), the
+[R9700 tuning thread](https://github.com/ggml-org/llama.cpp/discussions/21043)
+(notes MCLK boost flakiness on some kernels), and
+[kyuz0/amd-r9700-vllm-toolboxes](https://github.com/kyuz0/amd-r9700-vllm-toolboxes)
+(community vLLM image for this card; not needed here, the official image
+worked).
+
 ## The MoE crash
 
 Both MoE models crash after 2–4 successful requests with:
@@ -392,6 +636,9 @@ Notes for anyone reproducing this class of failure:
   memory within seconds; letting the kernel OOM handle it did not. If you
   experiment near your RAM limit on multi-GPU AMD Vulkan, run one of
   these.
+- The vLLM tensor-parallel addendum saw the same class of pressure from a
+  different direction (two workers mmapping ~15 GiB each during load; minimum
+  `MemAvailable` 7.2 GiB on the 32 GB box) — see its Observations.
 
 ## How the measuring works
 
@@ -431,6 +678,12 @@ Notes for anyone reproducing this class of failure:
   host-memory-visibility settings measure as zero-impact on healthy
   configs, and qwen3.5-27b's with/without numbers here are consistent with
   that.
+- **vLLM tensor-parallel addendum:** [vllm_tp2/bench_vllm.py](vllm_tp2/bench_vllm.py)
+  hits `POST /v1/completions` with streaming and derives prefill/decode
+  speeds client-side from the stream, because vLLM reports no per-request
+  timings. 3 runs per tier, two fresh container launches per model. Full
+  list of differences in
+  [that section](#how-this-differs-from-the-other-runs).
 - **Caveats:** the dense before/after comparison is Ollama-specific and the
   Vulkan tables are llama.cpp-specific — don't expect either to transfer
   exactly to other stacks, and don't compare across stacks without the
@@ -456,6 +709,29 @@ python3 compare.py --file vulkan_bench_results.json --before "config-a" --after 
 
 Results append to `ollama_bench_results.json` / `vulkan_bench_results.json`
 with a hardware snapshot per record.
+
+vLLM tensor parallel (Docker; scripts in [vllm_tp2/](vllm_tp2/)):
+
+```
+# one-time
+docker pull vllm/vllm-openai-rocm:latest
+./probe_devices.sh                      # find the two gfx1201 indices; exclude the iGPU
+# per model: fresh container -> wait -> bench -> remove (needs HIP_DEVS, MODELS_DIR)
+HIP_DEVS=0,1 MODELS_DIR=/path/to/hf_cache ./run_cycle.sh Qwen/Qwen3.5-27B-FP8 qwen3.5-27b-fp8 A qwen27 --max-num-seqs 8
+HIP_DEVS=0,1 MODELS_DIR=/path/to/hf_cache ./run_cycle.sh RedHatAI/gemma-4-31B-it-FP8-dynamic gemma-4-31b-it-fp8 A gemma31 --max-num-seqs 8
+# or by hand
+HIP_DEVS=0,1 MODELS_DIR=/path/to/hf_cache ./launch_vllm.sh Qwen/Qwen3.5-27B-FP8 qwen3.5-27b-fp8 --max-num-seqs 8
+./wait_ready.sh
+python3 bench_vllm.py --model qwen3.5-27b-fp8 --hf-repo Qwen/Qwen3.5-27B-FP8 --launch A
+docker rm -f vllm
+python3 make_report.py                  # comparison tables against the layer-split JSONs
+```
+
+`bench_vllm.py` writes one JSON per launch; `vllm_tp2_bench_results.json`
+is those records concatenated. Run `memwatch.sh` in the background on a
+32 GB host. `launch_vllm.sh` requires `MODELS_DIR` (mounted as `/models`,
+used as `HF_HOME`) and `HIP_DEVS`; the RCCL env vars it sets are explained
+in the tensor-parallel section.
 
 ## License
 
